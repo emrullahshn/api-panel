@@ -1,19 +1,19 @@
 easy_admin:
     site_name: 'API Panel'
     design:
-        assets:
-            css: ['assets/custom.css']
-        brand_color: '#7CB900'
+#        assets:
+#            css: ['assets/custom.css']
+#        brand_color: '#7CB900'
         menu:
         - label: 'Veri Yönetimi'
-          roles: ['ROLE_HOTEL_ADMIN_ALL']
+          roles: ['ROLE_SUPER_ADMIN']
           children: ['Users']
     entities:
         Users:
             class: App\Entity\User
             permissions:
-                list: ['ROLE_HOTEL_ADMIN_ALL']
-                new: ['ROLE_HOTEL_ADMIN_ALL']
-                edit: ['ROLE_HOTEL_ADMIN_ALL']
-                delete: ['ROLE_HOTEL_ADMIN_ALL']
-                show: ['ROLE_HOTEL_ADMIN_ALL']
+                list: ['ROLE_SUPER_ADMIN']
+                new: ['ROLE_SUPER_ADMIN']
+                edit: ['ROLE_SUPER_ADMIN']
+                delete: ['ROLE_SUPER_ADMIN']
+                show: ['ROLE_SUPER_ADMIN']
