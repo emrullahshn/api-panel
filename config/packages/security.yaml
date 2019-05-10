@@ -1,0 +1,131 @@
+# config/packages/security.yaml
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    role_hierarchy:
+        ROLE_HOTEL_ADMIN_ALL:
+            - ROLE_HOTEL_ADMIN_ADD
+            - ROLE_HOTEL_ADMIN_EDIT
+            - ROLE_HOTEL_ADMIN_DELETE
+        ROLE_HOTEL_ADMIN: ROLE_USER
+        ROLE_HOTEL_ADMIN_ADD: ROLE_HOTEL_ADMIN
+        ROLE_HOTEL_ADMIN_EDIT: ROLE_HOTEL_ADMIN
+        ROLE_HOTEL_ADMIN_DELETE: ROLE_HOTEL_ADMIN
+
+        ROLE_HOTEL_ADMIN_AGENT_ALL:
+            - ROLE_HOTEL_ADMIN_AGENT_ADD
+            - ROLE_HOTEL_ADMIN_AGENT_EDIT
+            - ROLE_HOTEL_ADMIN_AGENT_DELETE
+            - ROLE_HOTEL_ADMIN_AGENT
+        ROLE_HOTEL_ADMIN_AGENT: ROLE_HOTEL_ADMIN
+        ROLE_HOTEL_ADMIN_AGENT_ADD: ROLE_HOTEL_ADMIN
+        ROLE_HOTEL_ADMIN_AGENT_EDIT: ROLE_HOTEL_ADMIN
+        ROLE_HOTEL_ADMIN_AGENT_DELETE: ROLE_HOTEL_ADMIN
+
+        ROLE_HOTEL_MAPPING_ALL:
+            - ROLE_HOTEL_ADMIN_ALL
+            - ROLE_HOTEL_MAPPING_ADD
+            - ROLE_HOTEL_MAPPING_EDIT
+            - ROLE_HOTEL_MAPPING_DELETE
+            - ROLE_HOTEL_MAPPING
+        ROLE_HOTEL_MAPPING: ROLE_HOTEL_ADMIN
+        ROLE_HOTEL_MAPPING_ADD: ROLE_HOTEL_ADMIN
+        ROLE_HOTEL_MAPPING_EDIT: ROLE_HOTEL_ADMIN
+        ROLE_HOTEL_MAPPING_DELETE: ROLE_HOTEL_ADMIN
+
+        ROLE_HOTEL_INTERN_ALL:
+            - ROLE_HOTEL_GEOLOCATION_ALL
+            - ROLE_HOTEL_ADMIN
+
+        ROLE_HOTEL_GEOLOCATION_ALL:
+            - ROLE_HOTEL_GEOLOCATION_ADD
+            - ROLE_HOTEL_GEOLOCATION_EDIT
+            - ROLE_HOTEL_GEOLOCATION_DELETE
+            - ROLE_HOTEL_GEOLOCATION
+
+        ROLE_HOTEL_ACCOUNTING_ALL:
+            - ROLE_HOTEL_ACCOUNTING_ADD
+            - ROLE_HOTEL_ACCOUNTING_EDIT
+            - ROLE_HOTEL_ACCOUNTING_DELETE
+            - ROLE_HOTEL_ACCOUNTING
+        ROLE_HOTEL_ACCOUNTING: ROLE_HOTEL_ADMIN
+        ROLE_HOTEL_ACCOUNTING_ADD: ROLE_HOTEL_ADMIN
+        ROLE_HOTEL_ACCOUNTING_EDIT: ROLE_HOTEL_ADMIN
+        ROLE_HOTEL_ACCOUNTING_DELETE: ROLE_HOTEL_ADMIN
+
+        ROLE_SEO_SETTINGS_ALL:
+            - ROLE_SEO_SETTINGS_ADD
+            - ROLE_SEO_SETTING_EDIT
+            - ROLE_SEO_SETTINGS_DELETE
+            - ROLE_SEO_SETTINGS
+        ROLE_SEO_SETTINGS: ROLE_HOTEL_ADMIN
+        ROLE_SEO_SETTINGS_ADD: ROLE_HOTEL_ADMIN
+        ROLE_SEO_SETTINGS_EDIT: ROLE_HOTEL_ADMIN
+        ROLE_SEO_SETTINGS_DELETE: ROLE_HOTEL_ADMIN
+
+        ROLE_LANDING_SETTINGS_ALL:
+            - ROLE_LANDING_SETTINGS_ADD
+            - ROLE_LANDING_SETTINGS_EDIT
+            - ROLE_LANDING_SETTINGS_DELETE
+            - ROLE_LANDING_SETTINGS
+        ROLE_LANDING_SETTINGS: ROLE_HOTEL_ADMIN
+        ROLE_LANDING_SETTINGS_ADD: ROLE_HOTEL_ADMIN
+        ROLE_LANDING_SETTINGS_EDIT: ROLE_HOTEL_ADMIN
+        ROLE_LANDING_SETTINGS_DELETE: ROLE_HOTEL_ADMIN
+
+        ROLE_HOTEL_CONTENT_MANAGER_ALL:
+            - ROLE_HOTEL_ADMIN_ALL
+            - ROLE_HOTEL_CONTENT_MANAGER_EDIT
+            - ROLE_HOTEL_CONTENT_MANAGER_DELETE
+            - ROLE_HOTEL_CONTENT_MANAGER_ADD
+            - ROLE_HOTEL_CONTENT_MANAGER
+        ROLE_HOTEL_CONTENT_MANAGER: ROLE_HOTEL_ADMIN
+        ROLE_HOTEL_CONTENT_MANAGER_ADD: ROLE_HOTEL_CONTENT_MANAGER
+        ROLE_HOTEL_CONTENT_MANAGER_EDIT: ROLE_HOTEL_CONTENT_MANAGER
+        ROLE_HOTEL_CONTENT_MANAGER_DELETE: ROLE_HOTEL_CONTENT_MANAGER
+
+        ROLE_HOTEL_ADMIN_ACCOUNTANT:
+            - ROLE_HOTEL_ADMIN_AGENT_ALL
+            - ROLE_HOTEL_ACCOUNTING_ALL
+
+        ROLE_HOTEL_SALES_DASHBOARD:
+            - ROLE_HOTEL_ADMIN
+
+        ROLE_HOTEL_SUPER_ADMIN:
+            - ROLE_HOTEL_ADMIN_ALL
+            - ROLE_HOTEL_ADMIN_AGENT_ALL
+            - ROLE_HOTEL_ADMIN_ACCOUNTANT
+            - ROLE_HOTEL_MAPPING_ALL
+            - ROLE_HOTEL_ACCOUNTING_ALL
+            - ROLE_SEO_SETTINGS_ALL
+            - ROLE_LANDING_SETTINGS_ALL
+            - ROLE_HOTEL_CONTENT_MANAGER_ALL
+            - ROLE_HOTEL_GEOLOCATION_ALL
+
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+
+            logout:       true
+            anonymous:    true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, role: ROLE_USER }
