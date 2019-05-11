@@ -1,0 +1,44 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="container">
+    <div class="card bg-light" style="margin-top: 15%">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4 class="card-title mt-3 text-center">{{ 'security.login.submit'|trans }}</h4>
+
+            <form action="{{ path("fos_user_security_check") }}" method="post">
+                {% if csrf_token %}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                {% endif %}
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="username" id="username" name="_username"
+                           value="{{ last_username }}" required="required" autocomplete="off"/>
+
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                    </div>
+                    <input type="password" class="form-control" placeholder="password" id="password"
+                           name="_password" required="required" autocomplete="current-password"/>
+
+                </div>
+                <div class="row align-items-center remember" style="margin-left: 5px;">
+                    <input type="checkbox" id="remember_me" name="_remember_me"
+                           value="on"/>{{ 'security.login.remember_me'|trans }}
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn float-right login_btn" id="_submit" name="_submit"
+                           value="{{ 'security.login.submit'|trans }}"/>
+                </div>
+            </form>
+
+            <div class="col-md-12">
+                Hesabın yokmu?<a href="{{ path("fos_user_registration_register") }}">{{ 'registration.submit'|trans }}</a>
+
+            </div>
+        </article>
+    </div>
+</div>

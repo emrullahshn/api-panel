@@ -6,14 +6,14 @@ easy_admin:
 #        brand_color: '#7CB900'
         menu:
         - label: 'Veri Yönetimi'
-          roles: ['ROLE_SUPER_ADMIN']
+          roles: ['ROLE_USER']
           children: ['Users']
     entities:
         Users:
             class: App\Entity\User
             permissions:
-                list: ['ROLE_SUPER_ADMIN']
-                new: ['ROLE_SUPER_ADMIN']
-                edit: ['ROLE_SUPER_ADMIN']
-                delete: ['ROLE_SUPER_ADMIN']
-                show: ['ROLE_SUPER_ADMIN']
+                list: ['ROLE_USER']
+                new: ['ROLE_USER']
+                edit: ['ROLE_USER']
+                delete: ['ROLE_USER']
+                show: ['ROLE_USER']

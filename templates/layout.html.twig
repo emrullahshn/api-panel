@@ -1,0 +1,14 @@
+{% extends 'EasyAdminBundle:default:layout.html.twig' %}
+
+{% block page_title %}Manage Hosted{% endblock %}
+
+
+{% block header_logo %}
+    <a class="logo" title="{{ easyadmin_config('site_name')|striptags }}" href="{{ path('easyadmin') }}">
+        Manages Hosted
+    </a>
+{% endblock header_logo %}
+
+{% block body %}
+    {{ parent() }}
+{%   endblock%}
