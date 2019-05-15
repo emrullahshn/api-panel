@@ -1,0 +1,23 @@
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title 'Hosted' %}</title>
+    <meta name="description" content="Latest updates and statistic charts">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+
+    <base href="../">
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <link href="" rel="stylesheet" type="text/css" />
+    <script>
+      WebFont.load({
+        google: {"families":["Poppins:300,400,500,600,700","Roboto:300,400,500,600,700"]},
+        active: function() {
+          sessionStorage.fonts = true;
+        }
+      });
+    </script>
+  </head>
+  <body {% block bodyCustomClass '' %}>
+    {% block content %}{% endblock %}
+  </body>
+</html>
