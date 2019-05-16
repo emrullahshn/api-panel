@@ -1,8 +1,16 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('build/appStyle.css') }}">
+{% endblock %}
+
 {% block bodyCustomClass %}{% spaceless %}
   kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-aside--minimize kt-page--loading
 {% endspaceless %}{% endblock %}
+
+{% block javascripts %}
+  <script src="{{ asset('build/app.js') }}"></script>
+{% endblock %}
 
 {% block content %}
   <div id="kt_header_mobile" class="kt-header-mobile kt-header-mobile--fixed">
@@ -148,7 +156,7 @@
           <div class="kt-header__brand kt-grid__item  " id="kt_header_brand">
             <div class="kt-header__brand-logo">
               <a href="demo6/index.html">
-                <img alt="Logo" src="./assets/media/logos/logo-6.png"/>
+                <img alt="Logo" src="{{ asset('build/images/media/logos/logo-6.png') }}"/>
               </a>
             </div>
           </div>
@@ -455,7 +463,7 @@
 
                   <!--begin: Head -->
                   <div class="kt-head kt-head--skin-dark kt-head--fit-x kt-head--fit-b"
-                       style="background-image: url(./assets/media/misc/bg-1.jpg)">
+                       style="background-image: url('{{ asset('build/images/media/bg/bg-1.jpg') }}')">
                     <h3 class="kt-head__title">
                       User Notifications
                       &nbsp;
@@ -856,7 +864,7 @@
                 <form>
 
                   <!--begin: Head -->
-                  <div class="kt-head kt-head--skin-dark" style="background-image: url(./assets/media/misc/bg-1.jpg)">
+                  <div class="kt-head kt-head--skin-dark" style="background-image: url('{{ asset('build/images/media/bg/bg-1.jpg') }}')">
                     <h3 class="kt-head__title">
                       User Quick Actions
                       <span class="kt-space-15"></span>
@@ -963,7 +971,7 @@
 
                   <!-- begin:: Mycart -->
                   <div class="kt-mycart">
-                    <div class="kt-mycart__head kt-head" style="background-image: url(./assets/media/misc/bg-1.jpg);">
+                    <div class="kt-mycart__head kt-head" style="background-image: url('{{ asset('build/images/media/bg/bg-1.jpg') }}');">
                       <div class="kt-mycart__info">
                         <span class="kt-mycart__icon"><i class="flaticon2-shopping-cart-1 kt-font-success"></i></span>
                         <h3 class="kt-mycart__title">My Cart</h3>
@@ -992,7 +1000,7 @@
                             </div>
                           </div>
                           <a href="#" class="kt-mycart__pic">
-                            <img src="./assets/media/products/product9.jpg" title="">
+                            <img src="{{ asset('build/images/media/products/product9.jpg') }}" title="Product 9" alt="Product 9">
                           </a>
                         </div>
                       </div>
@@ -1127,7 +1135,7 @@
               <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px">
                 <span class="kt-hidden kt-header__topbar-welcome">Hi,</span>
                 <span class="kt-hidden kt-header__topbar-username">Nick</span>
-                <img class="kt-hidden" alt="Pic" src="./assets/media/users/300_21.jpg"/>
+                <img class="kt-hidden" alt="Pic" src="{{ asset('build/images/media/users/300_21.jpg') }}"/>
                 <span class="kt-header__topbar-icon kt-hidden-"><i class="flaticon2-user-outline-symbol"></i></span>
               </div>
               <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
@@ -4347,7 +4355,7 @@
                       <span class="kt-chat__datetime">30 Seconds</span>
                       <a href="#" class="kt-chat__username">You</span></a>
                       <span class="kt-userpic kt-userpic--circle kt-userpic--sm">
-													<img src="./assets/media/users/300_21.jpg" alt="image">
+													<img src="{{ asset('build/images/media/users/300_21.jpg') }}" alt="image">
 												</span>
                     </div>
                     <div class="kt-chat__text">
@@ -4372,7 +4380,7 @@
                       <span class="kt-chat__datetime">Just Now</span>
                       <a href="#" class="kt-chat__username">You</span></a>
                       <span class="kt-userpic kt-userpic--circle kt-userpic--sm">
-													<img src="./assets/media/users/300_21.jpg" alt="image">
+													<img src="{{ asset('build/images/media/users/300_21.jpg') }}" alt="image">
 												</span>
                     </div>
                     <div class="kt-chat__text">
@@ -4397,7 +4405,7 @@
                       <span class="kt-chat__datetime">30 Seconds</span>
                       <a href="#" class="kt-chat__username">You</span></a>
                       <span class="kt-userpic kt-userpic--circle kt-userpic--sm">
-													<img src="./assets/media/users/300_21.jpg" alt="image">
+													<img src="{{ asset('build/images/media/users/300_21.jpg') }}" alt="image">
 												</span>
                     </div>
                     <div class="kt-chat__text">
@@ -4422,7 +4430,7 @@
                       <span class="kt-chat__datetime">Just Now</span>
                       <a href="#" class="kt-chat__username">You</span></a>
                       <span class="kt-userpic kt-userpic--circle kt-userpic--sm">
-													<img src="./assets/media/users/300_21.jpg" alt="image">
+													<img src="{{ asset('build/images/media/users/300_21.jpg') }}" alt="image">
 												</span>
                     </div>
                     <div class="kt-chat__text">
@@ -4511,8 +4519,6 @@
   <!--begin::Page Vendors(used by this page) -->
   <script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM"
           type="text/javascript"></script>
-
-  <script src="{{ asset('build/app.js') }}"></script>
 
   <!--end::Page Vendors -->
 {% endblock %}

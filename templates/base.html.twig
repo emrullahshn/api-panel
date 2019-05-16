@@ -16,8 +16,12 @@
         }
       });
     </script>
+    {% block stylesheets %}{% endblock %}
   </head>
   <body {% block bodyCustomClass '' %}>
     {% block content %}{% endblock %}
+    {% block javascripts %}
+      <script></script>
+    {% endblock %}
   </body>
 </html>
