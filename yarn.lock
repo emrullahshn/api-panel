@@ -1275,6 +1275,11 @@ bootstrap-daterangepicker@^3.0.5:
     jquery ">=1.10"
     moment "^2.9.0"
 
+bootstrap-datetime-picker@^2.4.4:
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/bootstrap-datetime-picker/-/bootstrap-datetime-picker-2.4.4.tgz#b7cfe843a3c6d221c03293c9a464a4cc35d73968"
+  integrity sha1-t8/oQ6PG0iHAMpPJpGSkzDXXOWg=
+
 bootstrap-markdown@^2.10.0:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/bootstrap-markdown/-/bootstrap-markdown-2.10.0.tgz#65234277840454ee1adc7482b2f4a5e3975dace5"
