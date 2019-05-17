@@ -2734,9 +2734,6 @@ var KTMenu = function(elementId, options) {
                 return;
             }
 
-            console.log(e)
-            console.log(this.closest('.kt-menu__item'))
-
             var item = this.closest('.kt-menu__item');
 
             if ( item.getAttribute('data-ktmenu-submenu-mode') == 'accordion' ) {
