@@ -1,11 +1,30 @@
-/*
- * Welcome to your app's main JavaScript file!
- *
- * We recommend including the built version of this JavaScript file
- * (and its CSS file) in your base layout (base.html.twig).
- */
+import "./vendors.js"
 
-import "./vendors"
-import "./customs"
+import "./pages/app"
+import "./pages/components/base/dropdown"
+import "./pages/components/calendar/background-events"
+import "./pages/components/calendar/basic"
+import "./pages/components/calendar/external-events"
+import "./pages/components/calendar/google"
+import "./pages/components/calendar/list-view"
+import "./pages/components/charts/amcharts/charts"
+import "./pages/components/charts/amcharts/maps"
+import "./pages/components/charts/amcharts/stock-charts"
+import "./pages/components/charts/flotcharts"
+import "./pages/components/charts/google-charts"
+import "./pages/components/charts/morris-charts"
+import "./pages/components/extended/blockui"
+import "./pages/components/extended/bootstrap-notify"
+import "./pages/components/extended/perfect-scrollbar"
+import "./pages/components/extended/sweetalert2"
+import "./pages/components/extended/toastr"
+import "./pages/components/extended/treeview"
+import "./pages/components/maps/google-maps"
+import "./pages/components/maps/jqvmap"
+import "./pages/components/maps/jvectormap"
+import "./pages/components/portlets/draggable"
+import "./pages/components/portlets/tools"
+import "./pages/components/utils/idle-timer"
+import "./pages/components/utils/session-timeout"
+
 import "./pages/dashboard"
-import "./theme"

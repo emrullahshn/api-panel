@@ -1,6 +1,7 @@
 import $ from "jquery"
 import "popper.js"
 import "bootstrap"
+import "chart.js"
 import "js-cookie"
 import "moment"
 import "tooltip.js"
