@@ -138,7 +138,7 @@ var KTApp = function() {
             }
 
             var dropdownMenu = $(e.target).find('.dropdown-menu');
-            
+
             $('body').append(dropdownMenu.detach());
             dropdownMenu.css('display', 'block');
             dropdownMenu.position({
@@ -154,7 +154,7 @@ var KTApp = function() {
             }
 
             var dropdownMenu = $(e.target).find('.dropdown-menu');
-            
+
             $(e.target).append(dropdownMenu.detach());
             dropdownMenu.hide();
         });
@@ -308,7 +308,7 @@ var KTApp = function() {
             var skin = (options && options.skin) ? options.skin : 'light';
             var alignment = (options && options.alignment) ? options.alignment : 'right';
             var size = (options && options.size) ? 'kt-spinner--' + options.size : '';
-            var classes = 'kt-spinner ' + 'kt-spinner--' + skin + ' kt-spinner--' + alignment + ' kt-spinner--' + size; 
+            var classes = 'kt-spinner ' + 'kt-spinner--' + skin + ' kt-spinner--' + alignment + ' kt-spinner--' + size;
 
             KTApp.unprogress(target);
 
@@ -331,6 +331,8 @@ var KTApp = function() {
 }();
 
 // Initialize KTApp class on document ready
-$(document).ready(function() {
-    KTApp.init(KTAppOptions);
+$(function() {
+    KTApp.init( KTAppOptions);
 });
+
+global.KTApp = KTApp

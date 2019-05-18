@@ -12,7 +12,7 @@ var KTDefaultDatatableDemo = function () {
 				type: 'remote',
 				source: {
 					read: {
-						url: 'https://keenthemes.com/metronic/themes/themes/metronic/dist/preview/inc/api/datatables/demos/default.php'
+						url: 'inc/api/datatables/demos/default.php'
 					}
 				},
 				pageSize: 20,

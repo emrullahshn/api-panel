@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-  <link rel="stylesheet" href="{{ asset('build/appStyle.css') }}">
+  <link rel="stylesheet" href="{{ asset('build/style.css') }}">
 {% endblock %}
 
 {% block bodyCustomClass %}{% spaceless %}
   kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-aside--minimize kt-page--loading
 {% endspaceless %}{% endblock %}
 
-{#{% block javascripts %}
-  <script src="{{ asset('build/app.js') }}"></script>
-{% endblock %}#}
+{% block javascripts %}
+  {{ encore_entry_script_tags('app') }}
+{% endblock %}
 
 {% block content %}
   <div id="kt_header_mobile" class="kt-header-mobile kt-header-mobile--fixed">
@@ -3878,35 +3878,6 @@
     </div>
   </div>
 
-  <!--ENd:: Chat-->
-
-  <!-- begin::Global Config(global config for global JS sciprts) -->
-  <script>
-    var KTAppOptions = {
-      "colors": {
-        "state": {
-          "brand": "#22b9ff",
-          "light": "#ffffff",
-          "dark": "#282a3c",
-          "primary": "#5867dd",
-          "success": "#34bfa3",
-          "info": "#36a3f7",
-          "warning": "#ffb822",
-          "danger": "#fd3995"
-        },
-        "base": {
-          "label": ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"],
-          "shape": ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"]
-        }
-      }
-    };
+  <script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM" type="text/javascript">
   </script>
-
-  <!-- end::Global Config -->
-
-  <!--begin::Page Vendors(used by this page) -->
-  <script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM"
-          type="text/javascript"></script>
-
-  <!--end::Page Vendors -->
 {% endblock %}

@@ -112,7 +112,7 @@ this.Element && function(ElementPrototype) {
     });
 })([Element.prototype, Document.prototype, DocumentFragment.prototype]);
 
-// Global variables 
+// Global variables
 window.KTUtilElementDataStore = {};
 window.KTUtilElementDataStoreID = 0;
 window.KTUtilDelegatedEventHandlers = {};
@@ -123,15 +123,15 @@ var KTUtil = function() {
 
     /** @type {object} breakpoints The device width breakpoints **/
     var breakpoints = {
-        sm: 544, // Small screen / phone           
-        md: 768, // Medium screen / tablet            
-        lg: 1024, // Large screen / desktop        
+        sm: 544, // Small screen / phone
+        md: 768, // Medium screen / tablet
+        lg: 1024, // Large screen / desktop
         xl: 1200 // Extra large screen / wide desktop
     };
 
     /**
-     * Handle window resize event with some 
-     * delay to attach event handlers upon resize complete 
+     * Handle window resize event with some
+     * delay to attach event handlers upon resize complete
      */
     var _windowResizeHandler = function() {
         var _runResizeHandlers = function() {
@@ -202,8 +202,8 @@ var KTUtil = function() {
             } else {
                 // for IE and other old browsers
                 // causes deprecation warning on modern browsers
-                var evt = window.document.createEvent('UIEvents'); 
-                evt.initUIEvent('resize', true, false, window, 0); 
+                var evt = window.document.createEvent('UIEvents');
+                evt.initUIEvent('resize', true, false, window, 0);
                 window.dispatchEvent(evt);
             }
         },
@@ -211,7 +211,7 @@ var KTUtil = function() {
         /**
          * Get GET parameter value from URL.
          * @param {string} paramName Parameter name.
-         * @returns {string}  
+         * @returns {string}
          */
         getURLParam: function(paramName) {
             var searchString = window.location.search.substring(1),
@@ -229,7 +229,7 @@ var KTUtil = function() {
 
         /**
          * Checks whether current device is mobile touch.
-         * @returns {boolean}  
+         * @returns {boolean}
          */
         isMobileDevice: function() {
             return (this.getViewPort().width < this.getBreakpoint('lg') ? true : false);
@@ -237,7 +237,7 @@ var KTUtil = function() {
 
         /**
          * Checks whether current device is desktop.
-         * @returns {boolean}  
+         * @returns {boolean}
          */
         isDesktopDevice: function() {
             return KTUtil.isMobileDevice() ? false : true;
@@ -246,7 +246,7 @@ var KTUtil = function() {
         /**
          * Gets browser window viewport size. Ref:
          * http://andylangton.co.uk/articles/javascript/get-viewport-size-javascript/
-         * @returns {object}  
+         * @returns {object}
          */
         getViewPort: function() {
             var e = window,
@@ -266,7 +266,7 @@ var KTUtil = function() {
          * Checks whether given device mode is currently activated.
          * @param {string} mode Responsive mode name(e.g: desktop,
          *     desktop-and-tablet, tablet, tablet-and-mobile, mobile)
-         * @returns {boolean}  
+         * @returns {boolean}
          */
         isInResponsiveRange: function(mode) {
             var breakpoint = this.getViewPort().width;
@@ -293,7 +293,7 @@ var KTUtil = function() {
         /**
          * Generates unique ID for give prefix.
          * @param {string} prefix Prefix for generated ID
-         * @returns {boolean}  
+         * @returns {boolean}
          */
         getUniqueID: function(prefix) {
             return prefix + Math.floor(Math.random() * (new Date()).getTime());
@@ -302,7 +302,7 @@ var KTUtil = function() {
         /**
          * Gets window width for give breakpoint mode.
          * @param {string} mode Responsive mode name(e.g: xl, lg, md, sm)
-         * @returns {number}  
+         * @returns {number}
          */
         getBreakpoint: function(mode) {
             return breakpoints[mode];
@@ -312,7 +312,7 @@ var KTUtil = function() {
          * Checks whether object has property matchs given key path.
          * @param {object} obj Object contains values paired with given key path
          * @param {string} keys Keys path seperated with dots
-         * @returns {object}  
+         * @returns {object}
          */
         isset: function(obj, keys) {
             var stone;
@@ -346,7 +346,7 @@ var KTUtil = function() {
         /**
          * Gets highest z-index of the given element parents
          * @param {object} el jQuery element object
-         * @returns {number}  
+         * @returns {number}
          */
         getHighestZindex: function(el) {
             var elem = KTUtil.get(el),
@@ -379,7 +379,7 @@ var KTUtil = function() {
         /**
          * Checks whether the element has any parent with fixed positionfreg
          * @param {object} el jQuery element object
-         * @returns {boolean}  
+         * @returns {boolean}
          */
         hasFixedPositionedParent: function(el) {
             while (el && el !== document) {
@@ -419,7 +419,7 @@ var KTUtil = function() {
 
         /**
          * Checks whether Angular library is included
-         * @returns {boolean}  
+         * @returns {boolean}
          */
         isAngularVersion: function() {
             return window.Zone !== undefined ? true : false;
@@ -450,7 +450,7 @@ var KTUtil = function() {
             return out;
         },
 
-        // extend:  $.extend({}, objA, objB); 
+        // extend:  $.extend({}, objA, objB);
         extend: function(out) {
             out = out || {};
 
@@ -499,7 +499,7 @@ var KTUtil = function() {
 
         getByTag: function(query) {
             var el;
-            
+
             if (el = document.getElementsByTagName(query)) {
                 return el[0];
             } else {
@@ -509,7 +509,7 @@ var KTUtil = function() {
 
         getByClass: function(query) {
             var el;
-            
+
             if (el = document.getElementsByClassName(query)) {
                 return el[0];
             } else {
@@ -521,7 +521,7 @@ var KTUtil = function() {
          * Checks whether the element has given classes
          * @param {object} el jQuery element object
          * @param {string} Classes string
-         * @returns {boolean}  
+         * @returns {boolean}
          */
         hasClasses: function(el, classes) {
             if (!el) {
@@ -653,7 +653,7 @@ var KTUtil = function() {
             }
         },
 
-        index: function( elm ){ 
+        index: function( elm ){
             elm = KTUtil.get(elm);
             var c = elm.parentNode.children, i = 0;
             for(; i < c.length; i++ )
@@ -684,14 +684,14 @@ var KTUtil = function() {
             parent = KTUtil.get(parent);
             if (parent) {
                 return parent.querySelector(query);
-            }            
+            }
         },
 
         findAll: function(parent, query) {
             parent = KTUtil.get(parent);
             if (parent) {
                 return parent.querySelectorAll(query);
-            } 
+            }
         },
 
         insertAfter: function(el, referenceNode) {
@@ -796,7 +796,7 @@ var KTUtil = function() {
                         return;
                     }
 
-                    if (element.customDataTag === undefined) { 
+                    if (element.customDataTag === undefined) {
                         return null;
                     }
 
@@ -807,8 +807,8 @@ var KTUtil = function() {
                     if (element === undefined) {
                         return false;
                     }
-                    
-                    if (element.customDataTag === undefined) { 
+
+                    if (element.customDataTag === undefined) {
                         return false;
                     }
 
@@ -968,7 +968,7 @@ var KTUtil = function() {
         actualCss: function(el, prop, cache) {
             el = KTUtil.get(el);
             var css = '';
-            
+
             if (el instanceof HTMLElement === false) {
                 return;
             }
@@ -1084,7 +1084,7 @@ var KTUtil = function() {
                 calcPaddingBottom = parseInt(KTUtil.data(el).get('slide-padding-bottom'));
             }
 
-            if (dir == 'up') { // up          
+            if (dir == 'up') { // up
                 el.style.cssText = 'display: block; overflow: hidden;';
 
                 if (calcPaddingTop) {
@@ -1213,9 +1213,9 @@ var KTUtil = function() {
             el.addEventListener(type, function callee(e) {
                 // remove event
                 if (e.target && e.target.removeEventListener) {
-                    e.target.removeEventListener(e.type, callee);                    
+                    e.target.removeEventListener(e.type, callee);
                 }
-                
+
                 // call handler
                 return callback(e);
             });
@@ -1422,7 +1422,7 @@ var KTUtil = function() {
             return (KTUtil.attr(KTUtil.get('html'), 'direction') == 'rtl');
         },
 
-        // 
+        //
 
         // Scroller
         scrollInit: function(element, options) {
@@ -1468,7 +1468,7 @@ var KTUtil = function() {
                     KTUtil.css(element, 'overflow', 'auto');
                     return;
                 }
-                
+
                 // Init scroll
                 KTUtil.css(element, 'overflow', 'hidden');
 
@@ -1481,7 +1481,7 @@ var KTUtil = function() {
                         swipeEasing: true,
                         wheelPropagation: (options.windowScroll === false ? false : true),
                         minScrollbarLength: 40,
-                        maxScrollbarLength: 300, 
+                        maxScrollbarLength: 300,
                         suppressScrollX: KTUtil.attr(element, 'data-scroll-x') != 'true' ? true : false
                     });
 
@@ -1498,11 +1498,11 @@ var KTUtil = function() {
                         if (pos > 0) {
                             element.scrollTop = pos;
                         }
-                    } 
+                    }
 
                     element.addEventListener('ps-scroll-y', function() {
                         Cookies.set(uid, element.scrollTop);
-                    });                                      
+                    });
                 }
             }
 
@@ -1549,7 +1549,7 @@ var KTUtil = function() {
             if (KTUtil.get(el)) {
                 return KTUtil.get(el).innerHTML;
             }
-        } 
+        }
     }
 }();
 
@@ -1558,7 +1558,9 @@ KTUtil.ready(function() {
     KTUtil.init();
 });
 
+global.KTUtil = KTUtil;
+
 // CSS3 Transitions only after page load(.kt-page-loading class added to body tag and remove with JS on page load)
-window.onload = function() {    
+window.onload = function() {
     KTUtil.removeClass(KTUtil.get('body'), 'kt-page--loading');
 }

@@ -4,7 +4,7 @@ Encore
   .setOutputPath('public/build/')
   .setPublicPath('/build')
   .setManifestKeyPrefix('build/')
-  .addStyleEntry('appStyle', './assets/css/app.scss')
+  .addStyleEntry('style', './assets/css/app.scss')
   .addEntry('app', './assets/js/app.js')
   .splitEntryChunks()
   .disableSingleRuntimeChunk()

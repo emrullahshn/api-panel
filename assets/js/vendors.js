@@ -1,18 +1,24 @@
-import $ from "jquery"
+// Required
 import "popper.js"
 import "bootstrap"
-import "chart.js"
 import "js-cookie"
-import "moment"
+import moment from "moment"
 import "tooltip.js"
-import "perfect-scrollbar"
-import "sticky-js"
+import PerfectScrollbar from "perfect-scrollbar"
+import Sticky from "sticky-js"
 import "wnumb"
-import "@google/maps"
+import "chart.js"
+
+global.moment = moment
+global.PerfectScrollbar = PerfectScrollbar
+global.Sticky = Sticky
+
+// Optional
 import "jquery-form"
 import "block-ui"
 import "bootstrap-datepicker"
 import "bootstrap-daterangepicker"
+import "bootstrap-datetime-picker"
 import "bootstrap-touchspin"
 import "bootstrap-maxlength"
 import "bootstrap-select"
@@ -48,4 +54,4 @@ import "jquery.repeater/src/jquery.input"
 import "jquery.repeater/src/repeater"
 import "sweetalert2"
 import "dompurify"
-import "bootstrap-datetime-picker"
+import "@google/maps"
