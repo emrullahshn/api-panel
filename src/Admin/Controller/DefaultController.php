@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Controller;
+namespace App\Admin\Controller;
 
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DefaultController extends Controller
+class DefaultController extends EasyAdminController
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/admin1", name="admin_dashboard")
      * @return Response
      */
     public function index()

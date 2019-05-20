@@ -4,13 +4,13 @@ fos_user:
     mailer: fos_user.mailer.twig_swift
   db_driver: orm # other valid values are 'mongodb' and 'couchdb'
   firewall_name: main
-  user_class: App\Entity\User
+  user_class: App\Admin\Entity\User
   from_email:
     address: info@hosted.com.tr
     sender_name: Info Hosted
   registration:
     form:
-      type: App\Form\RegistrationFormType
+      type: App\Admin\Form\RegistrationFormType
     confirmation:
       enabled:    true
       template:   'bundles/FOSUserBundle/Registration/email.txt.twig'

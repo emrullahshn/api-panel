@@ -10,7 +10,7 @@ easy_admin:
           children: ['Users']
     entities:
         Users:
-            class: App\Entity\User
+            class: App\Admin\Entity\User
             permissions:
                 list: ['ROLE_USER']
                 new: ['ROLE_USER']
