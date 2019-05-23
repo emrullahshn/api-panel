@@ -14,6 +14,7 @@
     },
     "dependencies": {
         "@google/maps": "^0.5.5",
+        "animate.css": "^3.7.0",
         "autosize": "^4.0.2",
         "block-ui": "^2.70.1",
         "bootstrap": "^4.3.1",
@@ -38,7 +39,7 @@
         "handlebars": "^4.1.2",
         "inputmask": "^4.0.8",
         "ion-rangeslider": "^2.3.0",
-        "jquery": "3.3.1",
+        "jquery": "3.4.0",
         "jquery-form": "^4.2.2",
         "jquery-validation": "^1.19.0",
         "jquery.repeater": "^1.2.1",
