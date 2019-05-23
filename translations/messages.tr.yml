@@ -1,3 +1,34 @@
 homepage:
   title: Yönetim Merkezi - Manage Hosted
   desc: Latest updates and statistic charts
+
+loginPage:
+  title: Kullanıcı Girişi
+  rememberMe: Beni hatırla
+  signIn: Giriş Yap
+  signUp: Hesap Oluştur
+  splashArt:
+    title: Manage HOSTED
+    desc: >
+      HOSTED Teknoloji kullanıcı yönetim paneline hoşgeldiniz, tüm işlemlerinizi bu panel üzerinden
+      güvenli bir şekilde gerçekleştirebilirsiniz.
+  forgetPassword:
+    title: Parolamı unuttum
+    title2: Parolanızı mı Unuttunuz?
+    desc: Lütfen kayıtlı olan e-posta adresinizi giriniz.
+    reset: Parolamı Sıfırla
+  register:
+    title: Kayıt Ol
+    desc: Lütfen aşağıdaki bilgileri eksiksiz doldurunuz
+    fullName: İsim Soyisim
+    email: E-posta
+    address: Adres
+    city: Şehir
+    phone: Telefon
+    accType: Hesap Türü
+    comName: Şirket Adı
+    password: Parola
+    confirmPassword: Parolayı Onayla
+    terms: >
+      <a>Kullanım sözleşmesini okudum</a> ve kabul ediyorum.
+    cancel: Vazgeç

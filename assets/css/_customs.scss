@@ -4,3 +4,32 @@
 @import "customs/jquery-ui.bundle.css";
 @import "customs/jqvmap.bundle.css";
 @import "customs/jstree.bundle.css";
+
+.kt-login.kt-login--v6 {
+  .kt-login__content {
+    .kt-login__section {
+      .kt-login__block {
+        padding: 1rem 1.5rem;
+        margin: 0 auto;
+        display: inline-block;
+        text-align: center;
+        max-width: 500px;
+
+        .kt-login__title {
+          color: #212529;
+          font-size: 1.75rem;
+          padding-top: 6rem;
+        }
+      }
+    }
+  }
+}
+
+.kt-sign-up__form {
+  margin: 3.4rem 0 3rem 0;
+  text-align: center;
+
+  .btn {
+    height: auto;
+  }
+}

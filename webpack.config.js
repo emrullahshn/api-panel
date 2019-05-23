@@ -5,6 +5,7 @@ Encore
   .setPublicPath('/build')
   .setManifestKeyPrefix('build/')
   .addStyleEntry('style', './assets/css/app.scss')
+  .addStyleEntry('login-page', './assets/css/login-page.scss')
   .splitEntryChunks()
   .disableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()
