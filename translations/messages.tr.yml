@@ -23,6 +23,7 @@ loginPage:
     fullName: İsim Soyisim
     email: E-posta
     address: Adres
+    country: Ülke
     city: İl
     town: İlçe
     phone: Telefon
