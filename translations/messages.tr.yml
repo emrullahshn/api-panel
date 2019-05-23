@@ -23,7 +23,8 @@ loginPage:
     fullName: İsim Soyisim
     email: E-posta
     address: Adres
-    city: Şehir
+    city: İl
+    town: İlçe
     phone: Telefon
     accType: Hesap Türü
     comName: Şirket Adı
