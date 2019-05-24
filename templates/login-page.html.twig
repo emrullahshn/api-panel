@@ -107,7 +107,8 @@
         $.getJSON("{{ asset('sources/il-bolge.json') }}", function(sonuc){
           $.each(sonuc, function(index, value){
             var row="";
-            row +='<option value="'+value.il+'">'+value.il+'</option>';
+            var il = value.il.charAt(0).toUpperCase() + value.il.toLowerCase().slice(1)
+            row +='<option value="'+ il +'">' + il + '</option>';
             $("#city").append(row);
           })
         });
@@ -120,7 +121,8 @@
               var row="";
               if(value.il==il)
               {
-                row +='<option value="'+value.ilce+'">'+value.ilce+'</option>';
+                var ilce = value.ilce.charAt(0).toUpperCase() + value.ilce.toLowerCase().slice(1)
+                row +='<option value="'+ ilce +'">' + ilce + '</option>';
                 $("#town").append(row);
               }
             });
