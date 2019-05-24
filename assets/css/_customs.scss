@@ -33,3 +33,27 @@
     height: auto;
   }
 }
+
+.confirmed-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  text-align: center;
+
+  .image {
+    display: block;
+    flex: 0 0 100%;
+  }
+
+  .desc {
+    display: block;
+    flex: 0 0 100%;
+    padding: .75rem;
+  }
+
+  .links {
+    display: block;
+    flex: 0 0 100%;
+  }
+}
