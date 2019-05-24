@@ -102,7 +102,7 @@ var KTLoginGeneral = function() {
               else {
                 setTimeout(function() {
                   btn.removeClass('kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light').attr('disabled', false);
-                  showErrorMsg(form, 'danger', 'Incorrect username or password. Please try again.');
+                  showErrorMsg(form, 'danger', response.message);
                 }, 2000);
               }
             }
@@ -162,7 +162,7 @@ var KTLoginGeneral = function() {
                       signInForm.clearForm();
                       signInForm.validate().resetForm();
 
-                      showErrorMsg(signInForm, 'success', 'Thank you. To complete your registration please check your email.');
+                      showErrorMsg(signInForm, 'success', response.message);
                     }, 2000);
                   }
                 }
@@ -210,7 +210,7 @@ var KTLoginGeneral = function() {
                       signInForm.clearForm();
                       signInForm.validate().resetForm();
 
-                      showErrorMsg(signInForm, 'success', 'Cool! Password recovery instruction has been sent to your email.');
+                      showErrorMsg(signInForm, 'success', response.message);
                     }, 2000);
                   }
                 }
