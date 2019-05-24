@@ -25,22 +25,22 @@ class User extends BaseUser
     protected $address;
 
     /**
-     * @var int
-     * @ORM\Column(name="country_id", type="integer", nullable=true)
+     * @var string
+     * @ORM\Column(name="country", type="string", nullable=true)
      */
-    protected $countryId;
+    protected $country;
 
     /**
-     * @var int
-     * @ORM\Column(name="city_id", type="integer", nullable=true)
+     * @var string
+     * @ORM\Column(name="city", type="string", nullable=true)
      */
-    protected $cityId;
+    protected $city;
 
     /**
-     * @var int
-     * @ORM\Column(name="town_id", type="integer", nullable=true)
+     * @var string
+     * @ORM\Column(name="town", type="string", nullable=true)
      */
-    protected $townId;
+    protected $town;
 
     /**
      * @var string
@@ -73,20 +73,20 @@ class User extends BaseUser
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getCityId(): int
+    public function getCity(): string
     {
-        return $this->cityId;
+        return $this->city;
     }
 
     /**
-     * @param int $cityId
+     * @param string $city
      * @return User
      */
-    public function setCityId(int $cityId): User
+    public function setCity(string $city): User
     {
-        $this->cityId = $cityId;
+        $this->city = $city;
         return $this;
     }
 
@@ -109,31 +109,21 @@ class User extends BaseUser
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getCountryId(): int
+    public function getCountry(): string
     {
-        return $this->countryId;
+        return $this->country;
     }
 
     /**
-     * @param int $countryId
+     * @param string $country
      * @return User
      */
-    public function setCountryId(int $countryId): User
+    public function setCountry(string $country): User
     {
-        $this->countryId = $countryId;
+        $this->country = $country;
         return $this;
-    }
-
-    /**
-     * User constructor.
-     * @param $id
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
     }
 
     /**
@@ -173,20 +163,20 @@ class User extends BaseUser
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getTownId(): int
+    public function getTown(): string
     {
-        return $this->townId;
+        return $this->town;
     }
 
     /**
-     * @param int $townId
+     * @param string $town
      * @return User
      */
-    public function setTownId(int $townId): User
+    public function setTown(string $town): User
     {
-        $this->townId = $townId;
+        $this->town = $town;
         return $this;
     }
 }
