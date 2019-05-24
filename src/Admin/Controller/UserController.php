@@ -1,19 +1,41 @@
 <?php
-
-
 namespace App\Admin\Controller;
 
 use App\Admin\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\UserBundle\Mailer\Mailer;
+use FOS\UserBundle\Mailer\MailerInterface;
+use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class UserController extends Controller
 {
+    /**
+     * @var Mailer $mailer
+     */
+    protected $mailer;
+
+    /**
+     * @var TokenGeneratorInterface $tokenGenerator
+     */
+    protected $tokenGenerator;
+
+    /**
+     * UserController constructor.
+     * @param Mailer $mailer
+     * @param TokenGeneratorInterface $tokenGenerator
+     */
+    public function __construct(Mailer $mailer, TokenGeneratorInterface $tokenGenerator)
+    {
+        $this->mailer = $mailer;
+        $this->tokenGenerator = $tokenGenerator;
+    }
+
     /**
      * @Route(path="/user-login", name="user_login", methods={"POST"})
      * @param Request $request
@@ -28,6 +50,7 @@ class UserController extends Controller
      * @param EntityManagerInterface $entityManager
      * @param EncoderFactoryInterface $encoderFactory
      * @return JsonResponse
+     * @throws \Exception
      */
     public function registerAction(Request $request, EntityManagerInterface $entityManager, EncoderFactoryInterface $encoderFactory)
     {
@@ -38,7 +61,7 @@ class UserController extends Controller
         $city = $request->request->get('city');
         $town = $request->request->get('town');
         $phoneNumber = $request->request->get('phone');
-        $companyName = $request->request->get('company');
+        $companyName = $request->request->get('companyName');
         $passWord = $request->request->get('password');
         $rPassword = $request->request->get('rpassword');
 
@@ -61,13 +84,42 @@ class UserController extends Controller
 
         $user = (new User())
             ->setUsernameCanonical($fullName)
+            ->setUsername($email)
             ->setEmail($email)
             ->setAddress($address)
             ->setCompanyName($companyName)
-            ->setPlainPassword()
+            ->setPhoneNumber($phoneNumber)
+            ->setCountry($country)
+            ->setCity($city)
+            ->setTown($town)
             ->setEnabled(1)
+            ->setPlainPassword($passWord)
             ->setRoles([User::ROLE_DEFAULT])
         ;
+        $user->setConfirmationToken($this->tokenGenerator->generateToken());
+
+        $encoder = $encoderFactory->getEncoder($user);
+
+        if ($encoder instanceof BCryptPasswordEncoder) {
+            $user->setSalt(null);
+        } else {
+            $salt = rtrim(str_replace('+', '.', base64_encode(random_bytes(32))), '=');
+            $user->setSalt($salt);
+        }
+
+        $hashedPassword = $encoder->encodePassword($user->getPlainPassword(), $user->getSalt());
+        $user->setPassword($hashedPassword);
+        $user->eraseCredentials();
+
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        $this->sendMail($user, 'create');
+
+        return new JsonResponse([
+            'status' => true,
+            'message' => 'Kayıt olduğunuz için teşekkür ederiz. Aktivasyon mailiniz email adresinize gönderilmiştir.'
+        ]);
     }
 
     /**
@@ -75,5 +127,13 @@ class UserController extends Controller
      */
     public function changePasswordAction(){
 
+    }
+
+    public function sendMail(User $user, string $type){
+        if ($type === 'create'){
+            $this->mailer->sendConfirmationEmailMessage($user);
+        }else{
+            $this->mailer->sendResettingEmailMessage($user);
+        }
     }
 }
