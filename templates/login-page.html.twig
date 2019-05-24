@@ -30,6 +30,7 @@
     };
   </script>
 
+  <script src="{{ asset('build/js/customs/turkishLowerAndUpper.js') }}" type="text/javascript"></script>
   <script src="{{ asset('build/js/vendors/general/jquery/dist/jquery.js') }}" type="text/javascript"></script>
   <script src="{{ asset('build/js/vendors/general/popper.js/dist/umd/popper.js') }}" type="text/javascript"></script>
   <script src="{{ asset('build/js/vendors/general/bootstrap/dist/js/bootstrap.min.js') }}" type="text/javascript"></script>
@@ -107,21 +108,24 @@
         $.getJSON("{{ asset('sources/il-bolge.json') }}", function(sonuc){
           $.each(sonuc, function(index, value){
             var row="";
-            var il = value.il.charAt(0).toUpperCase() + value.il.toLowerCase().slice(1)
-            row +='<option value="'+ il +'">' + il + '</option>';
+            var plaka = value.plaka
+            var il = value.il.charAt(0).turkishToUpper() + value.il.turkishToLower().slice(1)
+            row +='<option data-value="' + plaka + '" value="'+ il +'">' + il + '</option>';
             $("#city").append(row);
           })
         });
 
         $("#city").on("change", function(){
-          var il=$(this).val();
+          var plaka = $(this).find('option:selected').attr('data-value');
+
           $("#town").attr("disabled", false).html("<option value=''>Seçin..</option>");
           $.getJSON("{{ asset('sources/il-ilce.json') }}", function(sonuc){
             $.each(sonuc, function(index, value){
               var row="";
-              if(value.il==il)
+
+              if(value.plaka === +(plaka))
               {
-                var ilce = value.ilce.charAt(0).toUpperCase() + value.ilce.toLowerCase().slice(1)
+                var ilce = value.ilce.charAt(0).turkishToUpper() + value.ilce.turkishToLower().slice(1)
                 row +='<option value="'+ ilce +'">' + ilce + '</option>';
                 $("#town").append(row);
               }
