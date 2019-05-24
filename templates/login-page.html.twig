@@ -158,7 +158,7 @@
                     <h3 class="kt-login__title">{{ 'loginPage.title'|trans }}</h3>
                   </div>
                   <div class="kt-login__form">
-                    <form class="kt-form" action="">
+                    <form class="kt-form" action="{{ path('user_login') }}" method="post">
                       <div class="form-group">
                         <input class="form-control" type="text" placeholder="{{ 'loginPage.register.email'|trans }}" name="email" autocomplete="off">
                       </div>
@@ -190,7 +190,7 @@
                     </div>
                   </div>
                   <div class="kt-login__form">
-                    <form class="kt-form" action="">
+                    <form class="kt-form" action="{{ path('user_register') }}" method="post">
                       <div class="form-group">
                         <input class="form-control" type="text" placeholder="{{ 'loginPage.register.fullName'|trans }}" name="fullname">
                       </div>
@@ -261,7 +261,7 @@
                     </div>
                   </div>
                   <div class="kt-login__form">
-                    <form class="kt-form" action="">
+                    <form class="kt-form" action="{{ path('user_change_password') }}" method="post">
                       <div class="form-group">
                         <input class="form-control" type="text" placeholder="{{ 'loginPage.register.email'|trans }}" name="email" id="kt_email" autocomplete="off">
                       </div>
