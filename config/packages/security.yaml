@@ -19,6 +19,10 @@ security:
             pattern:    ^/user-register/
             security:   false
 
+        user_login:
+            pattern:    ^/user_login/
+            security:   false
+
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -28,7 +32,7 @@ security:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
                 always_use_default_target_path: false
-                default_target_path: /admin
+                default_target_path: /
 
             logout:       true
             anonymous:    true

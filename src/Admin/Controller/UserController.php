@@ -10,8 +10,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class UserController extends Controller
 {
@@ -24,6 +27,11 @@ class UserController extends Controller
      * @var TokenGeneratorInterface $tokenGenerator
      */
     protected $tokenGenerator;
+
+    /**
+     * @var AuthorizationChecker $authChecker
+     */
+    protected $authChecker;
 
     /**
      * UserController constructor.
@@ -41,7 +49,15 @@ class UserController extends Controller
      * @param Request $request
      */
     public function loginAction(Request $request){
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['username' => $request->request->get('email')]);
 
+        $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+        $this->get('security.token_storage')->setToken($token);
+
+        $this->get('session')->set('_security_main', serialize($token));
+
+        $event = new InteractiveLoginEvent($request, $token);
+        $this->get('event_dispatcher')->dispatch('security.interactive_login', $event);
     }
 
     /**
