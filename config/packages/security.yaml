@@ -15,6 +15,10 @@ security:
             id: fos_user.user_provider.username_email
 
     firewalls:
+        user_register:
+            pattern:    ^/user-register/
+            security:   false
+
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -37,3 +41,4 @@ security:
         - { path: ^/demo, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, role: ROLE_USER }
+        - { path: ^/, role: ROLE_USER }

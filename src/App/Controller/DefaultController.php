@@ -17,14 +17,4 @@ class DefaultController extends Controller
     {
         return $this->render('homepage.html.twig');
     }
-
-    /**
-     * @TODO
-     * @Route("/login-page", name="login_page")
-     * @return Response
-     */
-    public function loginPage()
-    {
-        return $this->render('login-page.html.twig');
-    }
 }
