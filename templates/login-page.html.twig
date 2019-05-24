@@ -138,6 +138,28 @@
     })
 
     $('#country').trigger('change')
+
+    $('#kt_login_signin_submit, #kt_login_signup_submit, #kt_login_forgot_submit').on('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      var $form = $(this).closest('form')
+      var data = $form.serialize()
+
+      $.ajax({
+        method: $form.attr('method'),
+        url: $form.attr('action'),
+        data: data,
+        success: function() {
+          console.log('gitti')
+        },
+        error: function() {
+          console.log('Fatal Error')
+        }
+      })
+
+      return false;
+    })
   </script>
 {% endblock %}
 
@@ -159,7 +181,7 @@
                     <h3 class="kt-login__title">{{ 'loginPage.title'|trans }}</h3>
                   </div>
                   <div class="kt-login__form">
-                    <form class="kt-form" action="{{ path('user_login') }}" method="post">
+                    <form class="kt-form" action="{{ absolute_url(path('user_login')) }}" method="post">
                       <div class="form-group">
                         <input class="form-control" type="text" placeholder="{{ 'loginPage.register.email'|trans }}" name="email" autocomplete="off">
                       </div>
@@ -174,7 +196,7 @@
                         <a href="javascript:;" id="kt_login_forgot">{{ 'loginPage.forgetPassword.title'|trans }}</a>
                       </div>
                       <div class="kt-login__actions">
-                        <button id="kt_login_signin_submit" class="btn btn-brand btn-pill btn-elevate">
+                        <button id="kt_login_signin_submit" type="submit" class="btn btn-brand btn-pill btn-elevate submit-btn">
                           {{ 'loginPage.signIn'|trans }}
                         </button>
                       </div>
@@ -191,7 +213,7 @@
                     </div>
                   </div>
                   <div class="kt-login__form">
-                    <form class="kt-form" action="{{ path('user_register') }}" method="post">
+                    <form class="kt-form" action="{{ absolute_url(path('user_register')) }}" method="post">
                       <div class="form-group">
                         <input class="form-control" type="text" placeholder="{{ 'loginPage.register.fullName'|trans }}" name="fullname">
                       </div>
@@ -242,10 +264,10 @@
                         </label>
                       </div>
                       <div class="kt-login__actions">
-                        <button id="kt_login_signup_submit" class="btn btn-brand btn-pill btn-elevate">
+                        <button id="kt_login_signup_submit" type="submit" class="btn btn-brand btn-pill btn-elevate submit-btn">
                           {{ 'loginPage.register.title'|trans }}
                         </button>
-                        <button id="kt_login_signup_cancel" class="btn btn-outline-brand btn-pill">
+                        <button id="kt_login_signup_cancel" type="reset" class="btn btn-outline-brand btn-pill">
                           {{ 'loginPage.register.cancel'|trans }}
                         </button>
                       </div>
@@ -267,8 +289,12 @@
                         <input class="form-control" type="text" placeholder="{{ 'loginPage.register.email'|trans }}" name="email" id="kt_email" autocomplete="off">
                       </div>
                       <div class="kt-login__actions">
-                        <button id="kt_login_forgot_submit" class="btn btn-brand btn-pill btn-elevate">{{ 'loginPage.forgetPassword.reset'|trans }}</button>
-                        <button id="kt_login_forgot_cancel" class="btn btn-outline-brand btn-pill">{{ 'loginPage.register.cancel'|trans }}</button>
+                        <button id="kt_login_forgot_submit" class="btn btn-brand btn-pill btn-elevate submit-btn">
+                          {{ 'loginPage.forgetPassword.reset'|trans }}
+                        </button>
+                        <button id="kt_login_forgot_cancel" class="btn btn-outline-brand btn-pill">
+                          {{ 'loginPage.register.cancel'|trans }}
+                        </button>
                       </div>
                     </form>
                   </div>
