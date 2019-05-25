@@ -271,15 +271,15 @@
                     </div>
                   </div>
                   <div class="kt-login__form">
-                    <form class="kt-form" action="{{ path('user_change_password') }}" method="post" onsubmit="return false;">
+                    <form class="kt-form" action="{{ path('fos_user_resetting_send_email') }}" method="post">
                       <div class="form-group">
-                        <input class="form-control" type="text" placeholder="{{ 'loginPage.register.email'|trans }}" name="email" id="kt_email" autocomplete="off">
+                        <input class="form-control" type="text" placeholder="{{ 'loginPage.register.email'|trans }}" name="username" required="required" id="kt_email" autocomplete="off">
                       </div>
                       <div class="kt-login__actions">
-                        <button id="kt_login_forgot_submit" type="submit" class="btn btn-brand btn-pill btn-elevate submit-btn">
+                        <button type="submit" class="btn btn-brand btn-pill btn-elevate submit-btn">
                           {{ 'loginPage.forgetPassword.reset'|trans }}
                         </button>
-                        <button id="kt_login_forgot_cancel" type="reset" class="btn btn-outline-brand btn-pill">
+                        <button type="reset" class="btn btn-outline-brand btn-pill">
                           {{ 'loginPage.register.cancel'|trans }}
                         </button>
                       </div>
