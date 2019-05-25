@@ -4,10 +4,8 @@ security:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
-        ROLE_ADMIN:
-            - ROLE_USER
-
-        ROLE_USER:
+        ROLE_ADMIN:       [ROLE_USER, ROLE_EVENT_CREATE]
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:

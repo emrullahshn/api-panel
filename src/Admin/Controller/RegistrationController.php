@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Admin\Controller;
 
 use App\Admin\Entity\User;
@@ -66,7 +67,7 @@ class RegistrationController extends Controller
         $passWord = $request->request->get('password');
         $rPassword = $request->request->get('rpassword');
 
-        if ($passWord !== $rPassword){
+        if ($passWord !== $rPassword) {
             return new JsonResponse([
                 'status' => false,
                 'message' => 'Şifreler farklı!'
@@ -95,8 +96,8 @@ class RegistrationController extends Controller
             ->setTown($town)
             ->setEnabled(1)
             ->setPlainPassword($passWord)
-            ->setRoles([User::ROLE_DEFAULT])
-        ;
+            ->addRole(User::ROLE_DEFAULT);
+
         $user->setConfirmationToken($this->tokenGenerator->generateToken());
 
         $encoder = $encoderFactory->getEncoder($user);
@@ -126,14 +127,16 @@ class RegistrationController extends Controller
     /**
      * @Route(path="/user-change-password", name="user_change_password", methods={"POST"})
      */
-    public function changePasswordAction(){
+    public function changePasswordAction()
+    {
 
     }
 
-    public function sendMail(User $user, string $type){
-        if ($type === 'create'){
+    public function sendMail(User $user, string $type)
+    {
+        if ($type === 'create') {
             $this->mailer->sendConfirmationEmailMessage($user);
-        }else{
+        } else {
             $this->mailer->sendResettingEmailMessage($user);
         }
     }

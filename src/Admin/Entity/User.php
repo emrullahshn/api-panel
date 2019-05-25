@@ -11,6 +11,19 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser
 {
+    public const ROLE_DEFAULT = '';
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        // Add role
+        $this->addRole('ROLE_USER');
+    }
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
