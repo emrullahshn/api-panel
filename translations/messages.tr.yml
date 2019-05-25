@@ -1,3 +1,25 @@
+aside:
+  dashboard: Yönetim Merkezi
+  hosting: Hosting
+  server: Sunucu
+  email: E-Posta
+  cdn: CDN
+  ssl: SSL
+  security: Güvenlik
+  settings: Hesap Ayarları
+  invoice:
+    title: Faturalandırma
+    addBalance: Bakiye Ekle
+    addCreditCard: Kredi Kartı Ekle
+  information: Bilgi Merkezi
+  support: Destek Talebi
+
+footer:
+  copyright: "%date &copy; Manage HOSTED v2.1"
+  back: Siteye Dön
+  submitError: Hata Bildir
+  contactUs: Bize Ulaşın
+
 homepage:
   title: Yönetim Merkezi - Manage Hosted
   desc: Latest updates and statistic charts
@@ -32,3 +54,28 @@ loginPage:
     terms: >
       <a>Kullanım sözleşmesini okudum</a> ve kabul ediyorum.
     cancel: Vazgeç
+
+profileEdit:
+  profileInfo:
+    label: Profil Bilgileri
+    title: Kişisel Bilgiler
+    inputs:
+      name: İsim
+      lastName: Soyisim
+      email: E-Posta
+      phone: Telefon
+      address: Adres
+      country: Ülke
+      city: İl
+      town: İlçe
+      postCode: Posta Kodu
+    title2: Adres Bilgileri
+
+  changePassword: Parola Değiştir
+  ipFilter: IP Kısaltması
+  emailHistory: E-Posta Geçmişi
+  processHistory:
+    label: İşlem Kayıtları
+    title: IP Adresi Ekle
+    desc: Manage HOSTED hesabınıza yalnızca ekleyeceğiniz IP adresleri ile erişim sağlanacaktır.
+

@@ -1,0 +1,18 @@
+<!-- begin:: Footer -->
+<div class="kt-footer kt-grid__item kt-grid kt-grid--desktop kt-grid--ver-desktop" id="kt_footer">
+    <div class="kt-footer__copyright">
+        {{ 'footer.copyright'|transchoice(0, {'%date%': ('now'|date('Y'))})|raw }}
+    </div>
+    <div class="kt-footer__menu">
+        <a href="{{ path('homepage') }}" target="_blank" class="kt-footer__menu-link kt-link">
+            {{ 'footer.back'|trans }}
+        </a>
+        <a href="#" target="_blank" class="kt-footer__menu-link kt-link">
+            {{ 'footer.submitError'|trans }}
+        </a>
+        <a href="#" target="_blank" class="kt-footer__menu-link kt-link">
+            {{ 'footer.contactUs'|trans }}
+        </a>
+    </div>
+</div>
+<!-- end:: Footer -->

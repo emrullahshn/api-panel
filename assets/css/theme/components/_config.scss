@@ -14,11 +14,11 @@ $kt-state-colors: (
     ),
     light: (
         base: #ffffff,
-        inverse: #282a3c 
+        inverse: #282a3c
     ),
     dark: (
         base: #282a3c,
-        inverse: #ffffff 
+        inverse: #ffffff
     ),
 
     // Bootstrap states
@@ -41,7 +41,7 @@ $kt-state-colors: (
     danger: (
         base: #fd27eb,
         inverse: #ffffff
-    )    
+    )
 );
 
 // Layout
@@ -58,7 +58,7 @@ $kt-page-padding: (
 $kt-brand-hover-color: #f5f6fc;
 
 // Secondary Brand Color
-$kt-secondary-brand-color: #fbce44;
+$kt-secondary-brand-color: #343c4f;
 
 // Page bg color
 $kt-page-bg-color: #f9f9fc;  // page bg color
