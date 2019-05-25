@@ -165,22 +165,25 @@
                     <h3 class="kt-login__title">{{ 'loginPage.title'|trans }}</h3>
                   </div>
                   <div class="kt-login__form">
-                    <form class="kt-form" action="{{ path('user_login') }}" method="post" onsubmit="return false;">
+                    <form class="kt-form" action="{{ path("fos_user_security_check") }}" method="post">
+                      {% if csrf_token %}
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                      {% endif %}
                       <div class="form-group">
-                        <input class="form-control" type="text" placeholder="{{ 'loginPage.register.email'|trans }}" name="email" autocomplete="off">
+                        <input class="form-control" type="text" placeholder="{{ 'loginPage.register.email'|trans }}" name="_username" autocomplete="off">
                       </div>
                       <div class="form-group">
-                        <input class="form-control form-control-last" type="password" placeholder="Password" name="password" autocomplete="off">
+                        <input class="form-control form-control-last" type="password" placeholder="Password" name="_password" autocomplete="off">
                       </div>
                       <div class="kt-login__extra">
                         <label class="kt-checkbox">
-                          <input type="checkbox" name="remember"> {{ 'loginPage.rememberMe'|trans }}
+                          <input type="checkbox" name="_remember_me"> {{ 'loginPage.rememberMe'|trans }}
                           <span></span>
                         </label>
                         <a href="javascript:;" id="kt_login_forgot">{{ 'loginPage.forgetPassword.title'|trans }}</a>
                       </div>
                       <div class="kt-login__actions">
-                        <button id="kt_login_signin_submit" type="submit" class="btn btn-brand btn-pill btn-elevate submit-btn">
+                        <button type="submit" class="btn btn-brand btn-pill btn-elevate submit-btn">
                           {{ 'loginPage.signIn'|trans }}
                         </button>
                       </div>

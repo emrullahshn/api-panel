@@ -32,7 +32,7 @@ services:
         resource: '../src/Admin/Controller'
         tags: ['controller.service_arguments']
 
-    App\Admin\Controller\UserController:
+    App\Admin\Controller\RegistrationController:
         arguments: ['@fos_user.mailer.default','@fos_user.util.token_generator.default']
 
     # add more service definitions when explicit configuration is needed

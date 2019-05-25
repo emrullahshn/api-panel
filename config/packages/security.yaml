@@ -20,7 +20,7 @@ security:
             security:   false
 
         user_login:
-            pattern:    ^/user_login/
+            pattern:    ^/user-login
             security:   false
 
         dev:
