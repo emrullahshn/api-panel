@@ -1,3 +1,25 @@
+aside:
+  dashboard: Yönetim Merkezi
+  hosting: Hosting
+  server: Sunucu
+  email: E-Posta
+  cdn: CDN
+  ssl: SSL
+  security: Güvenlik
+  settings: Hesap Ayarları
+  invoice:
+    title: Faturalandırma
+    addBalance: Bakiye Ekle
+    addCreditCard: Kredi Kartı Ekle
+  information: Bilgi Merkezi
+  support: Destek Talebi
+
+footer:
+  copyright: "%date% &copy; Manage HOSTED v2.1"
+  back: Siteye Dön
+  submitError: Hata Bildir
+  contactUs: Bize Ulaşın
+
 homepage:
   title: Yönetim Merkezi - Manage Hosted
   desc: Latest updates and statistic charts
@@ -34,3 +56,83 @@ loginPage:
     terms: >
       <a>Kullanım sözleşmesini okudum</a> ve kabul ediyorum.
     cancel: Vazgeç
+
+profileEdit:
+  saveChanges: Değişiklikleri Kaydet
+  saveAndContinue: Kaydet ve Devam et
+  saveAndNew: Kaydet ve Yeni ekle
+  saveAndExit: Kaydet ve Çık
+  back: Geri
+  profileInfo:
+    label: Profil Bilgileri
+    title: Kişisel Bilgiler
+    inputs:
+      name: İsim
+      lastName: Soyisim
+      email: E-Posta
+      phone: Telefon
+      address: Adres
+      country: Ülke
+      city: İl
+      town: İlçe
+      postCode: Posta Kodu
+    title2: Adres Bilgileri
+
+  changePassword:
+    label: Parola Değiştir
+    title: Parola Değiştir
+    currentPass: Mevcut Parola
+    newPass: Yeni Parola
+    inputs:
+      currentPass: Parolanız
+      newPass: Lütfen yeni parolanızı girin
+      newPassConfirm: Lütfen yeni parolanızı tekrar girin
+
+  ipFilter:
+    label: IP Kısaltması
+    title1: IP Adresi Ekle
+    desc1: Manage HOSTED hesabınıza yalnızca ekleyeceğiniz IP adresleri ile erişim sağlanacaktır.
+    title2: İzin Verilen IP Adresleri
+    desc2: >
+      Hesabınıza erişim için izin verilen tüm IP adresleri aşağıda listelenmektedir, olağandışı bir durum bulunuyor ise
+      destek talebi oluşturabilir veya canlı destek üzerinden yardım talebinde bulunabilirsiniz.
+    inputs:
+      ipBlock: IP Adresi/Bloğu
+      blockedIps: IP Adresi / Bloğu
+      actions: İşlem
+    tips:
+      title: Kullanım Örnekleri
+      desc: >
+        IP adresi ekle sekmesi üzerinde kullanabileceğiniz tüm varyasyonlar aşağıda belirtilmiştir.
+        <br>
+        all - Tüm IP adreslerinden erişim sağlanır.
+        120.123.123.57 - Belirtilen IP adresinden erişim sağlanır.
+        120.123.123.57/28 - Belirtilen bloktaki IP adreslerinden erişim sağlanır.
+        120.123.123.57/16 - Belirtilen bloktaki IP adreslerinden erişim sağlanır.
+
+
+  emailHistory:
+    label: E-Posta Geçmişi
+    title: E-Posta Geçmişi
+    desc: >
+      Profilinizde kayıtlı olan e-posta adreslerine daha önce gönderilen tüm postaları bu sayfa üzerinden
+      görüntüleyebilirsiniz. Güvenlik sebebi ile çeşitli parola/key bilgileri şifrelenebilir.
+      Daha fazla bilgi için destek talebi oluşturabilir veya canlı destek üzerinden yardım talebinde bulunabilirsiniz.
+    inputs:
+      subject: Konu
+      sendedTime: Gönderilme Tarihi
+  processHistory:
+    label: İşlem Kayıtları
+    title: İşlem Kayıtları
+    desc: >
+      Hesabınız üzerinde gerçekleştirilen tüm işlemlere ait kayıtlar aşağıda listelenmektedir, olağandışı bir durum
+      bulunuyor ise destek talebi oluşturabilir veya canlı destek üzerinden yardım talebinde bulunabilirsiniz.
+    inputs:
+      date: Tarih
+      processInfo: İşlem Detayı
+      status: Durum
+      success: Başarılı
+      waiting: Bekliyor
+      cancelled: İptal Edildi
+
+
