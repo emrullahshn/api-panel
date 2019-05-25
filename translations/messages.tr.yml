@@ -45,7 +45,9 @@ loginPage:
     fullName: İsim Soyisim
     email: E-posta
     address: Adres
-    city: Şehir
+    country: Ülke
+    city: İl
+    town: İlçe
     phone: Telefon
     accType: Hesap Türü
     comName: Şirket Adı

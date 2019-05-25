@@ -27,6 +27,14 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('usernameCanonical', EmailType::class, [
+                'label' => false,
+                'translation_domain' => 'FOSUserBundle',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'İsim Soyisim'
+                ],
+            ])
             ->add('email', EmailType::class, [
                 'label' => false,
                 'translation_domain' => 'FOSUserBundle',

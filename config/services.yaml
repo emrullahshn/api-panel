@@ -1,3 +1,6 @@
+imports:
+    - { resource: packages/service/core.yaml }
+
 # This file is the entry point to configure your own services.
 # Files in the packages/ subdirectory configure your dependencies.
 
@@ -31,6 +34,9 @@ services:
     App\Admin\Controller\:
         resource: '../src/Admin/Controller'
         tags: ['controller.service_arguments']
+
+    App\Admin\Controller\RegistrationController:
+        arguments: ['@fos_user.mailer.default','@fos_user.util.token_generator.default']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
