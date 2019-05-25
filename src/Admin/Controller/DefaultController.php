@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends EasyAdminController
 {
     /**
-     * @Route("/admin1", name="admin_dashboard")
+     * @Route("/admin", name="admin_dashboard")
      * @return Response
      */
     public function index()

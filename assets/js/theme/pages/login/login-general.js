@@ -96,15 +96,16 @@ var KTLoginGeneral = function() {
           form.ajaxSubmit({
             url: form.attr('action'),
             success: function(response, status, xhr, $form) {
-              if(response.status) {
-                console.log('hi 1');
-              }
-              else {
-                setTimeout(function() {
-                  btn.removeClass('kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light').attr('disabled', false);
-                  showErrorMsg(form, 'danger', 'Incorrect username or password. Please try again.');
-                }, 2000);
-              }
+              setTimeout(function() {
+                let type = 'danger'
+
+                if(response.status) {
+                  type = 'success'
+                }
+
+                btn.removeClass('kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light').attr('disabled', false);
+                showErrorMsg(form, type, response.message);
+              }, 2000);
             }
           });
         });
@@ -147,24 +148,25 @@ var KTLoginGeneral = function() {
             form.ajaxSubmit({
                 url: form.attr('action'),
                 success: function(response, status, xhr, $form) {
-                  if(response.status) {
-                    console.log('hi 2');
-                  }
-                  else {
-                    setTimeout(function() {
-                      btn.removeClass('kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light').attr('disabled', false);
-                      form.clearForm();
-                      form.validate().resetForm();
+                  setTimeout(function() {
+                    btn.removeClass('kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light').attr('disabled', false);
+                    form.clearForm();
+                    form.validate().resetForm();
 
-                      // display signup form
-                      displaySignInForm();
-                      var signInForm = login.find('.kt-login__signin form');
-                      signInForm.clearForm();
-                      signInForm.validate().resetForm();
+                    // display signup form
+                    displaySignInForm();
+                    var signInForm = login.find('.kt-login__signin form');
+                    signInForm.clearForm();
+                    signInForm.validate().resetForm();
 
-                      showErrorMsg(signInForm, 'success', 'Thank you. To complete your registration please check your email.');
-                    }, 2000);
-                  }
+                    let type = 'danger'
+
+                    if(response.status) {
+                      type = 'success'
+                    }
+
+                    showErrorMsg(signInForm, type, response.message);
+                  }, 2000);
                 }
             });
         });
@@ -195,24 +197,25 @@ var KTLoginGeneral = function() {
             form.ajaxSubmit({
                 url: form.attr('action'),
                 success: function(response, status, xhr, $form) {
-                	if(response.status) {
-                	  console.log('hi 3');
-                  }
-                  else {
-                    setTimeout(function() {
-                      btn.removeClass('kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light').attr('disabled', false); // remove
-                      form.clearForm(); // clear form
-                      form.validate().resetForm(); // reset validation states
+                  setTimeout(function() {
+                    btn.removeClass('kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light').attr('disabled', false); // remove
+                    form.clearForm(); // clear form
+                    form.validate().resetForm(); // reset validation states
 
-                      // display signup form
-                      displaySignInForm();
-                      var signInForm = login.find('.kt-login__signin form');
-                      signInForm.clearForm();
-                      signInForm.validate().resetForm();
+                    // display signup form
+                    displaySignInForm();
+                    var signInForm = login.find('.kt-login__signin form');
+                    signInForm.clearForm();
+                    signInForm.validate().resetForm();
 
-                      showErrorMsg(signInForm, 'success', 'Cool! Password recovery instruction has been sent to your email.');
-                    }, 2000);
-                  }
+                    let type = 'danger'
+
+                    if(response.status) {
+                      type = 'success'
+                    }
+
+                    showErrorMsg(signInForm, type, response.message);
+                  }, 2000);
                 }
             });
         });
