@@ -21,6 +21,10 @@ security:
             pattern:    ^/user-login
             security:   false
 
+        user_register_confirmed:
+            pattern:    ^/register-confirm
+            security:   false
+
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false

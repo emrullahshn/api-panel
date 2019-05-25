@@ -95,8 +95,7 @@ class RegistrationController extends Controller
             ->setCity($city)
             ->setTown($town)
             ->setEnabled(1)
-            ->setPlainPassword($passWord)
-            ->addRole(User::ROLE_DEFAULT);
+            ->setPlainPassword($passWord);
 
         $user->setConfirmationToken($this->tokenGenerator->generateToken());
 
