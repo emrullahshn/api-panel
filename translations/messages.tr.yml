@@ -175,3 +175,19 @@ addBalance:
   info:
     label: Bilgilendirme
     desc: Manage HOSTED paneli üzerinden minimum 50,00 TL, maksimum 25.000 TL bakiye yüklemesi gerçekleştirebilirsiniz. Yüklemek istediğiniz tutar bu aralık dışında ise canlı destek veya destek talebi üzerinden muhasebe departmanına ulaşım sağlayabilirsiniz.
+
+addCreditCard:
+  card:
+    label: Kayıtlı Olan Kredi Kartları
+    label2: Yeni Kart Ekle
+    type: Kart Türü
+    number: Kart Numarası
+    expireDate: Son Kullanma Tarihi
+    expireDateDesc: Lütfen AY/YIL formatında girin
+    add: Yeni Ekle
+    remove: Kaldır
+    save: Kaydet
+    cancel: Vazgeç
+  info:
+    label: Bilgilendirme
+    desc: Manage HOSTED paneli üzerinden yer alan kart bilgileriniz 3. şahıslar ile paylaşılmaz ve yüksek güvenli şifreleme yöntemleri ile çoklu şifreleme yapılarak depolanır. Kredi kartınızdan izniniz dışında bir işlem gerçekleştirilmez, daha fazla bilgi almak için canlı destek veya destek talebi üzerinden iletişime geçebilirsiniz.
