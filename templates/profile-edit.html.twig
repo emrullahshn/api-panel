@@ -100,6 +100,95 @@
   <script src="{{ asset('build/js/dashboard.js') }}" type="text/javascript"></script>
   <script src="{{ asset('build/js/theme/pages/login/login-general.js') }}" type="text/javascript"></script>
   <script>
+    $('#change_password').on('submit', function (e) {
+      e.preventDefault();
+
+      var isValid = true;
+      var currentPassword = $(this).find('#currentPass').val()
+      var newPassword = $(this).find('#newPassword').val()
+      var newPasswordVerify = $(this).find('#newPasswordVerify').val()
+
+      if(!currentPassword.length) {
+        isValid = false;
+
+        $(this).find('.error-field').html(`
+          <div class="alert alert-solid-danger alert-bold fade show kt-margin-t-20 kt-margin-b-40" role="alert">
+              <div class="alert-icon"><i class="fa fa-exclamation-triangle"></i></div>
+              <div class="alert-text">Lütfen mevcut şifrenizi girin</div>
+              <div class="alert-close">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true"><i class="la la-close"></i></span>
+                  </button>
+              </div>
+          </div>
+        `)
+      }
+
+      if(newPassword !== newPasswordVerify) {
+        isValid = false;
+
+        $(this).find('.error-field').html(`
+          <div class="alert alert-solid-danger alert-bold fade show kt-margin-t-20 kt-margin-b-40" role="alert">
+              <div class="alert-icon"><i class="fa fa-exclamation-triangle"></i></div>
+              <div class="alert-text">Yeni şifreler uyuşmuyor</div>
+              <div class="alert-close">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true"><i class="la la-close"></i></span>
+                  </button>
+              </div>
+          </div>
+        `)
+      }
+
+      if(isValid) {
+        $(this).ajaxSubmit({
+          error: function() {
+            $(this).find('.error-field').html(`
+              <div class="alert alert-solid-danger alert-bold fade show kt-margin-t-20 kt-margin-b-40" role="alert">
+                  <div class="alert-icon"><i class="fa fa-exclamation-triangle"></i></div>
+                  <div class="alert-text">Bir hata meydana geldi</div>
+                  <div class="alert-close">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true"><i class="la la-close"></i></span>
+                      </button>
+                  </div>
+              </div>
+            `)
+          },
+          success: function(data) {
+            if(!data.status) {
+              $(this).find('.error-field').html(`
+              <div class="alert alert-solid-success alert-bold fade show kt-margin-t-20 kt-margin-b-40" role="alert">
+                  <div class="alert-icon"><i class="fa fa-exclamation-triangle"></i></div>
+                  <div class="alert-text">${data.message}</div>
+                  <div class="alert-close">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true"><i class="la la-close"></i></span>
+                      </button>
+                  </div>
+              </div>
+            `)
+            }
+            else {
+              $(this).find('.error-field').html(`
+              <div class="alert alert-solid-danger alert-bold fade show kt-margin-t-20 kt-margin-b-40" role="alert">
+                  <div class="alert-icon"><i class="fa fa-exclamation-triangle"></i></div>
+                  <div class="alert-text">Şifreniz başarıyla güncellenmiştir</div>
+                  <div class="alert-close">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true"><i class="la la-close"></i></span>
+                      </button>
+                  </div>
+              </div>
+            `)
+            }
+          }
+        })
+      }
+
+      return isValid;
+    })
+
     $('#country').on('change', function () {
       if ($(this).val() === 'TR') {
         $.getJSON("{{ asset('sources/il-bolge.json') }}", function (sonuc) {
@@ -446,79 +535,84 @@
               </div>
               <div class="tab-pane" id="kt_apps_user_edit_tab_3" role="tabpanel">
                 <div class="kt-form kt-form--label-right">
-                  <div class="kt-form__body">
-                    <div class="kt-section kt-section--first">
-                      <div class="kt-section__body">
-                        <div class="row">
-                          <label class="col-xl-3"></label>
-                          <div class="col-lg-9 col-xl-6">
-                            <h3 class="kt-section__title kt-section__title-lg">
-                              {{ 'profileEdit.changePassword.currentPass'|trans }}
-                            </h3>
+                  <form action="{{ path('user_change_password') }}" method="post" id="change_password">
+                    <div class="kt-form__body">
+                      <div class="kt-section kt-section--first">
+                        <div class="kt-section__body">
+                          <div class="error-field"></div>
+                          <div class="row">
+                            <label class="col-xl-3"></label>
+                            <div class="col-lg-9 col-xl-6">
+                              <h3 class="kt-section__title kt-section__title-lg">
+                                {{ 'profileEdit.changePassword.currentPass'|trans }}
+                              </h3>
+                            </div>
                           </div>
-                        </div>
-                        <div class="form-group row">
-                          <label class="col-xl-3 col-lg-3 col-form-label">
-                            {{ 'profileEdit.changePassword.inputs.currentPass'|trans }}
-                          </label>
-                          <div class="col-lg-9 col-xl-6">
-                            <input type="password"
-                                   class="form-control"
-                                   value=""
-                                   placeholder="{{ 'profileEdit.changePassword.inputs.currentPass'|trans }}"
-                                   name="currentPass">
+                          <div class="form-group row">
+                            <label class="col-xl-3 col-lg-3 col-form-label">
+                              {{ 'profileEdit.changePassword.inputs.currentPass'|trans }}
+                            </label>
+                            <div class="col-lg-9 col-xl-6">
+                              <input type="password"
+                                     class="form-control"
+                                     value=""
+                                     placeholder="{{ 'profileEdit.changePassword.inputs.currentPass'|trans }}"
+                                     name="currentPass" id="currentPass">
+                            </div>
                           </div>
-                        </div>
-                        <div class="row">
-                          <label class="col-xl-3"></label>
-                          <div class="col-lg-9 col-xl-6">
-                            <h3 class="kt-section__title kt-section__title-lg">
-                              {{ 'profileEdit.changePassword.newPass'|trans }}
-                            </h3>
+                          <div class="row">
+                            <label class="col-xl-3"></label>
+                            <div class="col-lg-9 col-xl-6">
+                              <h3 class="kt-section__title kt-section__title-lg">
+                                {{ 'profileEdit.changePassword.newPass'|trans }}
+                              </h3>
+                            </div>
                           </div>
-                        </div>
-                        <div class="form-group row">
-                          <label class="col-xl-3 col-lg-3 col-form-label">
-                            {{ 'profileEdit.changePassword.inputs.newPass'|trans }}
-                          </label>
-                          <div class="col-lg-9 col-xl-6">
-                            <input type="password"
-                                   class="form-control"
-                                   name="newPassword"
-                                   value=""
-                                   placeholder="{{ 'profileEdit.changePassword.inputs.newPass'|trans }}"
-                            >
+                          <div class="form-group row">
+                            <label class="col-xl-3 col-lg-3 col-form-label">
+                              {{ 'profileEdit.changePassword.inputs.newPass'|trans }}
+                            </label>
+                            <div class="col-lg-9 col-xl-6">
+                              <input type="password"
+                                     class="form-control"
+                                     id="newPassword"
+                                     name="newPassword"
+                                     value=""
+                                     placeholder="{{ 'profileEdit.changePassword.inputs.newPass'|trans }}"
+                              >
+                            </div>
                           </div>
-                        </div>
-                        <div class="form-group form-group-last row">
-                          <label class="col-xl-3 col-lg-3 col-form-label">
-                            {{ 'profileEdit.changePassword.inputs.newPassConfirm'|trans }}
-                          </label>
-                          <div class="col-lg-9 col-xl-6">
-                            <input type="password"
-                                   class="form-control"
-                                   value=""
-                                   name="newPasswordVerify"
-                                   placeholder="{{ 'profileEdit.changePassword.inputs.newPass'|trans }}">
+                          <div class="form-group form-group-last row">
+                            <label class="col-xl-3 col-lg-3 col-form-label">
+                              {{ 'profileEdit.changePassword.inputs.newPassConfirm'|trans }}
+                            </label>
+                            <div class="col-lg-9 col-xl-6">
+                              <input type="password"
+                                     class="form-control"
+                                     value=""
+                                     name="newPasswordVerify"
+                                     id="newPasswordVerify"
+                                     placeholder="{{ 'profileEdit.changePassword.inputs.newPass'|trans }}">
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
-                  <div class="kt-form__actions">
-                    <div class="row">
-                      <div class="col-xl-3"></div>
-                      <div class="col-lg-9 col-xl-6">
-                        <a href="#" class="btn btn-label-brand btn-bold">
-                          {{ 'profileEdit.saveChanges'|trans }}
-                        </a>
-                        <a href="#" class="btn btn-clean btn-bold">
-                          {{ 'loginPage.register.cancel'|trans }}
-                        </a>
+                    <div class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
+                    <div class="kt-form__actions">
+                      <div class="row">
+                        <div class="col-xl-3"></div>
+                        <div class="col-lg-9 col-xl-6">
+                          <button type="submit" class="btn btn-label-brand btn-bold">
+                            {{ 'profileEdit.saveChanges'|trans }}
+                          </button>
+                          <button type="reset" class="btn btn-clean btn-bold">
+                            {{ 'loginPage.register.cancel'|trans }}
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </form>
                 </div>
               </div>
 
