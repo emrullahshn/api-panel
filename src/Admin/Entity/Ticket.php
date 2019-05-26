@@ -21,9 +21,28 @@ class Ticket
     public const STATUS_ANSWERED = 'ANSWERED';
     public const STATUS_CLOSED = 'CLOSED';
 
-    public const DEPARTMENT_TECHNICAL = 'TECHNICAL';
-    public const DEPARTMENT_SALE = 'SALE';
-    public const DEPARTMENT_FINANCE = 'FINANCE';
+    public const STATUS_DESC = [
+        self::STATUS_NEW => 'Yeni',
+        self::STATUS_WAITING => 'Cevap Bekliyor',
+        self::STATUS_ANSWERED => 'Cevaplandı',
+        self::STATUS_CLOSED => 'Kapatıldı'
+    ];
+
+    public const DEPARTMENT_TECHNICAL = 10;
+    public const DEPARTMENT_SALE = 20;
+    public const DEPARTMENT_FINANCE = 30;
+
+    public const DEPARTMENT_DESC = [
+        self::DEPARTMENT_TECHNICAL => 'Teknik Destek',
+        self::DEPARTMENT_SALE => 'Satış',
+        self::DEPARTMENT_FINANCE => 'Muhasebe'
+    ];
+
+    public const DEPARTMENT_LIST = [
+        'Teknik Destek' => self::DEPARTMENT_TECHNICAL,
+        'Satış' => self::DEPARTMENT_SALE,
+        'Muhasebe' => self::DEPARTMENT_FINANCE,
+    ];
 
     /**
      * @ORM\Id
@@ -60,7 +79,7 @@ class Ticket
      * @var string
      * @ORM\Column(name="status", type="string")
      */
-    protected $status;
+    protected $status = self::STATUS_NEW;
 
     /**
      * @return mixed
@@ -81,9 +100,9 @@ class Ticket
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSubject(): string
+    public function getSubject(): ?string
     {
         return $this->subject;
     }
@@ -99,9 +118,9 @@ class Ticket
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getContent(): string
+    public function getContent(): ?string
     {
         return $this->content;
     }
@@ -117,9 +136,9 @@ class Ticket
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAnswer(): string
+    public function getAnswer(): ?string
     {
         return $this->answer;
     }
@@ -135,11 +154,19 @@ class Ticket
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getDepartment(): int
+    public function getDepartment(): ?int
     {
         return $this->department;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDepartmentDesc(): ?string
+    {
+        return self::DEPARTMENT_DESC[$this->department];
     }
 
     /**
@@ -153,11 +180,19 @@ class Ticket
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStatus(): string
+    public function getStatus(): ?string
     {
         return $this->status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatusDesc(): string
+    {
+        return self::STATUS_DESC[$this->status];
     }
 
     /**
