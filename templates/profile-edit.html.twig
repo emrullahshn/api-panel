@@ -99,11 +99,55 @@
 
   <script src="{{ asset('build/js/dashboard.js') }}" type="text/javascript"></script>
   <script src="{{ asset('build/js/theme/pages/login/login-general.js') }}" type="text/javascript"></script>
+  <script>
+    $('#country').on('change', function () {
+      if ($(this).val() === 'TR') {
+        $.getJSON("{{ asset('sources/il-bolge.json') }}", function (sonuc) {
+          $.each(sonuc, function (index, value) {
+            var row = "";
+            var plaka = value.plaka
+            var il = value.il.charAt(0).turkishToUpper() + value.il.turkishToLower().slice(1)
+            row += '<option data-value="' + plaka + '" value="' + il + '">' + il + '</option>';
+            $("#city").append(row);
+          })
+        });
+
+        $("#city").on("change", function () {
+          var plaka = $(this).find('option:selected').attr('data-value');
+
+          $("#town").attr("disabled", false).html("<option value=''>Seçin..</option>");
+          $.getJSON("{{ asset('sources/il-ilce.json') }}", function (sonuc) {
+            $.each(sonuc, function (index, value) {
+              var row = "";
+
+              if (value.plaka === +(plaka)) {
+                var ilce = value.ilce.charAt(0).turkishToUpper() + value.ilce.turkishToLower().slice(1)
+                row += '<option value="' + ilce + '">' + ilce + '</option>';
+                $("#town").append(row);
+              }
+            });
+          });
+        });
+
+        if($('#selectedCity').length && $('#selectedCity').val() !== '') {
+          $('#city').val($('#selectedCity').val())
+          $('#city').trigger('change')
+        }
+
+        $("#city").show()
+        $("#town").show()
+      } else {
+        $("#city").hide()
+        $("#town").hide()
+      }
+    })
+
+    $('#country').trigger('change')
+  </script>
 {% endblock %}
 
 {% block content %}
   <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
-
     {% include 'components/aside-base.html.twig' %}
 
     {% include 'components/header-base.html.twig' %}
@@ -117,7 +161,7 @@
           <span class="kt-subheader__separator kt-subheader__separator--v"></span>
           <div class="kt-subheader__group" id="kt_subheader_search">
             <span class="kt-subheader__desc" id="kt_subheader_total">
-              {{ user.name|default('') }}
+              {{ user.fullName|default('') }}
             </span>
           </div>
         </div>
@@ -201,397 +245,383 @@
             </div>
           </div>
           <div class="kt-portlet__body">
-            <form action="/" method="post">
-              <div class="tab-content">
-                <div class="tab-pane active" id="kt_apps_user_edit_tab_1" role="tabpanel">
-                  <div class="kt-form kt-form--label-right">
-                    <div class="kt-form__body">
-                      <div class="kt-section kt-section--first">
-                        <div class="kt-section__body">
-                          <div class="row">
-                            <label class="col-xl-3"></label>
-                            <div class="col-lg-9 col-xl-6">
-                              <h3 class="kt-section__title kt-section__title-lg">
-                                {{ 'profileEdit.profileInfo.title'|trans }}:
-                              </h3>
-                            </div>
+            <div class="tab-content">
+              <div class="tab-pane active" id="kt_apps_user_edit_tab_1" role="tabpanel">
+                <div class="kt-form kt-form--label-right">
+                  <div class="kt-form__body">
+                    <div class="kt-section kt-section--first">
+                      <div class="kt-section__body">
+                        <div class="row">
+                          <label class="col-xl-3"></label>
+                          <div class="col-lg-9 col-xl-6">
+                            <h3 class="kt-section__title kt-section__title-lg">
+                              {{ 'profileEdit.profileInfo.title'|trans }}:
+                            </h3>
                           </div>
-                          <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">Avatar</label>
-                            <div class="col-lg-9 col-xl-6">
-                              <div class="kt-avatar kt-avatar--outline kt-avatar--circle-" id="kt_apps_user_add_avatar">
-                                <div class="kt-avatar__holder"></div>
-                                <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Change avatar">
-                                  <i class="fa fa-pen"></i>
-                                  <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
-                                </label>
-                                <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="Cancel avatar">
-                                  <i class="fa fa-times"></i>
-                                </span>
-                              </div>
-                            </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-xl-3 col-lg-3 col-form-label">
+                            {{ 'profileEdit.profileInfo.inputs.fullName'|trans }}
+                          </label>
+                          <div class="col-lg-9 col-xl-6">
+                            <input class="form-control" name="fullName" type="text" value="{{ user.fullName }}">
                           </div>
-                          <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">
-                              {{ 'profileEdit.profileInfo.inputs.fullName'|trans }}
-                            </label>
-                            <div class="col-lg-9 col-xl-6">
-                              <input class="form-control" name="fullName" type="text" value="{{ user.fullName }}">
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">
-                              {{ 'profileEdit.profileInfo.inputs.email'|trans }}
-                            </label>
-                            <div class="col-lg-9 col-xl-6">
-                              <div class="input-group">
-                                <div class="input-group-prepend">
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-xl-3 col-lg-3 col-form-label">
+                            {{ 'profileEdit.profileInfo.inputs.email'|trans }}
+                          </label>
+                          <div class="col-lg-9 col-xl-6">
+                            <div class="input-group">
+                              <div class="input-group-prepend">
                                   <span class="input-group-text">
                                     <i class="la la-at"></i>
                                   </span>
-                                </div>
-                                <input type="text"
-                                       class="form-control"
-                                       name="email"
-                                       value="{{ user.email }}"
-                                       placeholder="{{ 'profileEdit.profileInfo.inputs.email'|trans }}"
-                                       aria-describedby="basic-addon1">
                               </div>
+                              <input type="text"
+                                     class="form-control"
+                                     name="email"
+                                     value="{{ user.email }}"
+                                     placeholder="{{ 'profileEdit.profileInfo.inputs.email'|trans }}"
+                                     aria-describedby="basic-addon1">
                             </div>
                           </div>
-                          <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">
-                              {{ 'profileEdit.profileInfo.inputs.phone'|trans }}
-                            </label>
-                            <div class="col-lg-9 col-xl-6">
-                              <div class="input-group">
-                                <div class="input-group-prepend">
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-xl-3 col-lg-3 col-form-label">
+                            {{ 'profileEdit.profileInfo.inputs.phone'|trans }}
+                          </label>
+                          <div class="col-lg-9 col-xl-6">
+                            <div class="input-group">
+                              <div class="input-group-prepend">
                                   <span class="input-group-text">
                                     <i class="la la-phone"></i>
                                   </span>
-                                </div>
-                                <input type="text"
-                                       class="form-control"
-                                       value="{{ user.phoneNumber }}"
-                                       placeholder="{{ 'profileEdit.profileInfo.inputs.phone'|trans }}"
-                                       aria-describedby="basic-addon1"
-                               >
                               </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="kt-section kt-section--second">
-                        <div class="kt-section__body">
-                          <div class="row">
-                            <label class="col-xl-3"></label>
-                            <div class="col-lg-9 col-xl-6">
-                              <h3 class="kt-section__title kt-section__title-lg">
-                                {{ 'profileEdit.profileInfo.title2'|trans }}:
-                              </h3>
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">
-                              {{ 'profileEdit.profileInfo.inputs.address'|trans }}
-                            </label>
-                            <div class="col-lg-9 col-xl-6">
-                              <input class="form-control" name="address" type="text" value="{{ user.address }}">
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">
-                              {{ 'profileEdit.profileInfo.inputs.country'|trans }}
-                            </label>
-                            <div class="col-lg-9 col-xl-6">
-                              <select class="form-control" name="country" type="text"></select>
-                              <input type="hidden" name="selectedCountry" value="{{ user.country }}">
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">
-                              {{ 'profileEdit.profileInfo.inputs.city'|trans }}
-                            </label>
-                            <div class="col-lg-9 col-xl-6">
-                              <select class="form-control" name="city" type="text"></select>
-                              <input type="hidden" name="selectedCity" value="{{ user.city }}">
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">
-                              {{ 'profileEdit.profileInfo.inputs.phone'|trans }}
-                            </label>
-                            <div class="col-lg-9 col-xl-6">
-                              <select class="form-control" name="town" type="text"></select>
-                              <input type="hidden" name="selectedTown" value="">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="tab-pane" id="kt_apps_user_edit_tab_2" role="tabpanel">
-                  <div class="kt-form kt-form--label-right">
-                    <div class="kt-form__body">
-                      <div class="row">
-                        <div class="kt-section kt-section--first col-sm-5">
-                          <div class="kt-section__body">
-                            <div class="row">
-                              <label class="col-xl-3"></label>
-                              <div class="col-lg-9 col-xl-6">
-                                <h3 class="kt-section__title kt-section__title-lg">
-                                  {{ 'profileEdit.ipFilter.title1'|trans }}
-                                </h3>
-                                <p>{{ 'profileEdit.ipFilter.desc1'|trans }}</p>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label class="col-xl-3 col-lg-3 col-form-label">
-                                {{ 'profileEdit.ipFilter.inputs.ipBlock'|trans }}
-                              </label>
-                              <div class="col-lg-9 col-xl-6">
-                                <div class="kt-spinner kt-spinner--sm kt-spinner--input">
-                                  <input class="form-control"
-                                         name="block-ip"
-                                         type="text"
-                                         value=""
-                                         placeholder="{{ 'profileEdit.ipFilter.inputs.ipBlock'|trans }}">
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-2"></div>
-                        <div class="kt-section kt-section--last col-sm-5">
-                          <div class="kt-section__body"></div>
-                          <table class="table">
-                            <thead>
-                            <tr>
-                              <th>{{ 'profileEdit.ipFilter.inputs.blockedIps'|trans }}</th>
-                              <th>{{ 'profileEdit.ipFilter.inputs.actions'|trans }}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                              <td scope="2">127.0.0.1</td>
-                              <td>
-                                <button class="btn btn-label-brand btn-bold" type="button" data-id="1">
-                                  Sil
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td scope="2">127.0.0.2</td>
-                              <td>
-                                <button class="btn btn-label-brand btn-bold" type="button" data-id="2">
-                                  Sil
-                                </button>
-                              </td>
-                            </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                        <div class="kt-section kt-section__buttons col-12">
-                          <div class="kt-separator kt-separator--border-dashed kt-separator--portlet-fit kt-separator--space-lg"></div>
-                          <div class="kt-form-group">
-                            <div class="row">
-                              <div class="col-xl-3"></div>
-                              <div class="col-lg-9 col-xl-6">
-                                <a href="#" class="btn btn-label-brand btn-bold">
-                                  {{ 'profileEdit.saveChanges'|trans }}
-                                </a>
-                                <a href="#" class="btn btn-clean btn-bold">
-                                  {{ 'loginPage.register.cancel'|trans }}
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="tab-pane" id="kt_apps_user_edit_tab_3" role="tabpanel">
-                  <div class="kt-form kt-form--label-right">
-                    <div class="kt-form__body">
-                      <div class="kt-section kt-section--first">
-                        <div class="kt-section__body">
-                          <div class="row">
-                            <label class="col-xl-3"></label>
-                            <div class="col-lg-9 col-xl-6">
-                              <h3 class="kt-section__title kt-section__title-lg">
-                                {{ 'profileEdit.changePassword.currentPass'|trans }}
-                              </h3>
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">
-                              {{ 'profileEdit.changePassword.inputs.currentPass'|trans }}
-                            </label>
-                            <div class="col-lg-9 col-xl-6">
-                              <input type="password"
+                              <input type="text"
                                      class="form-control"
-                                     value=""
-                                     placeholder="{{ 'profileEdit.changePassword.inputs.currentPass'|trans }}"
-                                     name="currentPass">
-                            </div>
-                          </div>
-                          <div class="row">
-                            <label class="col-xl-3"></label>
-                            <div class="col-lg-9 col-xl-6">
-                              <h3 class="kt-section__title kt-section__title-lg">
-                                {{ 'profileEdit.changePassword.newPass'|trans }}
-                              </h3>
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">
-                              {{ 'profileEdit.changePassword.inputs.newPass'|trans }}
-                            </label>
-                            <div class="col-lg-9 col-xl-6">
-                              <input type="password"
-                                     class="form-control"
-                                     name="newPassword"
-                                     value=""
-                                     placeholder="{{ 'profileEdit.changePassword.inputs.newPass'|trans }}"
+                                     value="{{ user.phoneNumber }}"
+                                     placeholder="{{ 'profileEdit.profileInfo.inputs.phone'|trans }}"
+                                     aria-describedby="basic-addon1"
                               >
                             </div>
                           </div>
-                          <div class="form-group form-group-last row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">
-                              {{ 'profileEdit.changePassword.inputs.newPassConfirm'|trans }}
-                            </label>
-                            <div class="col-lg-9 col-xl-6">
-                              <input type="password"
-                                     class="form-control"
-                                     value=""
-                                     name="newPasswordVerify"
-                                     placeholder="{{ 'profileEdit.changePassword.inputs.newPass'|trans }}">
-                            </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="kt-section kt-section--second">
+                      <div class="kt-section__body">
+                        <div class="row">
+                          <label class="col-xl-3"></label>
+                          <div class="col-lg-9 col-xl-6">
+                            <h3 class="kt-section__title kt-section__title-lg">
+                              {{ 'profileEdit.profileInfo.title2'|trans }}:
+                            </h3>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-xl-3 col-lg-3 col-form-label">
+                            {{ 'profileEdit.profileInfo.inputs.address'|trans }}
+                          </label>
+                          <div class="col-lg-9 col-xl-6">
+                            <input class="form-control" name="address" type="text" value="{{ user.address }}">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-xl-3 col-lg-3 col-form-label">
+                            {{ 'profileEdit.profileInfo.inputs.country'|trans }}
+                          </label>
+                          <div class="col-lg-9 col-xl-6">
+                            <select class="form-control"
+                                    name="country"
+                                    id="country"
+                                    value="{{ user.country|default('') }}"
+                                    data-role="country-selector"></select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-xl-3 col-lg-3 col-form-label">
+                            {{ 'profileEdit.profileInfo.inputs.city'|trans }}
+                          </label>
+                          <div class="col-lg-9 col-xl-6">
+                            <select class="form-control" name="city" id="city" type="text"></select>
+                            <input type="hidden" name="selectedCity" value="{{ user.city }}">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-xl-3 col-lg-3 col-form-label">
+                            {{ 'profileEdit.profileInfo.inputs.town'|trans }}
+                          </label>
+                          <div class="col-lg-9 col-xl-6">
+                            <select class="form-control" name="town" id="town" type="text"></select>
+                            <input type="hidden" name="selectedTown" value="">
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
-                    <div class="kt-form__actions">
-                      <div class="row">
-                        <div class="col-xl-3"></div>
-                        <div class="col-lg-9 col-xl-6">
-                          <a href="#" class="btn btn-label-brand btn-bold">
-                            {{ 'profileEdit.saveChanges'|trans }}
-                          </a>
-                          <a href="#" class="btn btn-clean btn-bold">
-                            {{ 'loginPage.register.cancel'|trans }}
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="tab-pane" id="kt_apps_user_edit_tab_4" role="tabpanel">
-                  <div class="kt-section kt-section--first">
-                    <div class="kt-section__body">
-                      <div class="row">
-                        <label class="col-xl-3"></label>
-                        <div class="col-lg-9 col-xl-6">
-                          <h3 class="kt-section__title kt-section__title-lg">
-                            {{ 'profileEdit.emailHistory.title'|trans }}
-                          </h3>
-                          <p>
-                            {{ 'profileEdit.emailHistory.desc'|trans }}
-                          </p>
-                        </div>
-                      </div>
-
-                      <table class="table">
-                        <thead>
-                        <tr>
-                          <th>{{ 'profileEdit.emailHistory.inputs.subject'|trans }}</th>
-                          <th>{{ 'profileEdit.emailHistory.inputs.sendedTime'|trans }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                          <td scope="2">Yeni sipariş verildi. #1554443651</td>
-                          <td>09/19/2018 09:23:14</td>
-                        </tr>
-                        <tr>
-                          <td scope="2">Yeni sipariş verildi. #1554443651</td>
-                          <td>09/19/2018 09:23:14</td>
-                        </tr>
-
-                        <tr>
-                          <td scope="2">Yeni sipariş verildi. #1554443651</td>
-                          <td>09/19/2018 09:23:14</td>
-                        </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="tab-pane" id="kt_apps_user_edit_tab_5" role="tabpanel">
-                  <div class="kt-section kt-section--first">
-                    <div class="kt-section__body">
-                      <div class="row">
-                        <label class="col-xl-3"></label>
-                        <div class="col-lg-9 col-xl-6">
-                          <h3 class="kt-section__title kt-section__title-lg">
-                            {{ 'profileEdit.processHistory.title'|trans }}
-                          </h3>
-                          <p>
-                            {{ 'profileEdit.processHistory.desc'|trans }}
-                          </p>
-                        </div>
-                      </div>
-
-                      <table class="table">
-                        <thead>
-                        <tr>
-                          <th>{{ 'profileEdit.processHistory.inputs.date'|trans }}</th>
-                          <th>{{ 'profileEdit.processHistory.inputs.processInfo'|trans }}</th>
-                          <th>{{ 'profileEdit.processHistory.inputs.status'|trans }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                          <td scope="2">09/19/2018 09:23:14</td>
-                          <td>Yeni sipariş verildi. #1554443651</td>
-                          <td>
-                          <span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill kt-badge--md">
-                            {{ 'profileEdit.processHistory.inputs.success'|trans }}
-                          </span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>09/19/2018 09:23:14</td>
-                          <td>Yeni sipariş verildi. #1554443651</td>
-                          <td>
-                          <span class="kt-badge kt-badge--warning kt-badge--inline kt-badge--pill kt-badge--md">
-                            {{ 'profileEdit.processHistory.inputs.waiting'|trans }}
-                          </span>
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td>09/19/2018 09:23:14</td>
-                          <td>Yeni sipariş verildi. #1554443651</td>
-                          <td>
-                          <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill kt-badge--md">
-                            {{ 'profileEdit.processHistory.inputs.cancelled'|trans }}
-                          </span>
-                          </td>
-                        </tr>
-                        </tbody>
-                      </table>
                     </div>
                   </div>
                 </div>
               </div>
-            </form>
+              <div class="tab-pane" id="kt_apps_user_edit_tab_2" role="tabpanel">
+                <div class="kt-form kt-form--label-right">
+                  <div class="kt-form__body">
+                    <div class="row">
+                      <div class="kt-section kt-section--first col-sm-5">
+                        <div class="kt-section__body">
+                          <div class="row">
+                            <label class="col-xl-3"></label>
+                            <div class="col-lg-9 col-xl-6">
+                              <h3 class="kt-section__title kt-section__title-lg">
+                                {{ 'profileEdit.ipFilter.title1'|trans }}
+                              </h3>
+                              <p>{{ 'profileEdit.ipFilter.desc1'|trans }}</p>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-xl-3 col-lg-3 col-form-label">
+                              {{ 'profileEdit.ipFilter.inputs.ipBlock'|trans }}
+                            </label>
+                            <div class="col-lg-9 col-xl-6">
+                              <div class="kt-spinner kt-spinner--sm kt-spinner--input">
+                                <input class="form-control"
+                                       name="block-ip"
+                                       type="text"
+                                       value=""
+                                       placeholder="{{ 'profileEdit.ipFilter.inputs.ipBlock'|trans }}">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-2"></div>
+                      <div class="kt-section kt-section--last col-sm-5">
+                        <div class="kt-section__body"></div>
+                        <table class="table">
+                          <thead>
+                          <tr>
+                            <th>{{ 'profileEdit.ipFilter.inputs.blockedIps'|trans }}</th>
+                            <th>{{ 'profileEdit.ipFilter.inputs.actions'|trans }}</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td scope="2">127.0.0.1</td>
+                            <td>
+                              <button class="btn btn-label-brand btn-bold" type="button" data-id="1">
+                                Sil
+                              </button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td scope="2">127.0.0.2</td>
+                            <td>
+                              <button class="btn btn-label-brand btn-bold" type="button" data-id="2">
+                                Sil
+                              </button>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="kt-section kt-section__buttons col-12">
+                        <div class="kt-separator kt-separator--border-dashed kt-separator--portlet-fit kt-separator--space-lg"></div>
+                        <div class="kt-form-group">
+                          <div class="row">
+                            <div class="col-xl-3"></div>
+                            <div class="col-lg-9 col-xl-6">
+                              <a href="#" class="btn btn-label-brand btn-bold">
+                                {{ 'profileEdit.saveChanges'|trans }}
+                              </a>
+                              <a href="#" class="btn btn-clean btn-bold">
+                                {{ 'loginPage.register.cancel'|trans }}
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="kt_apps_user_edit_tab_3" role="tabpanel">
+                <div class="kt-form kt-form--label-right">
+                  <div class="kt-form__body">
+                    <div class="kt-section kt-section--first">
+                      <div class="kt-section__body">
+                        <div class="row">
+                          <label class="col-xl-3"></label>
+                          <div class="col-lg-9 col-xl-6">
+                            <h3 class="kt-section__title kt-section__title-lg">
+                              {{ 'profileEdit.changePassword.currentPass'|trans }}
+                            </h3>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-xl-3 col-lg-3 col-form-label">
+                            {{ 'profileEdit.changePassword.inputs.currentPass'|trans }}
+                          </label>
+                          <div class="col-lg-9 col-xl-6">
+                            <input type="password"
+                                   class="form-control"
+                                   value=""
+                                   placeholder="{{ 'profileEdit.changePassword.inputs.currentPass'|trans }}"
+                                   name="currentPass">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <label class="col-xl-3"></label>
+                          <div class="col-lg-9 col-xl-6">
+                            <h3 class="kt-section__title kt-section__title-lg">
+                              {{ 'profileEdit.changePassword.newPass'|trans }}
+                            </h3>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-xl-3 col-lg-3 col-form-label">
+                            {{ 'profileEdit.changePassword.inputs.newPass'|trans }}
+                          </label>
+                          <div class="col-lg-9 col-xl-6">
+                            <input type="password"
+                                   class="form-control"
+                                   name="newPassword"
+                                   value=""
+                                   placeholder="{{ 'profileEdit.changePassword.inputs.newPass'|trans }}"
+                            >
+                          </div>
+                        </div>
+                        <div class="form-group form-group-last row">
+                          <label class="col-xl-3 col-lg-3 col-form-label">
+                            {{ 'profileEdit.changePassword.inputs.newPassConfirm'|trans }}
+                          </label>
+                          <div class="col-lg-9 col-xl-6">
+                            <input type="password"
+                                   class="form-control"
+                                   value=""
+                                   name="newPasswordVerify"
+                                   placeholder="{{ 'profileEdit.changePassword.inputs.newPass'|trans }}">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
+                  <div class="kt-form__actions">
+                    <div class="row">
+                      <div class="col-xl-3"></div>
+                      <div class="col-lg-9 col-xl-6">
+                        <a href="#" class="btn btn-label-brand btn-bold">
+                          {{ 'profileEdit.saveChanges'|trans }}
+                        </a>
+                        <a href="#" class="btn btn-clean btn-bold">
+                          {{ 'loginPage.register.cancel'|trans }}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane" id="kt_apps_user_edit_tab_4" role="tabpanel">
+                <div class="kt-section kt-section--first">
+                  <div class="kt-section__body">
+                    <div class="row">
+                      <label class="col-xl-3"></label>
+                      <div class="col-lg-9 col-xl-6">
+                        <h3 class="kt-section__title kt-section__title-lg">
+                          {{ 'profileEdit.emailHistory.title'|trans }}
+                        </h3>
+                        <p>
+                          {{ 'profileEdit.emailHistory.desc'|trans }}
+                        </p>
+                      </div>
+                    </div>
+
+                    <table class="table">
+                      <thead>
+                      <tr>
+                        <th>{{ 'profileEdit.emailHistory.inputs.subject'|trans }}</th>
+                        <th>{{ 'profileEdit.emailHistory.inputs.sendedTime'|trans }}</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td scope="2">Yeni sipariş verildi. #1554443651</td>
+                        <td>09/19/2018 09:23:14</td>
+                      </tr>
+                      <tr>
+                        <td scope="2">Yeni sipariş verildi. #1554443651</td>
+                        <td>09/19/2018 09:23:14</td>
+                      </tr>
+
+                      <tr>
+                        <td scope="2">Yeni sipariş verildi. #1554443651</td>
+                        <td>09/19/2018 09:23:14</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane" id="kt_apps_user_edit_tab_5" role="tabpanel">
+                <div class="kt-section kt-section--first">
+                  <div class="kt-section__body">
+                    <div class="row">
+                      <label class="col-xl-3"></label>
+                      <div class="col-lg-9 col-xl-6">
+                        <h3 class="kt-section__title kt-section__title-lg">
+                          {{ 'profileEdit.processHistory.title'|trans }}
+                        </h3>
+                        <p>
+                          {{ 'profileEdit.processHistory.desc'|trans }}
+                        </p>
+                      </div>
+                    </div>
+
+                    <table class="table">
+                      <thead>
+                      <tr>
+                        <th>{{ 'profileEdit.processHistory.inputs.date'|trans }}</th>
+                        <th>{{ 'profileEdit.processHistory.inputs.processInfo'|trans }}</th>
+                        <th>{{ 'profileEdit.processHistory.inputs.status'|trans }}</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td scope="2">09/19/2018 09:23:14</td>
+                        <td>Yeni sipariş verildi. #1554443651</td>
+                        <td>
+                          <span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill kt-badge--md">
+                            {{ 'profileEdit.processHistory.inputs.success'|trans }}
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>09/19/2018 09:23:14</td>
+                        <td>Yeni sipariş verildi. #1554443651</td>
+                        <td>
+                          <span class="kt-badge kt-badge--warning kt-badge--inline kt-badge--pill kt-badge--md">
+                            {{ 'profileEdit.processHistory.inputs.waiting'|trans }}
+                          </span>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>09/19/2018 09:23:14</td>
+                        <td>Yeni sipariş verildi. #1554443651</td>
+                        <td>
+                          <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill kt-badge--md">
+                            {{ 'profileEdit.processHistory.inputs.cancelled'|trans }}
+                          </span>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

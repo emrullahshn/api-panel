@@ -9,10 +9,29 @@ aside:
   settings: Hesap Ayarları
   invoice:
     title: Faturalandırma
+    myInvoices: Faturalarım
     addBalance: Bakiye Ekle
     addCreditCard: Kredi Kartı Ekle
   information: Bilgi Merkezi
   support: Destek Talebi
+
+header:
+  settings:
+    label: Hesap Ayarları
+    desc: Hesap Ayarlarınızı görüntüleyin
+  changePassword:
+    label: Parola Değiştir
+    desc: Mevcut parolanızı değiştirin
+  accountStaff:
+    label: Hesap Yetkileri
+    desc: Hesap yetkilerinizi görüntüleyin
+  createTicket:
+    label: Destek Talebi Oluştur
+    desc: Herhangi bir konuda yardım için talep oluşturun
+  tickets:
+    label: Geçmiş Destek Talepleri
+    desc: Geçmiş destek taleplerinizi görüntüleyin
+  signOut: Çıkış Yap
 
 footer:
   copyright: "%date% &copy; Manage HOSTED v2.1"
@@ -143,3 +162,16 @@ invoice:
   invoiceDate: Fatura Tarihi
   paymentDate: Ödeme Tarihi
   status: Durum
+
+addBalance:
+  title: Eklemek İstediğiniz Tutar
+  inputs:
+    total:
+      label: Tutar
+      desc: Lütfen tutarı girin
+    method:
+      label: Ödeme Yöntemi
+
+  info:
+    label: Bilgilendirme
+    desc: Manage HOSTED paneli üzerinden minimum 50,00 TL, maksimum 25.000 TL bakiye yüklemesi gerçekleştirebilirsiniz. Yüklemek istediğiniz tutar bu aralık dışında ise canlı destek veya destek talebi üzerinden muhasebe departmanına ulaşım sağlayabilirsiniz.

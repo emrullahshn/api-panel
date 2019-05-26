@@ -101,7 +101,9 @@
 {% endblock %}
 
 {% block content %}
-  <div id="kt_header_mobile" class="kt-header-mobile kt-header-mobile--fixed">
+  {% include 'components/header-base.html.twig' %}
+  {% include 'components/aside-base.html.twig' %}
+  {#<div id="kt_header_mobile" class="kt-header-mobile kt-header-mobile--fixed">
     <div class="kt-header-mobile__logo">
       <a href="{{ path('homepage') }}">
         <img alt="Logo" src="{{ asset('build/images/media/logos/logo-6-sm.png') }}"/>
@@ -3967,5 +3969,5 @@
   </div>
 
   <script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM" type="text/javascript">
-  </script>
+  </script>#}
 {% endblock %}

@@ -254,8 +254,7 @@
                                         </div>
                                     </div>
                                     <div class="kt-login__form">
-                                        <form class="kt-form" action="{{ path('user_register') }}" method="post"
-                                              onsubmit="return false;">
+                                        <form class="kt-form" action="{{ path('user_register') }}" method="post">
                                             <div class="form-group">
                                                 <input class="form-control" type="text"
                                                        placeholder="{{ 'loginPage.register.fullName'|trans }}"
@@ -277,8 +276,8 @@
                                                         id="country"
                                                         name="country"
                                                         title="{{ 'loginPage.register.country'|trans }}"
-                                                        value="{{ app.request.locale|upper }}"
-                                                        data-role="country-selector"
+                                                            value="{{ app.request.locale|upper }}"
+                                                            data-role="country-selector"
                                                         data-code-mode="alpha2"
                                                 >
                                                 </select>
