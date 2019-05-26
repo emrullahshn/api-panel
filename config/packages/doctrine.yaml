@@ -16,21 +16,25 @@ doctrine:
             collate: utf8mb4_unicode_ci
 
         url: '%env(resolve:DATABASE_URL)%'
-    orm:
-        auto_generate_proxy_classes: true
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
-        mappings:
-            App:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/App/Entity'
-                prefix: 'App\App\Entity'
-                alias: App
 
-            Admin:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Admin/Entity'
-                prefix: 'App\Admin\Entity'
-                alias: Admin
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        entity_managers:
+            default:
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                connection: default
+                auto_mapping: true
+                mappings:
+                    App:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/App/Entity'
+                        prefix: 'App\App\Entity'
+                        alias: App
+
+                    Admin:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/Admin/Entity'
+                        prefix: 'App\Admin\Entity'
+                        alias: Admin

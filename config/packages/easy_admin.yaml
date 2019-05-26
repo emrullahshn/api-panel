@@ -1,13 +1,13 @@
 easy_admin:
     site_name: 'API Panel'
     design:
-#        assets:
-#            css: ['assets/custom.css']
-#        brand_color: '#7CB900'
+        templates:
+            menu: 'src/Admin/Resources/views/menu.html.twig'
         menu:
         - label: 'Veri Yönetimi'
           roles: ['ROLE_SUPER_ADMIN']
           children: ['Users']
+        - { entity: Tickets, label: Tickets , icon: support}
     entities:
         Users:
             class: App\Admin\Entity\User
@@ -17,3 +17,30 @@ easy_admin:
                 edit: ['ROLE_SUPER_ADMIN']
                 delete: ['ROLE_SUPER_ADMIN']
                 show: ['ROLE_SUPER_ADMIN']
+        Tickets:
+            class: App\Admin\Entity\Ticket
+            controller: App\Admin\Controller\TicketController
+            permissions:
+                list: ['ROLE_ADMIN']
+                new: ['ROLE_ADMIN']
+                edit: ['ROLE_ADMIN']
+                delete: ['ROLE_ADMIN']
+                show: ['ROLE_ADMIN']
+            list:
+               fields:
+                   - { property: id }
+                   - { property: subject, label: Konu }
+                   - { property: createdBy, label: Oluşturan }
+                   - { property: departmentDesc, label: Departman }
+                   - { property: statusDesc, label: Durum }
+            form:
+                fields:
+                    - {property: subject, type: text, label: 'Konu'}
+                    - property: 'department'
+                      label: 'Departman'
+                      type: 'choice'
+                      type_options:
+                          choices: !php/const App\Admin\Entity\Ticket::DEPARTMENT_LIST
+                    - {property: content, type: fos_ckeditor, label: 'Soru'}
+                    - {property: answer, type: fos_ckeditor, label: 'Cevap'}
+
