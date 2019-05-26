@@ -111,9 +111,6 @@
       <!-- begin:: Content -->
       <div class="kt-content kt-grid__item kt-grid__item--fluid" id="kt_content">
         <div class="row">
-
-          {% set savedCard = true %}
-
           {% if not savedCard|default(false) %}
             <div class="kt-portlet kt-portlet--tabs col-12 col-sm-12">
               <div class="kt-portlet__head">
@@ -193,6 +190,11 @@
                     </td>
                   </tr>
                 </table>
+
+
+                <button class="btn btn-brand">
+                  {{ 'addCreditCard.card.add'|trans }}
+                </button>
               </div>
             </div>
             <div class="col-12 col-sm-2"></div>
@@ -247,6 +249,13 @@
                       <input class="form-control" name="expire-date" type="text" value="" placeholder="{{ 'addCreditCard.card.expireDateDesc'|trans }}">
                     </div>
                   </div>
+
+                  <button type="submit" class="btn btn-brand">
+                    {{ 'addCreditCard.card.save'|trans }}
+                  </button>
+                  <button type="reset" class="btn btn-warning">
+                    {{ 'addCreditCard.card.cancel'|trans }}
+                  </button>
                 </form>
               </div>
             </div>

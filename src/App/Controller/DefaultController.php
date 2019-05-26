@@ -51,6 +51,6 @@ class DefaultController extends Controller
      */
     public function createTicket()
     {
-        return $this->render('add-credit-card.html.twig');
+        return $this->render('create-ticket.html.twig');
     }
 }

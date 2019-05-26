@@ -191,3 +191,12 @@ addCreditCard:
   info:
     label: Bilgilendirme
     desc: Manage HOSTED paneli üzerinden yer alan kart bilgileriniz 3. şahıslar ile paylaşılmaz ve yüksek güvenli şifreleme yöntemleri ile çoklu şifreleme yapılarak depolanır. Kredi kartınızdan izniniz dışında bir işlem gerçekleştirilmez, daha fazla bilgi almak için canlı destek veya destek talebi üzerinden iletişime geçebilirsiniz.
+
+createTicket:
+  label: Yeni Destek Talebi Oluştur
+  departman: Departman
+  subject: Konu
+  detail: Destek Talebi Detayı
+  file: Dosya Ekle
+  send: Gönder
+  cancel: Vazgeç
