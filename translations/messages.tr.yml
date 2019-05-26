@@ -212,3 +212,8 @@ tickets:
     status: Durum
     departman: Departman
     date: Tarih
+
+answerTicket:
+  label: Destek Talebini Yanıtla
+  input: Destek Talebi Yanıtı
+  send: Gönder
