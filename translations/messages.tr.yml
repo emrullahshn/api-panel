@@ -135,4 +135,10 @@ profileEdit:
       waiting: Bekliyor
       cancelled: İptal Edildi
 
-
+invoice:
+  title: Faturalarım
+  number: Fatura Numarası
+  total: Toplam
+  invoiceDate: Fatura Tarihi
+  paymentDate: Ödeme Tarihi
+  status: Durum
