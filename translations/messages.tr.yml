@@ -7,6 +7,10 @@ aside:
   ssl: SSL
   security: Güvenlik
   settings: Hesap Ayarları
+  ticket:
+    title: Destek Talebi
+    new: Yeni Talep Oluştur
+    olds: Geçmiş Destek Talepleri
   invoice:
     title: Faturalandırma
     myInvoices: Faturalarım
@@ -200,3 +204,11 @@ createTicket:
   file: Dosya Ekle
   send: Gönder
   cancel: Vazgeç
+
+tickets:
+  label: Geçmiş Destek Talepleri
+  inputs:
+    subject: Konu
+    status: Durum
+    departman: Departman
+    date: Tarih

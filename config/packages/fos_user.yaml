@@ -6,8 +6,8 @@ fos_user:
   firewall_name: main
   user_class: App\Admin\Entity\User
   from_email:
-    address: info@hosted.com.tr
-    sender_name: Info Hosted
+    address: manage@hosted.com.tr
+    sender_name: HOSTED Technology
   registration:
     form:
       type: App\Admin\Form\RegistrationFormType

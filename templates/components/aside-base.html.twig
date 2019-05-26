@@ -63,9 +63,6 @@
           <span class="kt-menu__link kt-menu__toggle">
             <i class="kt-menu__link-icon flaticon-list-2"></i>
             <span class="kt-menu__link-text">{{ 'aside.invoice.title'|trans }}</span>
-            <span class="kt-menu__link-badge">
-              <span class="kt-badge kt-badge--brand">2</span>
-            </span>
             <i class="kt-menu__ver-arrow la la-angle-right"></i>
           </span>
           <div class="kt-menu__submenu" kt-hidden-height="160" style="display: none; overflow: hidden;">
@@ -84,6 +81,29 @@
               <li class="kt-menu__item" aria-haspopup="true">
                 <a href="{{ path('add-credit-card') }}" class="kt-menu__link">
                   <span class="kt-menu__link-text">{{ 'aside.invoice.addCreditCard'|trans }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="kt-menu__item kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+          <span class="kt-menu__link kt-menu__toggle">
+            <i class="kt-menu__link-icon flaticon-questions-circular-button"></i>
+            <span class="kt-menu__link-text">{{ 'aside.ticket.title'|trans }}</span>
+            <i class="kt-menu__ver-arrow la la-angle-right"></i>
+          </span>
+          <div class="kt-menu__submenu" kt-hidden-height="160" style="display: none; overflow: hidden;">
+            <span class="kt-menu__arrow"></span>
+            <ul class="kt-menu__subnav">
+              <li class="kt-menu__item" aria-haspopup="true">
+                <a href="{{ path('create-ticket') }}" class="kt-menu__link">
+                  <span class="kt-menu__link-text">{{ 'aside.ticket.new'|trans }}</span>
+                </a>
+              </li>
+              <li class="kt-menu__item" aria-haspopup="true">
+                <a href="{{ path('all-tickets') }}" class="kt-menu__link">
+                  <span class="kt-menu__link-text">{{ 'aside.ticket.olds'|trans }}</span>
                 </a>
               </li>
             </ul>

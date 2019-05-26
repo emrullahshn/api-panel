@@ -53,4 +53,13 @@ class DefaultController extends Controller
     {
         return $this->render('create-ticket.html.twig');
     }
+
+    /**
+     * @Route("/all-tickets", name="all-tickets")
+     * @return Response
+     */
+    public function allTickets()
+    {
+        return $this->render('all-tickets.html.twig');
+    }
 }

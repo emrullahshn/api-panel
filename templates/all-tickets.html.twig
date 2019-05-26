@@ -108,165 +108,112 @@
 
     {% include 'components/header-base.html.twig' %}
 
-      <!-- begin:: Content -->
-      <div class="kt-content kt-grid__item kt-grid__item--fluid" id="kt_content">
-        <div class="row">
-          {% set savedCard = true %}
-          {% if not savedCard|default(false) %}
-            <div class="kt-portlet kt-portlet--tabs col-12 col-sm-12">
-              <div class="kt-portlet__head">
-                <div class="kt-portlet__head-label">
-                  <h3 class="kt-portlet__head-title  kt-font-success">
-                    {{ 'addCreditCard.card.label2'|trans }}
-                  </h3>
-                </div>
-              </div>
-              <div class="kt-portlet__body">
-                <form action="#" method="post">
-                  <div class="form-group row">
-                    <label class="col-xl-3 col-lg-3 col-form-label" for="type">
-                      {{ 'addCreditCard.card.type'|trans }}
-                    </label>
-                    <div class="col-lg-9 col-xl-6">
-                      <select name="type" id="type" class="form-control">
-                        <option value="1">Visa</option>
-                        <option value="2">MasterCard</option>
-                        <option value="3">Discover</option>
-                        <option value="4">Amerikan Express</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-xl-3 col-lg-3 col-form-label" for="type">
-                      {{ 'addCreditCard.card.number'|trans }}
-                    </label>
-                    <div class="col-lg-9 col-xl-6">
-                      <input class="form-control" name="number" type="text" value="" placeholder="0000 0000 0000 0000">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-xl-3 col-lg-3 col-form-label" for="type">
-                      {{ 'addCreditCard.card.expireDate'|trans }}
-                    </label>
-                    <div class="col-lg-9 col-xl-6">
-                      <input class="form-control" name="expire-date" type="text" value="" placeholder="{{ 'addCreditCard.card.expireDateDesc'|trans }}">
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          {% else %}
-            <div class="kt-portlet kt-portlet--tabs col-12 col-sm-5">
-              <div class="kt-portlet__head">
-                <div class="kt-portlet__head-label">
-                  <h3 class="kt-portlet__head-title  kt-font-success">
-                    {{ 'addCreditCard.card.label'|trans }}
-                  </h3>
-                </div>
-              </div>
-              <div class="kt-portlet__body">
-                <table class="table table-bordered">
-                  <tr>
-                    <td>
-                      {{ 'addCreditCard.card.type'|trans }}
-                    </td>
-                    <td>
-                      Visa
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      {{ 'addCreditCard.card.number'|trans }}
-                    </td>
-                    <td>
-                      4444 4444 4444 4444
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      {{ 'addCreditCard.card.expireDate'|trans }}
-                    </td>
-                    <td>
-                      12/20
-                    </td>
-                  </tr>
-                </table>
-
-
-                <button class="btn btn-brand">
-                  {{ 'addCreditCard.card.add'|trans }}
+    <!-- begin:: Content -->
+    <div class="kt-content kt-grid__item kt-grid__item--fluid" id="kt_content">
+      <div class="kt-portlet kt-portlet--tabs">
+        <div class="kt-portlet__head">
+          <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title  kt-font-success">
+              {{ 'tickets.label'|trans }}
+            </h3>
+          </div>
+        </div>
+        <div class="kt-portlet__body">
+          {% if create|default(false) %}
+            <div class="alert alert-solid-danger alert-bold fade show kt-margin-t-20 kt-margin-b-40" role="alert">
+              <div class="alert-icon"><i class="fa fa-exclamation-triangle"></i></div>
+              <div class="alert-text"></div>
+              <div class="alert-close">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true"><i class="la la-close"></i></span>
                 </button>
               </div>
             </div>
-            <div class="col-12 col-sm-2"></div>
-            <div class="kt-portlet kt-portlet--tabs col-12 col-sm-5">
-              <div class="kt-portlet__head">
-                <div class="kt-portlet__head-label">
-                  <h3 class="kt-portlet__head-title  kt-font-success">
-                    {{ 'addCreditCard.info.label'|trans }}
-                  </h3>
-                </div>
-              </div>
-              <div class="kt-portlet__body">
-                {{ 'addCreditCard.info.desc'|trans }}
-              </div>
-            </div>
-            <div class="kt-portlet kt-portlet--tabs col-12 col-sm-5">
-              <div class="kt-portlet__head">
-                <div class="kt-portlet__head-label">
-                  <h3 class="kt-portlet__head-title  kt-font-success">
-                    {{ 'addCreditCard.card.label2'|trans }}
-                  </h3>
-                </div>
-              </div>
-              <div class="kt-portlet__body">
-                <form action="#" method="post">
-                  <div class="form-group row">
-                    <label class="col-xl-3 col-lg-3 col-form-label" for="type">
-                      {{ 'addCreditCard.card.type'|trans }}
-                    </label>
-                    <div class="col-lg-9 col-xl-6">
-                      <select name="type" id="type" class="form-control">
-                        <option value="1">Visa</option>
-                        <option value="2">MasterCard</option>
-                        <option value="3">Discover</option>
-                        <option value="4">Amerikan Express</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-xl-3 col-lg-3 col-form-label" for="type">
-                      {{ 'addCreditCard.card.number'|trans }}
-                    </label>
-                    <div class="col-lg-9 col-xl-6">
-                      <input class="form-control" name="number" type="text" value="" placeholder="0000 0000 0000 0000">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-xl-3 col-lg-3 col-form-label" for="type">
-                      {{ 'addCreditCard.card.expireDate'|trans }}
-                    </label>
-                    <div class="col-lg-9 col-xl-6">
-                      <input class="form-control" name="expire-date" type="text" value="" placeholder="{{ 'addCreditCard.card.expireDateDesc'|trans }}">
-                    </div>
-                  </div>
-
-                  <button type="submit" class="btn btn-brand">
-                    {{ 'addCreditCard.card.save'|trans }}
-                  </button>
-                  <button type="reset" class="btn btn-warning">
-                    {{ 'addCreditCard.card.cancel'|trans }}
-                  </button>
-                </form>
-              </div>
-            </div>
           {% endif %}
+
+          <table class="table">
+            <tr>
+              <th>
+                {{ 'tickets.inputs.subject'|trans }}
+              </th>
+              <th>
+                {{ 'tickets.inputs.status'|trans }}
+              </th>
+              <th>
+                {{ 'tickets.inputs.departman'|trans }}
+              </th>
+              <th>
+                {{ 'tickets.inputs.date'|trans }}
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <a href="/view/ticket/123123">
+                  <span>
+                    Örnek Destek Talebi
+                  </span>
+                </a>
+              </td>
+              <td>
+                <span class="kt-font-success kt-font-hover-success">
+                  Yanıtlandı
+                </span>
+              </td>
+              <td>
+                Teknik Destek
+              </td>
+              <td>
+                25/09/2018
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="/view/ticket/123123">
+                  <span>
+                    Örnek Destek Talebi
+                  </span>
+                </a>
+              </td>
+              <td>
+                <span class="kt-font-danger kt-font-hover-danger">
+                  İncelemede
+                </span>
+              </td>
+              <td>
+                Teknik Destek
+              </td>
+              <td>
+                25/09/2018
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="/view/ticket/123123">
+                  <span>
+                    Örnek Destek Talebi
+                  </span>
+                </a>
+              </td>
+              <td>
+                <span class="kt-font-warning kt-font-hover-warning">
+                  Yanıtlanmadı
+                </span>
+              </td>
+              <td>
+                Teknik Destek
+              </td>
+              <td>
+                25/09/2018
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
-
-      <!-- end:: Content -->
-
-      {% include 'components/footer-base.html.twig' %}
     </div>
+
+    <!-- end:: Content -->
+
+    {% include 'components/footer-base.html.twig' %}
+  </div>
   </div>
 {% endblock %}
