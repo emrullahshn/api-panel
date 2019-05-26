@@ -62,4 +62,13 @@ class DefaultController extends Controller
     {
         return $this->render('all-tickets.html.twig');
     }
+
+    /**
+     * @Route("/view/ticket/{number}", name="view-ticket")
+     * @return Response
+     */
+    public function viewTickets($number)
+    {
+        return $this->render('answer-ticket.html.twig');
+    }
 }
