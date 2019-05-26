@@ -233,18 +233,10 @@
                           </div>
                           <div class="form-group row">
                             <label class="col-xl-3 col-lg-3 col-form-label">
-                              {{ 'profileEdit.profileInfo.inputs.name'|trans }}
+                              {{ 'profileEdit.profileInfo.inputs.fullName'|trans }}
                             </label>
                             <div class="col-lg-9 col-xl-6">
-                              <input class="form-control" name="name" type="text" value="">
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-xl-3 col-lg-3 col-form-label">
-                              {{ 'profileEdit.profileInfo.inputs.lastName'|trans }}
-                            </label>
-                            <div class="col-lg-9 col-xl-6">
-                              <input class="form-control" name="lastName" type="text" value="">
+                              <input class="form-control" name="fullName" type="text" value="{{ user.fullName }}">
                             </div>
                           </div>
                           <div class="form-group row">
@@ -261,7 +253,7 @@
                                 <input type="text"
                                        class="form-control"
                                        name="email"
-                                       value=""
+                                       value="{{ user.email }}"
                                        placeholder="{{ 'profileEdit.profileInfo.inputs.email'|trans }}"
                                        aria-describedby="basic-addon1">
                               </div>
@@ -280,7 +272,7 @@
                                 </div>
                                 <input type="text"
                                        class="form-control"
-                                       value=""
+                                       value="{{ user.phoneNumber }}"
                                        placeholder="{{ 'profileEdit.profileInfo.inputs.phone'|trans }}"
                                        aria-describedby="basic-addon1"
                                >
@@ -305,7 +297,7 @@
                               {{ 'profileEdit.profileInfo.inputs.address'|trans }}
                             </label>
                             <div class="col-lg-9 col-xl-6">
-                              <input class="form-control" name="address" type="text" value="">
+                              <input class="form-control" name="address" type="text" value="{{ user.address }}">
                             </div>
                           </div>
                           <div class="form-group row">
@@ -314,7 +306,7 @@
                             </label>
                             <div class="col-lg-9 col-xl-6">
                               <select class="form-control" name="country" type="text"></select>
-                              <input type="hidden" name="selectedCountry" value="">
+                              <input type="hidden" name="selectedCountry" value="{{ user.country }}">
                             </div>
                           </div>
                           <div class="form-group row">
@@ -323,7 +315,7 @@
                             </label>
                             <div class="col-lg-9 col-xl-6">
                               <select class="form-control" name="city" type="text"></select>
-                              <input type="hidden" name="selectedCity" value="">
+                              <input type="hidden" name="selectedCity" value="{{ user.city }}">
                             </div>
                           </div>
                           <div class="form-group row">
