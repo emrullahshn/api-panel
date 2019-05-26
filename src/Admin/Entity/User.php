@@ -33,6 +33,12 @@ class User extends BaseUser
 
     /**
      * @var string
+     * @ORM\Column(name="full_name", type="string", nullable=true)
+     */
+    protected $fullName;
+
+    /**
+     * @var string
      * @ORM\Column(name="address", type="text", nullable=true)
      */
     protected $address;
@@ -73,6 +79,24 @@ class User extends BaseUser
     public function getAddress(): string
     {
         return $this->address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullName(): string
+    {
+        return $this->fullName;
+    }
+
+    /**
+     * @param string $fullName
+     * @return User
+     */
+    public function setFullName(string $fullName): User
+    {
+        $this->fullName = $fullName;
+        return $this;
     }
 
     /**

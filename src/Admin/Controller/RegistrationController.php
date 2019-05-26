@@ -85,7 +85,7 @@ class RegistrationController extends Controller
         }
 
         $user = (new User())
-            ->setUsernameCanonical($fullName)
+            ->setFullName($fullName)
             ->setUsername($email)
             ->setEmail($email)
             ->setAddress($address)

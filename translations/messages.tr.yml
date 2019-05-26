@@ -69,6 +69,7 @@ profileEdit:
     inputs:
       name: İsim
       lastName: Soyisim
+      fullName: İsim Soyisim
       email: E-Posta
       phone: Telefon
       address: Adres
