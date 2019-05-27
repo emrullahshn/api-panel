@@ -14,7 +14,7 @@ class TicketController extends EasyAdminController
      * @param Request $request
      */
     public function createTicket(Request $request){
-
+        $fields = $request->request;
     }
 
     /**

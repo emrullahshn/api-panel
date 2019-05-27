@@ -46,7 +46,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/create-ticket-page", name="create_ticket_page")
+     * @Route("/destek-talebi", name="destek_talebi")
      * @return Response
      */
     public function createTicket()
