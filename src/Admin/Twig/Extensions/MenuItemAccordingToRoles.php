@@ -8,7 +8,7 @@ class MenuItemAccordingToRoles extends \Twig_Extension
 {
 
     /**
-     * @var AuthorizationChecker $authorizationChecker
+     * @var AuthorizationCheckerInterface $authorizationChecker
      */
     private $authorizationChecker;
 
