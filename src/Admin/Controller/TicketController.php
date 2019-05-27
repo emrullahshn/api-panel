@@ -17,7 +17,21 @@ class TicketController extends EasyAdminController
 
     }
 
-//    public function createTicketsEntityFormBuilder($entity, $view)
-//    {
-//    }
+    /**
+     * @Route("/all-tickets", name="all_tickets")
+     * @return Response
+     */
+    public function getAllTickets()
+    {
+        return $this->render('all-tickets.html.twig');
+    }
+
+    /**
+     * @Route("/view-ticket/{number}", name="view_ticket")
+     * @return Response
+     */
+    public function viewTicket($number)
+    {
+        return $this->render('answer-ticket.html.twig');
+    }
 }
