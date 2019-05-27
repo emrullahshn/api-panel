@@ -28,7 +28,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/add-balance", name="add-balance")
+     * @Route("/add-balance", name="add_balance_page")
      * @return Response
      */
     public function addBalanceAction()
@@ -37,7 +37,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/add-credit-card", name="add-credit-card")
+     * @Route("/add-credit-card-page", name="add_credit_card_page")
      * @return Response
      */
     public function addCreditCardAction()
@@ -46,29 +46,11 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/create-ticket", name="create-ticket")
+     * @Route("/create-ticket-page", name="create_ticket_page")
      * @return Response
      */
     public function createTicket()
     {
         return $this->render('create-ticket.html.twig');
-    }
-
-    /**
-     * @Route("/all-tickets", name="all-tickets")
-     * @return Response
-     */
-    public function allTickets()
-    {
-        return $this->render('all-tickets.html.twig');
-    }
-
-    /**
-     * @Route("/view/ticket/{number}", name="view-ticket")
-     * @return Response
-     */
-    public function viewTickets($number)
-    {
-        return $this->render('answer-ticket.html.twig');
     }
 }
