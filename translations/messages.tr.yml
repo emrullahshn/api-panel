@@ -178,7 +178,7 @@ addBalance:
 
   info:
     label: Bilgilendirme
-    desc: Manage HOSTED paneli üzerinden minimum 50,00 TL, maksimum 25.000 TL bakiye yüklemesi gerçekleştirebilirsiniz. Yüklemek istediğiniz tutar bu aralık dışında ise canlı destek veya destek talebi üzerinden muhasebe departmanına ulaşım sağlayabilirsiniz.
+    desc: Manage HOSTED paneli üzerinden minimum 50,00 TL, maksimum 25.000 TL bakiye yüklemesi gerçekleştirebilirsiniz. Yüklemek istediğiniz tutar bu aralık dışında ise canlı destek veya destek talebi üzerinden muhasebe departmentına ulaşım sağlayabilirsiniz.
 
 addCreditCard:
   card:
@@ -198,7 +198,7 @@ addCreditCard:
 
 createTicket:
   label: Yeni Destek Talebi Oluştur
-  departman: Departman
+  department: Departman
   subject: Konu
   detail: Destek Talebi Detayı
   file: Dosya Ekle
@@ -210,7 +210,7 @@ tickets:
   inputs:
     subject: Konu
     status: Durum
-    departman: Departman
+    department: Departman
     date: Tarih
   alerts:
     created: Destek talebiniz başarılı bir şekilde oluşturulmuştur. En kısa sürede tarafınıza dönüş sağlanacaktır
