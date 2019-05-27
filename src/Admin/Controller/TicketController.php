@@ -19,18 +19,22 @@ class TicketController extends EasyAdminController
      * @param EntityManagerInterface $entityManager
      * @return JsonResponse
      */
-    public function createNewTicket(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    public function createNewTicket(Request $request, EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage): JsonResponse
     {
         $department = $request->request->get('department');
         $subject = $request->request->get('subject');
         $content = $request->request->get('detail');
-        $file = $request->files->all()['file'];
+//        $file = $request->files->all()['file'];
+
+        $user = $tokenStorage->getToken()->getUser();
 
         $ticket = (new Ticket())
             ->setDepartment($department)
             ->setSubject($subject)
             ->setContent($content)
-            ->setStatus(Ticket::STATUS_NEW);
+            ->setStatus(Ticket::STATUS_NEW)
+            ->setUser($user)
+        ;
 
         $entityManager->persist($ticket);
         $entityManager->flush();

@@ -82,6 +82,11 @@ class Ticket
     protected $status = self::STATUS_NEW;
 
     /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="tickets")
+     */
+    protected $user;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -202,6 +207,24 @@ class Ticket
     public function setStatus(string $status): Ticket
     {
         $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     * @return Ticket
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
         return $this;
     }
 }

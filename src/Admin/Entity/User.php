@@ -74,7 +74,7 @@ class User extends BaseUser
     protected $companyName;
 
     /**
-     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="createdBy")
+     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="user")
      */
     protected $tickets;
 
