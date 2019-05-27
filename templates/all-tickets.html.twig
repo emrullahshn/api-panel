@@ -161,8 +161,6 @@
                 {% set color = 'success' %}
                 {% set status = 'Yeni' %}
 
-                // new, waiting, answered, closed
-
                 {% if ticket.status == 'waiting' or ticket.status == 'closed' %}
                   {% set color = 'danger' %}
                 {% elseif ticket.status == 'closed' %}
