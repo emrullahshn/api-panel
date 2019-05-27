@@ -41,6 +41,11 @@ easy_admin:
                       type: 'choice'
                       type_options:
                           choices: !php/const App\Admin\Entity\Ticket::DEPARTMENT_LIST
-                    - {property: content, type: fos_ckeditor, label: 'Soru'}
-                    - {property: answer, type: fos_ckeditor, label: 'Cevap'}
+                    - property: 'messages'
+                      type: 'collection'
+                      type_options:
+                          entry_type: 'App\Admin\Form\TicketMessageFormType'
+                          allow_delete: true
+                          allow_add: true
+                          by_reference: false
 

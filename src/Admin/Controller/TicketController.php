@@ -3,6 +3,7 @@
 namespace App\Admin\Controller;
 
 use App\Admin\Entity\Ticket;
+use App\Admin\Entity\TicketMessage;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -31,12 +32,21 @@ class TicketController extends EasyAdminController
         $ticket = (new Ticket())
             ->setDepartment($department)
             ->setSubject($subject)
-            ->setContent($content)
             ->setStatus(Ticket::STATUS_NEW)
             ->setUser($user)
         ;
 
+        $ticketMessage = (new TicketMessage())
+            ->setMessage($content)
+            ->setOrderIndex(1)
+            ->setStatus(TicketMessage::STATUS_USER)
+            ->setTicket($ticket)
+        ;
+
+        $ticket->addMessage($ticketMessage);
+
         $entityManager->persist($ticket);
+        $entityManager->persist($ticketMessage);
         $entityManager->flush();
 
         return new JsonResponse([
@@ -54,6 +64,8 @@ class TicketController extends EasyAdminController
     {
         $isCreate = $request->query->get('create');
         $user = $tokenStorage->getToken()->getUser();
+        $tickets = $user->getTickets();
+
 
         return $this->render('all-tickets.html.twig', [
             'create' => $isCreate,
