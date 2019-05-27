@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TicketController extends EasyAdminController
 {
     /**
-     * @Route(path="/create-ticket", name="create_ticket", methods={"POST"})
+     * @Route(path="/post-ticket", name="post_ticket", methods={"POST"})
      * @param Request $request
      */
     public function createTicket(Request $request){

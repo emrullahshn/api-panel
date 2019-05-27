@@ -28,7 +28,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/add-balance", name="add_balance_page")
+     * @Route("/add-balance", name="add_balance")
      * @return Response
      */
     public function addBalanceAction()
@@ -37,7 +37,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/add-credit-card-page", name="add_credit_card_page")
+     * @Route("/add-credit-card-page", name="add_credit_card")
      * @return Response
      */
     public function addCreditCardAction()
@@ -46,7 +46,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/destek-talebi", name="destek_talebi")
+     * @Route("/create-ticket", name="create_ticket")
      * @return Response
      */
     public function createTicket()
