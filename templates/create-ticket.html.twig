@@ -148,6 +148,9 @@
           if(!data.status) {
             showAlert( this, data.message )
           }
+          else {
+            window.location.href = '{{ path('all_tickets') }}?create=1'
+          }
         }
       } )
 
