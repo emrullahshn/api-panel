@@ -74,6 +74,11 @@ class User extends BaseUser
     protected $companyName;
 
     /**
+     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="user")
+     */
+    protected $tickets;
+
+    /**
      * @return string
      */
     public function getAddress(): string
@@ -214,6 +219,24 @@ class User extends BaseUser
     public function setTown(string $town): User
     {
         $this->town = $town;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
+    }
+
+    /**
+     * @param mixed $tickets
+     * @return User
+     */
+    public function setTickets($tickets)
+    {
+        $this->tickets = $tickets;
         return $this;
     }
 }
