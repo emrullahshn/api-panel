@@ -33,15 +33,13 @@ class TicketController extends EasyAdminController
             ->setDepartment($department)
             ->setSubject($subject)
             ->setStatus(Ticket::STATUS_NEW)
-            ->setUser($user)
-        ;
+            ->setUser($user);
 
         $ticketMessage = (new TicketMessage())
             ->setMessage($content)
             ->setOrderIndex(1)
             ->setStatus(TicketMessage::STATUS_USER)
-            ->setTicket($ticket)
-        ;
+            ->setTicket($ticket);
 
         $ticket->addMessage($ticketMessage);
 
@@ -64,8 +62,6 @@ class TicketController extends EasyAdminController
     {
         $isCreate = $request->query->get('create');
         $user = $tokenStorage->getToken()->getUser();
-        $tickets = $user->getTickets();
-
 
         return $this->render('all-tickets.html.twig', [
             'create' => $isCreate,
@@ -76,10 +72,16 @@ class TicketController extends EasyAdminController
     /**
      * @Route("/view-ticket/{number}", name="view_ticket")
      * @param $number
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function viewTicket($number): Response
+    public function viewTicket($number, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('answer-ticket.html.twig');
+        $ticketRepo = $entityManager->getRepository(Ticket::class);
+        $ticket = $ticketRepo->find($number);
+
+        return $this->render('answer-ticket.html.twig', [
+            'ticket' => $ticket
+        ]);
     }
 }
