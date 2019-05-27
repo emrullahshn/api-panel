@@ -123,7 +123,7 @@
             <div class="alert alert-solid-success alert-bold fade show kt-margin-t-20 kt-margin-b-40" role="alert">
               <div class="alert-icon"><i class="fa fa-exclamation-triangle"></i></div>
               <div class="alert-text">
-                {{ 'tickets.alerts.created'|trans }}
+                {{ 'tickets.alerts.created'|trans }}.
               </div>
               <div class="alert-close">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -133,82 +133,65 @@
             </div>
           {% endif %}
 
-          <table class="table">
-            <tr>
-              <th>
-                {{ 'tickets.inputs.subject'|trans }}
-              </th>
-              <th>
-                {{ 'tickets.inputs.status'|trans }}
-              </th>
-              <th>
-                {{ 'tickets.inputs.departman'|trans }}
-              </th>
-              <th>
-                {{ 'tickets.inputs.date'|trans }}
-              </th>
-            </tr>
-            <tr>
-              <td>
-                <a href="{{ path('view_ticket', {'number': '123123'}) }}">
+          {% if tickets is not defined or tickets is empty %}
+            <div class="">
+              Herhangi bir destek talebiniz bulunmamaktadır. <br> <br>
+
+              <a href="{{ path('create_ticket') }}" class="btn btn-brand">
+                Destek Talebi Oluştur
+              </a>
+            </div>
+          {% else %}
+            <table class="table">
+              <tr>
+                <th>
+                  {{ 'tickets.inputs.subject'|trans }}
+                </th>
+                <th>
+                  {{ 'tickets.inputs.status'|trans }}
+                </th>
+                <th>
+                  {{ 'tickets.inputs.department'|trans }}
+                </th>
+                <th>
+                  {{ 'tickets.inputs.date'|trans }}
+                </th>
+              </tr>
+              {% for ticket in tickets %}
+                {% set color = 'success' %}
+                {% set status = 'Yeni' %}
+
+                // new, waiting, answered, closed
+
+                {% if ticket.status == 'waiting' or ticket.status == 'closed' %}
+                  {% set color = 'danger' %}
+                {% elseif ticket.status == 'closed' %}
+                  {% set color = 'error' %}
+                {% endif %}
+
+                <tr>
+                  <td>
+                    <a href="{{ path('view_ticket', {'number': ticket.id}) }}">
                   <span>
                     Örnek Destek Talebi
                   </span>
-                </a>
-              </td>
-              <td>
+                    </a>
+                  </td>
+                  <td>
                 <span class="kt-font-success kt-font-hover-success">
-                  Yanıtlandı
+                  {{ status }}
                 </span>
-              </td>
-              <td>
-                Teknik Destek
-              </td>
-              <td>
-                25/09/2018
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href="{{ path('view_ticket', {'number': '123123'}) }}">
-                  <span>
-                    Örnek Destek Talebi
-                  </span>
-                </a>
-              </td>
-              <td>
-                <span class="kt-font-danger kt-font-hover-danger">
-                  İncelemede
-                </span>
-              </td>
-              <td>
-                Teknik Destek
-              </td>
-              <td>
-                25/09/2018
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href="{{ path('view_ticket', {'number': '123123'}) }}">
-                  <span>
-                    Örnek Destek Talebi
-                  </span>
-                </a>
-              </td>
-              <td>
-                <span class="kt-font-warning kt-font-hover-warning">
-                  Yanıtlanmadı
-                </span>
-              </td>
-              <td>
-                Teknik Destek
-              </td>
-              <td>
-                25/09/2018
-              </td>
-            </tr>
-          </table>
+                  </td>
+                  <td>
+                    {{ ticket.department }}
+                  </td>
+                  <td>
+                    {{ ticket.createdAt }}
+                  </td>
+                </tr>
+              {% endfor %}
+            </table>
+          {% endif %}
         </div>
       </div>
     </div>

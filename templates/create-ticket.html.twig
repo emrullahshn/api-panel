@@ -121,12 +121,12 @@
     $('#create-new-ticket').on('submit', function (e) {
       e.preventDefault();
 
-      var departman = $('#departman').val()
+      var department = $('#department').val()
       var subject = $('#subject').val()
       var detail = $('#detail').val()
 
-      if(!departman) {
-        showAlert(this, 'Lütfen departman seçin')
+      if(!department) {
+        showAlert(this, 'Lütfen department seçin')
         return false;
       }
 
@@ -181,12 +181,12 @@
               <div class="kt-portlet__body">
                 <div class="error-field"></div>
                 <div class="form-group row">
-                  <label class="col-xl-3 col-lg-3 col-form-label" for="departman">
-                    {{ 'createTicket.departman'|trans }}
+                  <label class="col-xl-3 col-lg-3 col-form-label" for="department">
+                    {{ 'createTicket.department'|trans }}
                   </label>
                   <div class="col-lg-9 col-xl-6">
-                    <select name="departman" id="departman" class="form-control">
-                      <option value="">Lütfen departman seçin</option>
+                    <select name="department" id="department" class="form-control">
+                      <option value="">Lütfen department seçin</option>
                       <option value="10">Teknik Destek</option>
                       <option value="20">Satış</option>
                       <option value="30">Muhasebe</option>
