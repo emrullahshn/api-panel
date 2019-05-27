@@ -184,7 +184,7 @@
                     {{ ticket.department }}
                   </td>
                   <td>
-                    {{ ticket.createdAt }}
+                    {{ ticket.createdAt|date('d.m.Y') }}
                   </td>
                 </tr>
               {% endfor %}
