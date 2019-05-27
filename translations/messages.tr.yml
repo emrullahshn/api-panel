@@ -212,6 +212,8 @@ tickets:
     status: Durum
     departman: Departman
     date: Tarih
+  alerts:
+    created: Destek talebiniz başarılı bir şekilde oluşturulmuştur. En kısa sürede tarafınıza dönüş sağlanacaktır
 
 answerTicket:
   label: Destek Talebini Yanıtla
