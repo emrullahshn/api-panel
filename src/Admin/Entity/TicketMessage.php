@@ -51,6 +51,12 @@ class TicketMessage
     protected $message;
 
     /**
+     * @var array|null
+     * @ORM\Column(name="image_raw", type="json_array",nullable=true)
+     */
+    private $image_raw;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -137,6 +143,24 @@ class TicketMessage
     public function setMessage(string $message): TicketMessage
     {
         $this->message = $message;
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getImageRaw(): ?array
+    {
+        return $this->image_raw;
+    }
+
+    /**
+     * @param array|null $image_raw
+     * @return TicketMessage
+     */
+    public function setImageRaw(?array $image_raw): TicketMessage
+    {
+        $this->image_raw = $image_raw;
         return $this;
     }
 }

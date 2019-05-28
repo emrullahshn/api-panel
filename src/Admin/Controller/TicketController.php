@@ -6,7 +6,6 @@ use App\Admin\Entity\Ticket;
 use App\Admin\Entity\TicketMessage;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,16 +28,23 @@ class TicketController extends EasyAdminController
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param TokenStorageInterface $tokenStorage
-     * @param UploadedFile $uploadedFile
+     * @param string $uploadDir
      * @return JsonResponse
      */
-    public function createNewTicket(Request $request, EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, UploadedFile $uploadedFile): JsonResponse
+    public function createNewTicket(Request $request, EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, string $uploadDir): JsonResponse
     {
         $department = $request->request->get('department');
         $subject = $request->request->get('subject');
         $content = $request->request->get('detail');
-        $file = $request->files->get('file');
+        $files = $request->files->get('file');
 
+
+        $filePaths = [];
+        foreach ($files as $file){
+            $fileName = md5(uniqid(rand(), true)).'.'.$file->getClientOriginalExtension();
+            $file->move($uploadDir, $fileName);
+            $filePaths[] = $uploadDir.'/'.$fileName;
+        }
 
         $user = $tokenStorage->getToken()->getUser();
 
@@ -46,13 +52,16 @@ class TicketController extends EasyAdminController
             ->setDepartment($department)
             ->setSubject($subject)
             ->setStatus(Ticket::STATUS_NEW)
-            ->setUser($user);
+            ->setUser($user)
+        ;
 
         $ticketMessage = (new TicketMessage())
             ->setMessage($content)
             ->setOrderIndex(1)
             ->setStatus(TicketMessage::STATUS_USER)
-            ->setTicket($ticket);
+            ->setTicket($ticket)
+            ->setImageRaw($filePaths)
+        ;
 
         $ticket->addMessage($ticketMessage);
 
