@@ -137,7 +137,7 @@ class TicketController extends EasyAdminController
         $entityManager->flush();
 
         return new JsonResponse([
-            'message' => $message
+            'status' => true
         ]);
     }
 
