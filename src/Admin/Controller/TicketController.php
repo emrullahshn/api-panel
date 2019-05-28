@@ -6,6 +6,7 @@ use App\Admin\Entity\Ticket;
 use App\Admin\Entity\TicketMessage;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,18 +15,30 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class TicketController extends EasyAdminController
 {
+    public function renderTemplate($actionName, $templatePath, array $parameters = []): ?Response
+    {
+        if ($actionName === 'edit') {
+            return $this->render('bundles/EasyAdminBundle/Ticket/edit.html.twig', $parameters);
+        }
+
+        return $this->render('@EasyAdminExtension/default/list.html.twig', $parameters);
+    }
+
     /**
      * @Route(path="/post-ticket", name="post_ticket", methods={"POST"})
      * @param Request $request
      * @param EntityManagerInterface $entityManager
+     * @param TokenStorageInterface $tokenStorage
+     * @param UploadedFile $uploadedFile
      * @return JsonResponse
      */
-    public function createNewTicket(Request $request, EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage): JsonResponse
+    public function createNewTicket(Request $request, EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, UploadedFile $uploadedFile): JsonResponse
     {
         $department = $request->request->get('department');
         $subject = $request->request->get('subject');
         $content = $request->request->get('detail');
-//        $file = $request->files->all()['file'];
+        $file = $request->files->get('file');
+
 
         $user = $tokenStorage->getToken()->getUser();
 
@@ -82,6 +95,59 @@ class TicketController extends EasyAdminController
 
         return $this->render('answer-ticket.html.twig', [
             'ticket' => $ticket
+        ]);
+    }
+
+    /**
+     * @Route(path="/add-ticket-message", name="add_ticket_message", methods={"POST"})
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return JsonResponse
+     */
+    public function addTicketMessage(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $ticketId = (int)$request->request->get('ticketId');
+        $message = $request->request->get('replyContent');
+        $status = $request->request->get('status');
+
+        $ticketRepo = $entityManager->getRepository(Ticket::class);
+        $ticket = $ticketRepo->find($ticketId);
+
+        $lastOrderIndex = $ticket->getMessages()->last()->getOrderIndex();
+
+        $ticketMessage = (new TicketMessage())
+            ->setMessage($message)
+            ->setTicket($ticket)
+            ->setStatus($status)
+            ->setOrderIndex(++$lastOrderIndex);
+
+        $ticket->addMessage($ticketMessage);
+        $ticket->setStatus(Ticket::STATUS_ANSWERED);
+
+        $entityManager->persist($ticketMessage);
+        $entityManager->flush();
+
+        return new JsonResponse([
+            'message' => $message
+        ]);
+    }
+
+    /**
+     * @Route(path="/close-ticket", name="close_ticket", methods={"POST"})
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return JsonResponse
+     */
+    public function closeTicket(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $ticketId = (int)$request->request->get('ticketId');
+        $ticketRepo = $entityManager->getRepository(Ticket::class);
+        $ticket = $ticketRepo->find($ticketId);
+        $ticket->setStatus(Ticket::STATUS_CLOSED);
+        $entityManager->flush();
+
+        return new JsonResponse([
+            'status' => true
         ]);
     }
 }

@@ -35,17 +35,18 @@ easy_admin:
                    - { property: statusDesc, label: Durum }
             form:
                 fields:
-                    - {property: subject, type: text, label: 'Konu'}
+                    - {property: subject, type: text, label: 'Konu', type_options: { disabled: true }}
                     - property: 'department'
                       label: 'Departman'
                       type: 'choice'
                       type_options:
                           choices: !php/const App\Admin\Entity\Ticket::DEPARTMENT_LIST
-                    - property: 'messages'
-                      type: 'collection'
-                      type_options:
-                          entry_type: 'App\Admin\Form\TicketMessageFormType'
-                          allow_delete: true
-                          allow_add: true
-                          by_reference: false
+                          disabled: true
+#                    - property: 'messages'
+#                      type: 'collection'
+#                      type_options:
+#                          entry_type: 'App\Admin\Form\TicketMessageFormType'
+#                          allow_delete: true
+#                          allow_add: true
+#                          by_reference: false
 

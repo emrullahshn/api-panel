@@ -1,0 +1,135 @@
+{% form_theme form with easyadmin_config('design.form_theme') %}
+
+{% set _entity_config = easyadmin_entity(app.request.query.get('entity')) %}
+{% set _entity_id = attribute(entity, _entity_config.primary_key_field_name) %}
+{% trans_default_domain _entity_config.translation_domain %}
+{% set _trans_parameters = { '%entity_name%': _entity_config.name|trans, '%entity_label%': _entity_config.label|trans, '%entity_id%': _entity_id } %}
+
+{% extends _entity_config.templates.layout %}
+
+{% block body_id 'easyadmin-edit-' ~ _entity_config.name ~ '-' ~ _entity_id %}
+{% block body_class 'edit edit-' ~ _entity_config.name|lower %}
+
+{% block content_title %}
+    {% spaceless %}
+        {% set _default_title = 'edit.page_title'|trans(_trans_parameters, 'EasyAdminBundle') %}
+        {{ _entity_config.edit.title is defined ? _entity_config.edit.title|trans(_trans_parameters) : _default_title }}
+    {% endspaceless %}
+{% endblock %}
+
+{% block content_footer_wrapper '' %}
+
+{% block main %}
+    <link rel="stylesheet" href="{{ asset('build/login-page.css') }}">
+    <div class="kt-grid__item kt-grid__item--fluid kt-app__content" id="kt_chat_content">
+        <div class="kt-chat">
+            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+                <div class="kt-portlet__body">
+                    <div>
+                        <span><b>Konu:</b> {{ entity.subject }}</span>
+                        <br>
+                        <span><b>Departman:</b> {{ entity.departmentDesc }}</span>
+                        <br>
+                        <span><b>Status:</b> {{ entity.statusDesc }}</span>
+                    </div>
+                    <hr>
+                    <div class="kt-scroll kt-scroll--pull" data-mobile-height="300"
+                         data-desktop-height="500">
+                        <div class="kt-chat__messages">
+                            {% for message in entity.messages %}
+                                {% if message.status == 2 %}
+                                    <div class="kt-chat__message">
+                                        <div class="kt-chat__text kt-bg-light-success">
+                                            {{ message.message }}
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="kt-chat__message kt-chat__message--right">
+                                        <div class="kt-chat__text kt-bg-light-brand">
+                                            {{ message.message }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__foot">
+                    <div class="kt-chat__input">
+                        <div class="kt-chat__editor">
+                            <textarea id="replyContent" style="height: 50px" placeholder="Type here..."></textarea>
+                        </div>
+                        <div class="kt-chat__toolbar">
+                            <div class="kt_chat__actions">
+                                <button type="submit" class="btn btn-brand btn-md btn-upper btn-bold kt-chat__reply"
+                                        id="replyTicket">
+                                    {{ 'answerTicket.send'|trans }}
+                                </button>
+                                <button type="submit" class="btn btn-danger btn-md btn-upper btn-bold kt-chat__reply"
+                                        id="closeTicket">
+                                    Kapat
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body_javascript %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(function () {
+            $('.edit-form').areYouSure({'message': '{{ 'form.are_you_sure'|trans({}, 'EasyAdminBundle')|e('js') }}'});
+
+            $('a.action-delete').on('click', function (e) {
+                e.preventDefault();
+
+                $('#modal-delete').modal({backdrop: true, keyboard: true})
+                    .off('click', '#modal-delete-button')
+                    .on('click', '#modal-delete-button', function () {
+                        $('#delete-form').trigger('submit');
+                    });
+            });
+
+            $("#replyTicket").on('click', function () {
+                const replyContent = $('#replyContent').val();
+                const tickedId = "{{ entity.id }}";
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('add_ticket_message') }}",
+                    data: {'replyContent': replyContent, 'ticketId': tickedId, 'status': 1}, // serializes the form's elements.
+                    success: function (data) {
+                        $(".kt-chat__messages").append(`
+                            <div class="kt-chat__message kt-chat__message--right">
+                                        <div class="kt-chat__text kt-bg-light-brand">
+                                            ${data.message}
+                                        </div>
+                                    </div>
+                        `)
+                    }
+                });
+            });
+
+            $("#closeTicket").on('click', function () {
+                const tickedId = "{{ entity.id }}";
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('close_ticket') }}",
+                    data: {'ticketId': tickedId}, // serializes the form's elements.
+                    success: function (data) {
+                        location.reload();
+                    }
+                });
+            });
+
+        });
+    </script>
+
+    {{ include('@EasyAdmin/default/includes/_select2_widget.html.twig') }}
+{% endblock %}
