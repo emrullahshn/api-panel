@@ -171,14 +171,14 @@
                   <td>
                     <a href="{{ path('view_ticket', {'number': ticket.id}) }}">
                   <span>
-                    Örnek Destek Talebi
+                    {{ ticket.subject }}
                   </span>
                     </a>
                   </td>
                   <td>
-                <span class="kt-font-success kt-font-hover-success">
-                  {{ status }}
-                </span>
+                  <span class="kt-font-success kt-font-hover-success">
+                    {{ status }}
+                  </span>
                   </td>
                   <td>
                     {{ ticket.departmentDesc }}

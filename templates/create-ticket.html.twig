@@ -169,7 +169,7 @@
       <!-- begin:: Content -->
       <div class="kt-content kt-grid__item kt-grid__item--fluid" id="kt_content">
         <div class="row">
-          <form action="{{ path('post_ticket') }}" method="post" class="col-12 col-sm-12" id="create-new-ticket">
+          <form action="{{ path('post_ticket') }}" method="post" class="col-12 col-sm-12" id="create-new-ticket" enctype="multipart/form-data">
             <div class="kt-portlet kt-portlet--tabs">
               <div class="kt-portlet__head">
                 <div class="kt-portlet__head-label">
@@ -215,7 +215,7 @@
                   </label>
                   <div class="col-lg-9 col-xl-6">
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="file" name="file">
+                      <input type="file" class="custom-file-input" id="file" name="file[]" multiple>
                       <label class="custom-file-label" for="file">{{ 'createTicket.file'|trans }}</label>
                     </div>
                   </div>
