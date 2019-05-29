@@ -133,7 +133,7 @@
             </div>
           {% endif %}
 
-          {% if tickets is not defined or tickets is empty %}
+          {% if tickets is not defined or (tickets|default({})) is empty %}
             <div class="">
               Herhangi bir destek talebiniz bulunmamaktadır. <br> <br>
 
