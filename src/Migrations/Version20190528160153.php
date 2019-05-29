@@ -22,7 +22,7 @@ final class Version20190528160153 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE ticket_message ADD image_raw JSON DEFAULT NULL COMMENT \'(DC2Type:json_array)\', CHANGE message  message LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE ticket_message ADD image_raw JSON DEFAULT NULL COMMENT \'(DC2Type:json_array)\'');
     }
 
     public function down(Schema $schema) : void
