@@ -1,0 +1,184 @@
+{% form_theme form with easyadmin_config('design.form_theme') %}
+
+{% set _entity_config = easyadmin_entity(app.request.query.get('entity')) %}
+{% set _entity_id = attribute(entity, _entity_config.primary_key_field_name) %}
+{% trans_default_domain _entity_config.translation_domain %}
+{% set _trans_parameters = { '%entity_name%': _entity_config.name|trans, '%entity_label%': _entity_config.label|trans, '%entity_id%': _entity_id } %}
+
+{% extends _entity_config.templates.layout %}
+
+{% block body_id 'easyadmin-edit-' ~ _entity_config.name ~ '-' ~ _entity_id %}
+{% block body_class 'edit edit-' ~ _entity_config.name|lower %}
+
+{% block content_title %}
+    {% spaceless %}
+        {% set _default_title = 'edit.page_title'|trans(_trans_parameters, 'EasyAdminBundle') %}
+        {{ _entity_config.edit.title is defined ? _entity_config.edit.title|trans(_trans_parameters) : _default_title }}
+    {% endspaceless %}
+{% endblock %}
+
+{% block content_footer_wrapper '' %}
+
+{% block main %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.0/css/lightbox.min.css">
+    <link rel="stylesheet" href="{{ asset('build/login-page.css') }}">
+    <div class="kt-grid__item kt-grid__item--fluid kt-app__content" id="kt_chat_content">
+        <div class="kt-chat">
+            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+                <div class="kt-portlet__body">
+                    <div>
+                        <span><b>Konu:</b> {{ entity.subject }}</span>
+                        <br>
+                        <span><b>Departman:</b> {{ entity.departmentDesc }}</span>
+                        <br>
+                        <span><b>Status:</b> {{ entity.statusDesc }}</span>
+                    </div>
+                    <hr>
+                    <div class="kt-scroll kt-scroll--pull" data-mobile-height="300"
+                         data-desktop-height="500">
+                        <div class="kt-chat__messages">
+                            {% for message in entity.messages %}
+
+                                {% if message.status == 2 %}
+                                    <div class="kt-chat__message">
+                                        <div class="kt-chat__text kt-bg-light-success">
+                                            {{ message.message }}
+
+                                            {% for index, image in message.imageRaw if message.imageRaw is not empty %}
+                                                <a href="{{ asset(image) }}"
+                                                   data-lightbox="{{ asset(image) }}"
+                                                   data-title="{{ asset(image) }}">image_{{ index }}</a>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="kt-chat__message kt-chat__message--right">
+                                        <div class="kt-chat__text kt-bg-light-brand">
+                                            {{ message.message }}
+
+                                            {% for index, image in message.imageRaw if message.imageRaw is not empty %}
+                                                <a href="{{ asset(image) }}"
+                                                   data-lightbox="{{ asset(image) }}"
+                                                   data-title="{{ asset(image) }}">image_{{ index }}</a>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__foot">
+                    <form action="{{ path('add_ticket_message') }}" method="post" id="add-ticket-message" enctype="multipart/form-data">
+                        <div class="kt-chat__input">
+                            <div class="kt-chat__editor">
+                                <textarea id="replyContent" style="height: 50px" placeholder="Type here..." name="replyContent"></textarea>
+                            </div>
+                            <div class="kt-chat__toolbar">
+                                <div class="kt_chat__tools">
+                                    <a href="#" id="attachment"><i class="flaticon2-link"></i></a>
+                                    <div style="display: none;">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="file" name="file[]" multiple>
+                                            <label class="custom-file-label" for="file">{{ 'createTicket.file'|trans }}</label>
+                                        </div>
+                                        <input type="hidden" id="ticketId" name="ticketId" value="{{ entity.id }}">
+                                        <input type="hidden" id="status" name="status" value="1">
+                                    </div>
+                                </div>
+                                <div class="kt_chat__actions">
+                                    <button type="submit" class="btn btn-brand btn-md btn-upper btn-bold kt-chat__reply"
+                                            id="replyTicket">
+                                        {{ 'answerTicket.send'|trans }}
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-md btn-upper btn-bold kt-chat__reply"
+                                            id="closeTicket">
+                                        Kapat
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body_javascript %}
+    {{ parent() }}
+    <script src="{{ asset('build/js/vendors/general/jquery-form/dist/jquery.form.min.js') }}" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.0/js/lightbox.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#attachment').on('click', function(e) {
+                e.preventDefault();
+
+                $('#file').trigger('click')
+            })
+
+            $('.edit-form').areYouSure({'message': '{{ 'form.are_you_sure'|trans({}, 'EasyAdminBundle')|e('js') }}'});
+
+            $('a.action-delete').on('click', function (e) {
+                e.preventDefault();
+
+                $('#modal-delete').modal({backdrop: true, keyboard: true})
+                    .off('click', '#modal-delete-button')
+                    .on('click', '#modal-delete-button', function () {
+                        $('#delete-form').trigger('submit');
+                    });
+            });
+
+            $("#add-ticket-message").on('submit', function (e) {
+                e.preventDefault();
+                var form = $(this);
+                const replyContent = $('#replyContent');
+
+                form.ajaxSubmit({
+                                    success: function(data) {
+                                        var html = ''
+
+                                        for(var key in data['files']) {
+                                            var file = data['files'][key]
+                                            html += `
+                                <a href="${file}"
+                                 data-lightbox="${file}"
+                                 data-title="${file}">
+                                  <img src="${file}" alt="${file}">
+                                </a>
+                              `
+                                        }
+
+                                        $(".kt-chat__messages").append(`
+                            <div class="kt-chat__message kt-chat__message--right">
+                                <div class="kt-chat__text kt-bg-light-brand">
+                                    ${replyContent.val()}
+
+                                  ${html}
+                                </div>
+                            </div>
+                        `)
+
+                                        replyContent.val('');
+                                    }
+                })
+            });
+
+            $("#closeTicket").on('click', function () {
+                const tickedId = "{{ entity.id }}";
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('close_ticket') }}",
+                    data: {'ticketId': tickedId}, // serializes the form's elements.
+                    success: function () {
+                        location.reload();
+                    }
+                });
+            });
+
+        });
+    </script>
+
+    {{ include('@EasyAdmin/default/includes/_select2_widget.html.twig') }}
+{% endblock %}

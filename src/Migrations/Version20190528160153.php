@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190524175527 extends AbstractMigration
+final class Version20190528160153 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,7 @@ final class Version20190524175527 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE fos_user ADD address LONGTEXT DEFAULT NULL, ADD country_id INT DEFAULT NULL, ADD city_id INT DEFAULT NULL, ADD town_id INT DEFAULT NULL, ADD phone_number VARCHAR(255) DEFAULT NULL, ADD company_name VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE ticket_message ADD image_raw JSON DEFAULT NULL COMMENT \'(DC2Type:json_array)\'');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +30,6 @@ final class Version20190524175527 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE fos_user DROP address, DROP country_id, DROP city_id, DROP town_id, DROP phone_number, DROP company_name');
+        $this->addSql('ALTER TABLE ticket_message DROP image_raw, CHANGE  message message LONGTEXT DEFAULT NULL COLLATE utf8mb4_unicode_ci');
     }
 }

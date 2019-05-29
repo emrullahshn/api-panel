@@ -1,13 +1,29 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block fos_user_content %}
-    <div class="container">
-        <div class="card bg-light" style="margin-top: 15%">
-            <article class="card-body mx-auto" style="max-width: 400px;">
-                <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
-            </article>
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/login-page.css') }}">
+{% endblock %}
+
+
+{% block bodyCustomClass %}{% spaceless %}
+    kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--fixed kt-subheader--enabled kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-page--loading
+{% endspaceless %}{% endblock %}
+
+{% block content %}
+    <div class="kt-grid kt-grid--hor kt-grid--root">
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+            <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+                <div class="confirmed-content">
+                    <div class="image">
+                        <img alt="Manage Hosted" src="{{ asset('build/images/login/giris-logo.png') }}">
+                    </div>
+                    <div class="desc">
+                        {{ 'registration.check_email'|trans({'%email%': user.email}) }}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-{% endblock fos_user_content %}
+{% endblock %}

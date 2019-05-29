@@ -8,12 +8,4 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends EasyAdminController
 {
-//    /**
-//     * @Route("/admin", name="admin_dashboard")
-//     * @return Response
-//     */
-//    public function index()
-//    {
-//        return $this->render('index.html.twig');
-//    }
 }

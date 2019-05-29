@@ -2,6 +2,7 @@
 
 namespace App\Admin\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -58,18 +59,6 @@ class Ticket
     protected $subject;
 
     /**
-     * @var string
-     * @ORM\Column(name="content", type="text")
-     */
-    protected $content;
-
-    /**
-     * @var string
-     * @ORM\Column(name="answer", type="text", nullable=true)
-     */
-    protected $answer;
-
-    /**
      * @var int
      * @ORM\Column(name="department", type="integer")
      */
@@ -80,6 +69,21 @@ class Ticket
      * @ORM\Column(name="status", type="string")
      */
     protected $status = self::STATUS_NEW;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="tickets")
+     */
+    protected $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="TicketMessage", mappedBy="ticket")
+     */
+    protected $messages;
+
+    public function __construct()
+    {
+        $this->messages = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -100,9 +104,9 @@ class Ticket
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getSubject(): ?string
+    public function getSubject(): string
     {
         return $this->subject;
     }
@@ -118,53 +122,17 @@ class Ticket
     }
 
     /**
-     * @return string|null
+     * @return int
      */
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    /**
-     * @param string $content
-     * @return Ticket
-     */
-    public function setContent(string $content): Ticket
-    {
-        $this->content = $content;
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getAnswer(): ?string
-    {
-        return $this->answer;
-    }
-
-    /**
-     * @param string $answer
-     * @return Ticket
-     */
-    public function setAnswer(string $answer): Ticket
-    {
-        $this->answer = $answer;
-        return $this;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getDepartment(): ?int
+    public function getDepartment(): int
     {
         return $this->department;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getDepartmentDesc(): ?string
+    public function getDepartmentDesc(): string
     {
         return self::DEPARTMENT_DESC[$this->department];
     }
@@ -180,9 +148,9 @@ class Ticket
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getStatus(): ?string
+    public function getStatus(): string
     {
         return $this->status;
     }
@@ -202,6 +170,54 @@ class Ticket
     public function setStatus(string $status): Ticket
     {
         $this->status = $status;
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     * @return Ticket
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+
+    /**
+     * @param mixed $messages
+     * @return Ticket
+     */
+    public function setMessages($messages)
+    {
+        $this->messages = $messages;
+        return $this;
+    }
+
+    /**
+     * @param $message TicketMessage
+     * @return $this
+     */
+    public function addMessage($message): self
+    {
+        $this->messages->add($message);
+
         return $this;
     }
 }

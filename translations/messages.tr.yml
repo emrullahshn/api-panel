@@ -7,12 +7,35 @@ aside:
   ssl: SSL
   security: Güvenlik
   settings: Hesap Ayarları
+  ticket:
+    title: Destek Talebi
+    new: Yeni Talep Oluştur
+    olds: Geçmiş Destek Talepleri
   invoice:
     title: Faturalandırma
+    myInvoices: Faturalarım
     addBalance: Bakiye Ekle
     addCreditCard: Kredi Kartı Ekle
   information: Bilgi Merkezi
   support: Destek Talebi
+
+header:
+  settings:
+    label: Hesap Ayarları
+    desc: Hesap Ayarlarınızı görüntüleyin
+  changePassword:
+    label: Parola Değiştir
+    desc: Mevcut parolanızı değiştirin
+  accountStaff:
+    label: Hesap Yetkileri
+    desc: Hesap yetkilerinizi görüntüleyin
+  createTicket:
+    label: Destek Talebi Oluştur
+    desc: Herhangi bir konuda yardım için talep oluşturun
+  tickets:
+    label: Geçmiş Destek Talepleri
+    desc: Geçmiş destek taleplerinizi görüntüleyin
+  signOut: Çıkış Yap
 
 footer:
   copyright: "%date% &copy; Manage HOSTED v2.1"
@@ -143,3 +166,56 @@ invoice:
   invoiceDate: Fatura Tarihi
   paymentDate: Ödeme Tarihi
   status: Durum
+
+addBalance:
+  title: Eklemek İstediğiniz Tutar
+  inputs:
+    total:
+      label: Tutar
+      desc: Lütfen tutarı girin
+    method:
+      label: Ödeme Yöntemi
+
+  info:
+    label: Bilgilendirme
+    desc: Manage HOSTED paneli üzerinden minimum 50,00 TL, maksimum 25.000 TL bakiye yüklemesi gerçekleştirebilirsiniz. Yüklemek istediğiniz tutar bu aralık dışında ise canlı destek veya destek talebi üzerinden muhasebe departmentına ulaşım sağlayabilirsiniz.
+
+addCreditCard:
+  card:
+    label: Kayıtlı Olan Kredi Kartları
+    label2: Yeni Kart Ekle
+    type: Kart Türü
+    number: Kart Numarası
+    expireDate: Son Kullanma Tarihi
+    expireDateDesc: Lütfen AY/YIL formatında girin
+    add: Yeni Ekle
+    remove: Kaldır
+    save: Kaydet
+    cancel: Vazgeç
+  info:
+    label: Bilgilendirme
+    desc: Manage HOSTED paneli üzerinden yer alan kart bilgileriniz 3. şahıslar ile paylaşılmaz ve yüksek güvenli şifreleme yöntemleri ile çoklu şifreleme yapılarak depolanır. Kredi kartınızdan izniniz dışında bir işlem gerçekleştirilmez, daha fazla bilgi almak için canlı destek veya destek talebi üzerinden iletişime geçebilirsiniz.
+
+createTicket:
+  label: Yeni Destek Talebi Oluştur
+  department: Departman
+  subject: Konu
+  detail: Destek Talebi Detayı
+  file: Dosya Ekle
+  send: Gönder
+  cancel: Vazgeç
+
+tickets:
+  label: Geçmiş Destek Talepleri
+  inputs:
+    subject: Konu
+    status: Durum
+    department: Departman
+    date: Tarih
+  alerts:
+    created: Destek talebiniz başarılı bir şekilde oluşturulmuştur. En kısa sürede tarafınıza dönüş sağlanacaktır
+
+answerTicket:
+  label: Destek Talebini Yanıtla
+  input: Destek Talebi Yanıtı
+  send: Gönder
