@@ -34,6 +34,7 @@ class TicketController extends EasyAdminController
     public function createNewTicket(Request $request, EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, string $uploadDir): JsonResponse
     {
         $output = [
+          'files' => [],
           'status' => true
         ];
         $department = $request->request->get('department');
@@ -122,6 +123,7 @@ class TicketController extends EasyAdminController
     public function addTicketMessage(Request $request, EntityManagerInterface $entityManager, string $uploadDir): JsonResponse
     {
         $output = [
+          'files' => [],
           'status' => true
         ];
         $ticketId = (int)$request->request->get('ticketId');
