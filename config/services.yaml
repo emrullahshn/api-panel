@@ -9,7 +9,7 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'tr'
-    upload_dir: '%kernel.project_dir%/var/uploads'
+    upload_dir: '%kernel.project_dir%/public/uploads'
 
 services:
     # default configuration for services in *this* file

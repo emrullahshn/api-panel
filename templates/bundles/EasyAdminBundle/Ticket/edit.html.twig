@@ -38,16 +38,17 @@
                          data-desktop-height="500">
                         <div class="kt-chat__messages">
                             {% for message in entity.messages %}
-
                                 {% if message.status == 2 %}
                                     <div class="kt-chat__message">
                                         <div class="kt-chat__text kt-bg-light-success">
                                             {{ message.message }}
 
                                             {% for index, image in message.imageRaw if message.imageRaw is not empty %}
-                                                <a href="{{ asset(image) }}"
-                                                   data-lightbox="{{ asset(image) }}"
-                                                   data-title="{{ asset(image) }}">image_{{ index }}</a>
+                                                <a href="{{ asset('uploads/' ~ index) }}"
+                                                   data-lightbox="{{ index }}"
+                                                   data-title="{{ index }}" style="display: block;">
+                                                    <img src="{{ asset('uploads/' ~ index) }}" width="75" height="auto" alt="{{ index }}">
+                                                </a>
                                             {% endfor %}
                                         </div>
                                     </div>
@@ -57,9 +58,11 @@
                                             {{ message.message }}
 
                                             {% for index, image in message.imageRaw if message.imageRaw is not empty %}
-                                                <a href="{{ asset(image) }}"
-                                                   data-lightbox="{{ asset(image) }}"
-                                                   data-title="{{ asset(image) }}">image_{{ index }}</a>
+                                                <a href="{{ asset('uploads/' ~ index) }}"
+                                                   data-lightbox="{{ index }}"
+                                                   data-title="{{ index }}" style="display: block;">
+                                                    <img src="{{ asset('uploads/' ~ index) }}" width="75" height="auto" alt="{{ index }}">
+                                                </a>
                                             {% endfor %}
                                         </div>
                                     </div>
@@ -108,7 +111,7 @@
 {% block body_javascript %}
     {{ parent() }}
     <script src="{{ asset('build/js/vendors/general/jquery-form/dist/jquery.form.min.js') }}" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.0/js/lightbox.min.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.0/js/lightbox.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(function () {
             $('#attachment').on('click', function(e) {

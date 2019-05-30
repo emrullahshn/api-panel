@@ -196,7 +196,7 @@
                         {% set position = '' %}
                         {% set class = 'kt-bg-light-success' %}
 
-                        {% if message.status == 1 %}
+                        {% if message.status == 2 %}
                           {% set position = ' kt-chat__message--right' %}
                           {% set class = 'kt-bg-light-brand' %}
                         {% endif %}
@@ -214,10 +214,10 @@
                             {{ message.message }}
 
                             {% for index, image in message.imageRaw if message.imageRaw is not empty %}
-                              <a href="{{ asset(image) }}"
-                                 data-lightbox="{{ asset(image) }}"
-                                 data-title="{{ asset(image) }}">
-                                <img src="{{ asset(image) }}" alt="{{ asset(image) }}">
+                              <a href="{{ asset('uploads/' ~ index) }}"
+                                 data-lightbox="{{ index }}"
+                                 data-title="{{ index }}" style="display: block;">
+                                <img src="{{ asset('uploads/' ~ index) }}" width="75" height="auto" alt="{{ index }}">
                               </a>
                             {% endfor %}
                           </div>
