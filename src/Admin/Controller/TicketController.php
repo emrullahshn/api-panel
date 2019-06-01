@@ -36,14 +36,14 @@ class TicketController extends EasyAdminController
         $department = $request->request->get('department');
         $subject = $request->request->get('subject');
         $content = $request->request->get('detail');
-        $files = $request->files->get('file');
+        $files = $request->files->get('file') ?? [];
 
 
         $filePaths = [];
-        foreach ($files as $file){
-            $fileName = md5(uniqid(rand(), true)).'.'.$file->getClientOriginalExtension();
+        foreach ($files as $file) {
+            $fileName = md5(uniqid(rand(), true)) . '.' . $file->getClientOriginalExtension();
             $file->move($uploadDir, $fileName);
-            $filePaths[] = $uploadDir.'/'.$fileName;
+            $filePaths[$fileName] = $uploadDir . '/' . $fileName;
         }
 
         $user = $tokenStorage->getToken()->getUser();
@@ -52,16 +52,14 @@ class TicketController extends EasyAdminController
             ->setDepartment($department)
             ->setSubject($subject)
             ->setStatus(Ticket::STATUS_NEW)
-            ->setUser($user)
-        ;
+            ->setUser($user);
 
         $ticketMessage = (new TicketMessage())
             ->setMessage($content)
             ->setOrderIndex(1)
             ->setStatus(TicketMessage::STATUS_USER)
             ->setTicket($ticket)
-            ->setImageRaw($filePaths)
-        ;
+            ->setImageRaw($filePaths);
 
         $ticket->addMessage($ticketMessage);
 
@@ -113,11 +111,20 @@ class TicketController extends EasyAdminController
      * @param EntityManagerInterface $entityManager
      * @return JsonResponse
      */
-    public function addTicketMessage(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    public function addTicketMessage(Request $request, EntityManagerInterface $entityManager, string $uploadDir): JsonResponse
     {
         $ticketId = (int)$request->request->get('ticketId');
         $message = $request->request->get('replyContent');
         $status = $request->request->get('status');
+        $files = $request->files->get('file') ?? [];
+
+
+        $filePaths = [];
+        foreach ($files as $file) {
+            $fileName = md5(uniqid(rand(), true)) . '.' . $file->getClientOriginalExtension();
+            $file->move($uploadDir, $fileName);
+            $filePaths[$fileName] = $uploadDir . '/' . $fileName;
+        }
 
         $ticketRepo = $entityManager->getRepository(Ticket::class);
         $ticket = $ticketRepo->find($ticketId);
@@ -128,10 +135,14 @@ class TicketController extends EasyAdminController
             ->setMessage($message)
             ->setTicket($ticket)
             ->setStatus($status)
-            ->setOrderIndex(++$lastOrderIndex);
+            ->setOrderIndex(++$lastOrderIndex)
+            ->setImageRaw($filePaths);
 
         $ticket->addMessage($ticketMessage);
-        $ticket->setStatus(Ticket::STATUS_ANSWERED);
+
+        if ($status === TicketMessage::STATUS_ADMIN) {
+            $ticket->setStatus(Ticket::STATUS_ANSWERED);
+        }
 
         $entityManager->persist($ticketMessage);
         $entityManager->flush();

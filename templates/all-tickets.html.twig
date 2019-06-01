@@ -157,7 +157,7 @@
                   {{ 'tickets.inputs.date'|trans }}
                 </th>
               </tr>
-              {% for ticket in tickets %}
+              {% for ticket in tickets|reverse %}
                 {% set color = 'success' %}
                 {% set status = 'Yeni' %}
 
