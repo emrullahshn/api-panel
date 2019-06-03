@@ -214,6 +214,8 @@ tickets:
     date: Tarih
   alerts:
     created: Destek talebiniz başarılı bir şekilde oluşturulmuştur. En kısa sürede tarafınıza dönüş sağlanacaktır
+  noTicket: Herhangi bir destek talebiniz bulunmamaktadır.
+  create: Destek Talebi Oluştur
 
 answerTicket:
   label: Destek Talebini Yanıtla

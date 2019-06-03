@@ -135,10 +135,10 @@
 
           {% if tickets is not defined or (tickets|default({})) is empty %}
             <div class="">
-              Herhangi bir destek talebiniz bulunmamaktadır. <br> <br>
+              {{ 'tickets.noTicket'|trans }}. <br> <br>
 
               <a href="{{ path('create_ticket') }}" class="btn btn-brand">
-                Destek Talebi Oluştur
+                {{ 'tickets.create'|trans }}
               </a>
             </div>
           {% else %}
@@ -161,10 +161,15 @@
                 {% set color = 'success' %}
                 {% set status = 'Yeni' %}
 
-                {% if ticket.status == 'waiting' or ticket.status == 'closed' %}
+                {% if ticket.status == 'WAITING' %}
                   {% set color = 'danger' %}
-                {% elseif ticket.status == 'closed' %}
+                  {% set status = 'Cevap Bekleniyor' %}
+                {% elseif ticket.status == 'ANSWERED' %}
+                  {% set color = 'danger' %}
+                  {% set status = 'Cevaplandı' %}
+                {% elseif ticket.status == 'CLOSED' %}
                   {% set color = 'error' %}
+                  {% set status = 'Kapandı' %}
                 {% endif %}
 
                 <tr>
@@ -176,7 +181,7 @@
                     </a>
                   </td>
                   <td>
-                  <span class="kt-font-success kt-font-hover-success">
+                  <span class="kt-font-{{ color }} kt-font-hover-{{ color }}">
                     {{ status }}
                   </span>
                   </td>

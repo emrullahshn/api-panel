@@ -46,7 +46,7 @@
                                             {% for index, image in message.imageRaw if message.imageRaw is not empty %}
                                                 <a href="{{ asset('uploads/' ~ index) }}"
                                                    data-lightbox="{{ index }}"
-                                                   data-title="{{ index }}" style="display: block;">
+                                                   data-title="{{ index }}" style="display: block;margin-bottom: .5rem;">
                                                     <img src="{{ asset('uploads/' ~ index) }}" width="75" height="auto" alt="{{ index }}">
                                                 </a>
                                             {% endfor %}
@@ -60,7 +60,7 @@
                                             {% for index, image in message.imageRaw if message.imageRaw is not empty %}
                                                 <a href="{{ asset('uploads/' ~ index) }}"
                                                    data-lightbox="{{ index }}"
-                                                   data-title="{{ index }}" style="display: block;">
+                                                   data-title="{{ index }}" style="display: block;margin-bottom: .5rem;">
                                                     <img src="{{ asset('uploads/' ~ index) }}" width="75" height="auto" alt="{{ index }}">
                                                 </a>
                                             {% endfor %}
@@ -75,14 +75,14 @@
                     <form action="{{ path('add_ticket_message') }}" method="post" id="add-ticket-message" enctype="multipart/form-data">
                         <div class="kt-chat__input">
                             <div class="kt-chat__editor">
-                                <textarea id="replyContent" style="height: 50px" placeholder="Type here..." name="replyContent"></textarea>
+                                <textarea id="replyContent" style="height: 50px" placeholder="{% if entity.status == 'CLOSED' %}Talep Kapandı{% else %}Buraya yazın{% endif %}" name="replyContent"{% if entity.status == 'CLOSED' %} disabled{% endif %}></textarea>
                             </div>
                             <div class="kt-chat__toolbar">
                                 <div class="kt_chat__tools">
                                     <a href="#" id="attachment"><i class="flaticon2-link"></i></a>
                                     <div style="display: none;">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="file" name="file[]" multiple>
+                                            <input type="file" class="custom-file-input" id="file" name="file[]" multiple{% if entity.status == 'CLOSED' %} disabled{% endif %}>
                                             <label class="custom-file-label" for="file">{{ 'createTicket.file'|trans }}</label>
                                         </div>
                                         <input type="hidden" id="ticketId" name="ticketId" value="{{ entity.id }}">
@@ -91,11 +91,15 @@
                                 </div>
                                 <div class="kt_chat__actions">
                                     <button type="submit" class="btn btn-brand btn-md btn-upper btn-bold kt-chat__reply"
-                                            id="replyTicket">
+                                            id="replyTicket"
+                                            {% if entity.status == 'CLOSED' %}style="display: none;"{% endif %}
+                                    >
                                         {{ 'answerTicket.send'|trans }}
                                     </button>
                                     <button type="button" class="btn btn-danger btn-md btn-upper btn-bold kt-chat__reply"
-                                            id="closeTicket">
+                                            id="closeTicket"
+                                            {% if entity.status == 'CLOSED' %}style="display: none;"{% endif %}
+                                    >
                                         Kapat
                                     </button>
                                 </div>
@@ -146,7 +150,7 @@
                                             html += `
                                 <a href="${file}"
                                  data-lightbox="${file}"
-                                 data-title="${file}">
+                                 data-title="${file}" style="display: block; margin-bottom: .5rem;">
                                   <img src="${file}" alt="${file}">
                                 </a>
                               `
@@ -154,7 +158,7 @@
 
                                         $(".kt-chat__messages").append(`
                             <div class="kt-chat__message kt-chat__message--right">
-                                <div class="kt-chat__text kt-bg-light-brand">
+                                <div class="kt-chat__text kt-bg-light-success">
                                     ${replyContent.val()}
 
                                   ${html}
