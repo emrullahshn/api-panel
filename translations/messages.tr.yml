@@ -7,6 +7,7 @@ aside:
   ssl: SSL
   security: Güvenlik
   settings: Hesap Ayarları
+  dataCenter: Bilgi Merkezi
   ticket:
     title: Destek Talebi
     new: Yeni Talep Oluştur
