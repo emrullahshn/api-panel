@@ -55,7 +55,7 @@ $kt-aside-config: (
 					)
 				)
 			)
-		)	
+		)
 	),
 
 	menu: (
@@ -88,15 +88,15 @@ $kt-aside-config: (
 						link: (
 							// link itself
 							self: (
-								height: 60px,				
+								height: 60px,
 								padding: 5px 40px
-							),					
+							),
 
 							// link icon
 							icon:	(
 								width: 35px,
-								font-size: 1.6rem
-							),		
+								font-size: 2rem
+							),
 
 							// link bullet
 							bullet:	(
@@ -111,8 +111,8 @@ $kt-aside-config: (
 								line: (
 									width: 5px,
 									height: 1px
-								)							
-							),					
+								)
+							),
 
 							// link text
 							text:	(
@@ -153,16 +153,16 @@ $kt-aside-config: (
 								link: (
 									// link itself
 									self: (
-										height: 40px,		
+										height: 40px,
 										padding: 5px 40px,
 										padding-x: 30px
-									),					
+									),
 
 									// link icon
 									icon:	(
 										width: 35px,
 										font-size: 1.3rem
-									),		
+									),
 
 									// link bullet
 									bullet:	(
@@ -175,8 +175,8 @@ $kt-aside-config: (
 										line: (
 											width: 5px,
 											height: 1px
-										)							
-									),						
+										)
+									),
 
 									// link text
 									text:	(
@@ -242,7 +242,7 @@ $kt-aside-config: (
 							letter-spacing: 0.3px
 						),
 
-						icon: (					
+						icon: (
 							font-size: 1.1rem
 						)
 					),
@@ -272,7 +272,7 @@ $kt-aside-config: (
 						// item link
 						link: (
 							badge: (
-								right: 7px,  
+								right: 7px,
 								size: 6px
 							)
 						),
@@ -296,10 +296,10 @@ $kt-aside-config: (
 								link: (
 									// link itself
 									self: (
-										height: 40px,			
-										margin-bottom: 0px,	
+										height: 40px,
+										margin-bottom: 0px,
 										padding: 0 30px 10px 30px
-									),					
+									),
 									// link text
 									text:	(
 										font-size: 1.05rem,
@@ -317,7 +317,7 @@ $kt-aside-config: (
 
 					// root section
 					section: (
-						icon: (				
+						icon: (
 							font-size: 1.1rem,
 							padding: 0
 						)
@@ -330,7 +330,7 @@ $kt-aside-config: (
 					item: (
 						// item itself
 						self: (
-							margin: 0, 
+							margin: 0,
 							zindex:	$kt-header-fixed-zindex + 1,
 						),
 
@@ -358,7 +358,7 @@ $kt-aside-config: (
 									inner: (
 										default: -10px,
 										up: -10px
-									)								
+									)
 								)
 							),
 
@@ -373,14 +373,14 @@ $kt-aside-config: (
 								link: (
 									// link itself
 									self: (
-										height: 40px,				
+										height: 40px,
 										padding: 7px 30px
-									),					
+									),
 									// link icon
 									icon:	(
 										width: 35px,
 										font-size: 1.35rem
-									),		
+									),
 									// link bullet
 									bullet:	(
 										self: (
@@ -392,8 +392,8 @@ $kt-aside-config: (
 										line: (
 											width: 5px,
 											height: 1px
-										)							
-									),						
+										)
+									),
 									// link text
 									text:	(
 										font-size: 1rem,
@@ -411,7 +411,7 @@ $kt-aside-config: (
 									// link badge
 									badge:	(
 										padding: 0px 0px 0px 5px,
-										align: right,	
+										align: right,
 									)
 								)
 							),
@@ -423,7 +423,7 @@ $kt-aside-config: (
 									padding: 0 25px,
 									height: 40px
 								),
-									
+
 								text: (
 									font-size: 0.8rem,
 									font-weight: 300,
@@ -441,7 +441,7 @@ $kt-aside-config: (
 							)
 						)
 					)
-				)		
+				)
 			),
 
 			// Skins
@@ -477,7 +477,7 @@ $kt-aside-config: (
 									active: $kt-brand-hover-color,
 									hover: transparent
 								)
-							),					
+							),
 							// link icon
 							icon: (
 								font-color:	(
@@ -487,7 +487,7 @@ $kt-aside-config: (
 									active: kt-brand-color(),
 									hover: kt-brand-color()
 								),
-							),		
+							),
 							// link bullet
 							bullet:	(
 								dot: (
@@ -507,8 +507,8 @@ $kt-aside-config: (
 										active: kt-brand-color(),
 										hover: kt-brand-color()
 									)
-								)							
-							),					
+								)
+							),
 							// link text
 							text:	(
 								font-color:	(
@@ -517,7 +517,7 @@ $kt-aside-config: (
 									here: kt-brand-color(),
 									active: kt-brand-color(),
 									hover: kt-brand-color()
-								)	
+								)
 							),
 							// link arrow
 							arrow:	(
@@ -564,7 +564,7 @@ $kt-aside-config: (
 											active: $kt-brand-hover-color,
 											hover: transparent
 										)
-									),					
+									),
 
 									// link icon
 									icon:	(
@@ -575,7 +575,7 @@ $kt-aside-config: (
 											active: kt-brand-color(),
 											hover: kt-brand-color()
 										)
-									),		
+									),
 
 									// link bullet
 									bullet:	(
@@ -596,8 +596,8 @@ $kt-aside-config: (
 												active: kt-brand-color(),
 												hover: kt-brand-color()
 											)
-										)							
-									),						
+										)
+									),
 									// link text
 									text: (
 										font-color:	(
@@ -605,7 +605,7 @@ $kt-aside-config: (
 											open: kt-brand-color(),
 											active: kt-brand-color(),
 											hover: kt-brand-color()
-										)	
+										)
 									),
 									// link arrow
 									arrow:	(
@@ -663,7 +663,7 @@ $kt-aside-config: (
 									active: null,
 									hover: null
 								)
-							),		
+							),
 							// link icon
 							icon:	(
 								font-color:	(
@@ -712,7 +712,7 @@ $kt-aside-config: (
 											active: $kt-brand-hover-color,
 											hover: transparent
 										)
-									),					
+									),
 									// link icon
 									icon:	(
 										font-color:	(
@@ -721,7 +721,7 @@ $kt-aside-config: (
 											active: kt-brand-color(),
 											hover: kt-brand-color()
 										)
-									),		
+									),
 									// link bullet
 									bullet:	(
 										dot: (
@@ -741,8 +741,8 @@ $kt-aside-config: (
 												active: kt-brand-color(),
 												hover: kt-brand-color()
 											)
-										)							
-									),						
+										)
+									),
 									// link text
 									text: (
 										font-color:	(
@@ -750,7 +750,7 @@ $kt-aside-config: (
 											open: kt-brand-color(),
 											active: kt-brand-color(),
 											hover: kt-brand-color()
-										)	
+										)
 									),
 									// link arrow
 									arrow:	(
@@ -777,9 +777,9 @@ $kt-aside-config: (
 								border: 1px solid rgba(#000000, 0.07)
 							)
 						)
-					)		
-				)	
-			)		
+					)
+				)
+			)
 		)
-	)	
+	)
 );
