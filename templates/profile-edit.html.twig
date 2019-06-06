@@ -395,7 +395,7 @@
                               {{ 'profileEdit.profileInfo.inputs.country'|trans }}
                             </label>
                             <div class="col-lg-9 col-xl-6">
-                              <select class="form-control"
+                              <select class="form-control custom-select"
                                       name="country"
                                       id="country"
                                       value="{{ user.country|default('') }}"
@@ -409,7 +409,7 @@
                               {{ 'profileEdit.profileInfo.inputs.city'|trans }}
                             </label>
                             <div class="col-lg-9 col-xl-6">
-                              <select class="form-control" name="city" id="city"></select>
+                              <select class="form-control custom-select" name="city" id="city"></select>
                               <input type="hidden" name="selectedCity" value="{{ user.city }}" id="selectedCity">
                             </div>
                           </div>
@@ -418,7 +418,7 @@
                               {{ 'profileEdit.profileInfo.inputs.town'|trans }}
                             </label>
                             <div class="col-lg-9 col-xl-6">
-                              <select class="form-control" name="town" id="town" type="text"></select>
+                              <select class="form-control custom-select" name="town" id="town" type="text"></select>
                               <input type="hidden" name="selectedTown" value="{{ user.town }}" id="selectedTown">
                             </div>
                           </div>
