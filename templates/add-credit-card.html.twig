@@ -127,7 +127,7 @@
                       {{ 'addCreditCard.card.type'|trans }}
                     </label>
                     <div class="col-lg-9 col-xl-6">
-                      <select name="type" id="type" class="form-control">
+                      <select name="type" id="type" class="form-control custom-select">
                         <option value="1">Visa</option>
                         <option value="2">MasterCard</option>
                         <option value="3">Discover</option>
@@ -151,6 +151,9 @@
                       <input class="form-control" name="expire-date" type="text" value="" placeholder="{{ 'addCreditCard.card.expireDateDesc'|trans }}">
                     </div>
                   </div>
+                  <button class="btn btn-brand" type="submit">
+                    {{ 'addCreditCard.card.add'|trans }}
+                  </button>
                 </form>
               </div>
             </div>
@@ -225,7 +228,7 @@
                       {{ 'addCreditCard.card.type'|trans }}
                     </label>
                     <div class="col-lg-9 col-xl-6">
-                      <select name="type" id="type" class="form-control">
+                      <select name="type" id="type" class="form-control custom-select">
                         <option value="1">Visa</option>
                         <option value="2">MasterCard</option>
                         <option value="3">Discover</option>

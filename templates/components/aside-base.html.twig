@@ -16,6 +16,10 @@
             <span class="kt-menu__link-text">{{ 'aside.dashboard'|trans }}</span>
           </a>
         </li>
+        <li class="kt-menu__section">
+          <h4 class="kt-menu__section-text">Hizmet Yönetimi</h4>
+          <i class="kt-menu__section-icon flaticon-more-v2"></i>
+        </li>
         <li class="kt-menu__item kt-menu__item" aria-haspopup="true">
           <a href="{{ path('homepage') }}" class="kt-menu__link">
             <i class="kt-menu__link-icon flaticon-pie-chart"></i>
@@ -36,29 +40,20 @@
         </li>
         <li class="kt-menu__item kt-menu__item" aria-haspopup="true">
           <a href="{{ path('homepage') }}" class="kt-menu__link">
-            <i class="kt-menu__link-icon flaticon-network"></i>
-            <span class="kt-menu__link-text">{{ 'aside.cdn'|trans }}</span>
-          </a>
-        </li>
-        <li class="kt-menu__item kt-menu__item" aria-haspopup="true">
-          <a href="{{ path('homepage') }}" class="kt-menu__link">
             <i class="kt-menu__link-icon flaticon-globe"></i>
             <span class="kt-menu__link-text">{{ 'aside.ssl'|trans }}</span>
           </a>
         </li>
-        <li class="kt-menu__item kt-menu__item" aria-haspopup="true">
-          <a href="{{ path('homepage') }}" class="kt-menu__link">
-            <i class="kt-menu__link-icon flaticon-security"></i>
-            <span class="kt-menu__link-text">{{ 'aside.security'|trans }}</span>
-          </a>
+        <li class="kt-menu__section">
+          <h4 class="kt-menu__section-text">Kullanıcı İşlemleri</h4>
+          <i class="kt-menu__section-icon flaticon-more-v2"></i>
         </li>
         <li class="kt-menu__item kt-menu__item" aria-haspopup="true">
-          <a href="{{ path('homepage') }}" class="kt-menu__link">
+          <a href="{{ path('profile') }}" class="kt-menu__link">
             <i class="kt-menu__link-icon flaticon-avatar"></i>
             <span class="kt-menu__link-text">{{ 'aside.settings'|trans }}</span>
           </a>
         </li>
-
         <li class="kt-menu__item kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
           <span class="kt-menu__link kt-menu__toggle">
             <i class="kt-menu__link-icon flaticon-list-2"></i>
@@ -87,6 +82,16 @@
           </div>
         </li>
 
+        <li class="kt-menu__section">
+          <h4 class="kt-menu__section-text">Bilgi Merkezi</h4>
+          <i class="kt-menu__section-icon flaticon-more-v2"></i>
+        </li>
+        <li class="kt-menu__item kt-menu__item" aria-haspopup="true">
+          <a href="{{ path('profile') }}" class="kt-menu__link">
+            <i class="kt-menu__link-icon flaticon-graphic"></i>
+            <span class="kt-menu__link-text">{{ 'aside.dataCenter'|trans }}</span>
+          </a>
+        </li>
         <li class="kt-menu__item kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
           <span class="kt-menu__link kt-menu__toggle">
             <i class="kt-menu__link-icon flaticon-questions-circular-button"></i>

@@ -219,10 +219,6 @@
       <!-- begin:: Content Head -->
       <div class="kt-subheader   kt-grid__item" id="kt_subheader">
         <div class="kt-subheader__main">
-          <h3 class="kt-subheader__title">
-            Edit User
-          </h3>
-          <span class="kt-subheader__separator kt-subheader__separator--v"></span>
           <div class="kt-subheader__group" id="kt_subheader_search">
             <span class="kt-subheader__desc" id="kt_subheader_total">
               {{ user.fullName|default('') }}
@@ -399,7 +395,7 @@
                               {{ 'profileEdit.profileInfo.inputs.country'|trans }}
                             </label>
                             <div class="col-lg-9 col-xl-6">
-                              <select class="form-control"
+                              <select class="form-control custom-select"
                                       name="country"
                                       id="country"
                                       value="{{ user.country|default('') }}"
@@ -413,7 +409,7 @@
                               {{ 'profileEdit.profileInfo.inputs.city'|trans }}
                             </label>
                             <div class="col-lg-9 col-xl-6">
-                              <select class="form-control" name="city" id="city"></select>
+                              <select class="form-control custom-select" name="city" id="city"></select>
                               <input type="hidden" name="selectedCity" value="{{ user.city }}" id="selectedCity">
                             </div>
                           </div>
@@ -422,7 +418,7 @@
                               {{ 'profileEdit.profileInfo.inputs.town'|trans }}
                             </label>
                             <div class="col-lg-9 col-xl-6">
-                              <select class="form-control" name="town" id="town" type="text"></select>
+                              <select class="form-control custom-select" name="town" id="town" type="text"></select>
                               <input type="hidden" name="selectedTown" value="{{ user.town }}" id="selectedTown">
                             </div>
                           </div>
@@ -483,8 +479,8 @@
                         <table class="table">
                           <thead>
                           <tr>
-                            <th>{{ 'profileEdit.ipFilter.inputs.blockedIps'|trans }}</th>
-                            <th>{{ 'profileEdit.ipFilter.inputs.actions'|trans }}</th>
+                            <th align="left">{{ 'profileEdit.ipFilter.inputs.blockedIps'|trans }}</th>
+                            <th align="left">{{ 'profileEdit.ipFilter.inputs.actions'|trans }}</th>
                           </tr>
                           </thead>
                           <tbody>
@@ -627,11 +623,11 @@
                       </div>
                     </div>
 
-                    <table class="table">
+                    <table class="table table-bordered">
                       <thead>
                       <tr>
-                        <th>{{ 'profileEdit.emailHistory.inputs.subject'|trans }}</th>
-                        <th>{{ 'profileEdit.emailHistory.inputs.sendedTime'|trans }}</th>
+                        <th align="left">{{ 'profileEdit.emailHistory.inputs.subject'|trans }}</th>
+                        <th align="left">{{ 'profileEdit.emailHistory.inputs.sendedTime'|trans }}</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -671,9 +667,9 @@
                     <table class="table">
                       <thead>
                       <tr>
-                        <th>{{ 'profileEdit.processHistory.inputs.date'|trans }}</th>
-                        <th>{{ 'profileEdit.processHistory.inputs.processInfo'|trans }}</th>
-                        <th>{{ 'profileEdit.processHistory.inputs.status'|trans }}</th>
+                        <th align="left">{{ 'profileEdit.processHistory.inputs.date'|trans }}</th>
+                        <th align="left">{{ 'profileEdit.processHistory.inputs.processInfo'|trans }}</th>
+                        <th align="left">{{ 'profileEdit.processHistory.inputs.status'|trans }}</th>
                       </tr>
                       </thead>
                       <tbody>

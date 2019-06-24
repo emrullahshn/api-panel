@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/login-page.css') }}">
+{% endblock %}
+
+
+{% block bodyCustomClass %}{% spaceless %}
+    kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--fixed kt-subheader--enabled kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-page--loading
+{% endspaceless %}{% endblock %}
+
+{% block content %}
+    {% include "@FOSUser/FOSUserBundle:Resetting:reset_content.html.twig" %}
+{% endblock %}
